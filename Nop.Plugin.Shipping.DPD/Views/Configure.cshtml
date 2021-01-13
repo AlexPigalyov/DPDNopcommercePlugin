@@ -1,0 +1,153 @@
+﻿@model DPDShippingModel
+
+@using Nop.Plugin.Shipping.DPD.Domain
+@using Nop.Plugin.Shipping.DPD.Models
+
+@{
+    Layout = "_ConfigurePlugin";
+}
+
+<form asp-controller="DPDShipping" asp-action="Configure" method="post">
+    <script>
+        $(document).ready(function () {
+            $("#dileviryTypes").children().each(function (index) {
+                if ($("#checkbox-" + index).prop('checked')) {
+                    $("#label-" + index).hide();
+                } else {
+                    $("#fieldSet-" + index).hide();
+                }
+                $("#checkbox-" + index).change(function () {
+                    if ($("#checkbox-" + index).prop('checked')) {
+                        $("#checkbox-" + index + "-box").prop("checked", true);
+                        $("#label-" + index).hide();
+                        $("#fieldSet-" + index).show();
+                    }
+                });
+                $("#checkbox-" + index + "-box").change(function () {
+                    if ($("#checkbox-" + index + "-box").prop('checked') == false) {
+                        $("#checkbox-" + index).prop("checked", false);
+                        $("#label-" + index).show();
+                        $("#fieldSet-" + index).hide();
+                    }
+                });
+                $("#TT-" + index).change(function() {
+                    if ($("#TT-" + index).prop('checked') == false && ($("#TD-" + index).prop('checked') == false)) {
+                        $("#TT-" + index).prop('checked', true);
+                    }
+                });
+                $("#TD-" + index).change(function () {
+                    if ($("#TD-" + index).prop('checked') == false && ($("#TT-" + index).prop('checked') == false)) {
+                        $("#TD-" + index).prop('checked', true);
+                    }
+                });
+
+            });
+        });
+    </script>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="UseSandbox"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="UseSandbox"/>
+                        <span asp-validation-for="UseSandbox"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="ClientNumber"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="ClientNumber"/>
+                        <span asp-validation-for="ClientNumber"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="ClientKey"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="ClientKey"/>
+                        <span asp-validation-for="ClientKey"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="ServiceCodeType"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-select asp-for="PaymentType" asp-items="Model.AvailablePaymentTypes"/>
+                        <span asp-validation-for="PaymentType"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="PickupTimePeriodType"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-select asp-for="PickupTimePeriodType" asp-items="Model.AvailablePickupTimePeriodTypes"/>
+                        <span asp-validation-for="PickupTimePeriodType"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="CargoRegistered"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="CargoRegistered"/>
+                        <span asp-validation-for="CargoRegistered"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="AvailableServiceCodeTypes"/>
+                    </div>
+                    <div class="col-md-9" id="dileviryTypes">
+                        @for (int i = 0; i < Model.AvailableServiceCodeTypes.Count; i++)
+                        {
+                            <div class="checkbox">
+                                <label id="label-@i">
+                                    <input style="margin-top:10px" type="checkbox" id="checkbox-@i" name="@(nameof(Model.ServiceCodeType))" value="@(Model.AvailableServiceCodeTypes[i].Value)" checked="@(Model.AvailableServiceCodeTypes[i].Selected)"/>
+                                    <span style="font-size:21px">@(Model.AvailableServiceCodeTypes[i].Text)</span>
+                                </label>
+                                <div id="fieldSet-@i">
+                                    <fieldset >
+                                        <legend>
+                                            <label>
+                                                <input id="checkbox-@i-box" type="checkbox" style="margin-top:10px" name="@(Model.ServiceCodes[i].Code)" value="@(Model.AvailableServiceCodeTypes[i].Value)" checked="@(Model.AvailableServiceCodeTypes[i].Selected)"/>
+                                                <span>@(Model.AvailableServiceCodeTypes[i].Text)</span>
+                                            </label>
+                                        </legend>
+                                        <div class="checkboxes" style="margin-left: 50px">
+                                            <input type="hidden" name="ServiceCodes" value="@(Model.AvailableServiceCodeTypes[i].Value)" />
+                                            <div class="form-group">
+
+                                                <input id="TT-@i" name="@(Model.ServiceCodes[i].IsTTActive)" type="checkbox" checked="checked"/>
+                                                <span>TT</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <input id="TD-@i" name="@(Model.ServiceCodes[i].IsTDActive)" type="checkbox"/>
+                                                <span>TD</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                
+                            </div>
+
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" name="save" class="btn bg-blue" value="@T("Admin.Common.Save")"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
