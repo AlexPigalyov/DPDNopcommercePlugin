@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using iTextSharp.text;
-using Nop.Core.Configuration;
+﻿using Nop.Core.Configuration;
 using Nop.Plugin.Shipping.DPD.Domain;
 
 namespace Nop.Plugin.Shipping.DPD
@@ -18,6 +16,5 @@ namespace Nop.Plugin.Shipping.DPD
         public string ServiceCodeType { get; set; }
         public string ServiceVariantType { get; set; }
         public PaymentType PaymentType { get; set; }
-        public List<ServiceCode> ServiceCodes { get; set; }
     }
 }
