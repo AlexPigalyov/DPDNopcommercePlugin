@@ -1,14 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.ServiceModel;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
+using Nop.Core.Domain.Customers;
+using Nop.Core.Domain.Directory;
 using Nop.Core.Domain.Orders;
+using Nop.Core.Domain.Shipping;
 using Nop.Data;
 using Nop.Plugin.Shipping.DPD.Domain;
+using Nop.Services;
+using Nop.Services.Directory;
 using Nop.Services.Localization;
+using Nop.Services.Logging;
+using Nop.Services.Orders;
 using Nop.Services.Shipping;
+using Nop.Services.Shipping.Tracking;
 
 namespace Nop.Plugin.Shipping.DPD.Services
 {
@@ -60,74 +74,37 @@ namespace Nop.Plugin.Shipping.DPD.Services
             return GetAttributeValue<DPDCodeAttribute>(enumValue)?.Code;
         }
 
-        private (List<string>, List<string>) GetServicesVariantAndCodeCodes()
+        public virtual GetShippingOptionResponse GetRates(GetShippingOptionRequest shippingOptionRequest)
         {
+            var response = new GetShippingOptionResponse();
+
             var servicesVariantCodes = _dpdSettings.ServiceVariantType.Split(':', StringSplitOptions.RemoveEmptyEntries)
                 .Select(idValue => idValue.Trim('[', ']')).ToList();
             var servicesCodeCodes = _dpdSettings.ServiceCodeType.Split(':', StringSplitOptions.RemoveEmptyEntries)
                 .Select(idValue => idValue.Trim('[', ']')).ToList();
 
-            return (servicesVariantCodes, servicesCodeCodes);
-        }
-
-        private List<Product> GetCustomerShoppingCartItems()
-        {
             var shoppingCartItems = new List<Product>();
 
             foreach (var shoppingCartItem in _shoppingCartItemRepository.Table)
-            {
                 if (shoppingCartItem.CustomerId == _workContext.CurrentCustomer.Id)
-                {
                     foreach (var product in _productRepository.Table)
-                    {
                         if (product.Id == shoppingCartItem.ProductId)
-                        {
                             shoppingCartItems.Add(product);
-                        }
-                    }
-                }
-            }
 
-            return shoppingCartItems;
-        }
 
-        private (decimal, decimal, decimal) GetProductsPriceVolumeWeight(List<Product> products)
-        {
-            decimal priceOfShoppingCart = 0;
-            decimal volumeOfShoppingCart = 0; 
-            decimal weightOfShoppingCart = 0;
+            double priceAllProductsInShoppingCart = 0;
+            double volumeOfShoppingCart = 0;
+            double weightOfShoppingCart = 0;
 
-            foreach (var shoppingCartItem in products)
+            foreach (var shoppingCartItem in shoppingCartItems)
             {
-                priceOfShoppingCart += shoppingCartItem.Price;
-                volumeOfShoppingCart += shoppingCartItem.Length * shoppingCartItem.Width * shoppingCartItem.Height;
-                weightOfShoppingCart += shoppingCartItem.Weight;
+                priceAllProductsInShoppingCart += (double)shoppingCartItem.Price;
+                volumeOfShoppingCart += (double)shoppingCartItem.Length * (double)shoppingCartItem.Width *
+                                        (double)shoppingCartItem.Height;
+                weightOfShoppingCart += (double)shoppingCartItem.Weight;
             }
 
-            return (priceOfShoppingCart, volumeOfShoppingCart, weightOfShoppingCart);
-        }
-
-        public virtual GetShippingOptionResponse GetRates(GetShippingOptionRequest shippingOptionRequest)
-        {
-            var response = new GetShippingOptionResponse();
-
-            
-            List<string> servicesVariantCodes, servicesCodeCodes = new List<string>();
-
-            //get services variants and codes
-            (servicesVariantCodes, servicesCodeCodes) = GetServicesVariantAndCodeCodes();
-
-            List<Product> shoppingCartItems = GetCustomerShoppingCartItems();
-
-            decimal priceOfShoppingCart = 0;
-            decimal volumeOfShoppingCart = 0;
-            decimal weightOfShoppingCart = 0;
-
-            //get price, volume and weight of all items in shopping cart 
-            (priceOfShoppingCart, volumeOfShoppingCart, weightOfShoppingCart) =
-                GetProductsPriceVolumeWeight(shoppingCartItems);
-
-            priceOfShoppingCart = Math.Round(priceOfShoppingCart, 2);
+            priceAllProductsInShoppingCart = Math.Round(priceAllProductsInShoppingCart, 2);
 
             //var calculator = new DPDCalculatorClient();
 
