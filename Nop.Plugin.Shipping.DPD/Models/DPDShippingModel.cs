@@ -17,8 +17,6 @@ namespace Nop.Plugin.Shipping.DPD.Models
             AvailableServiceVariantTypes = new List<SelectListItem>();
         }
         
-        
-        public List<Language> Languages { get; set; }
         [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.ClientNumber")]
         public long ClientNumber { get; set; }
 
@@ -39,7 +37,9 @@ namespace Nop.Plugin.Shipping.DPD.Models
 
         [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.ServiceCodeType")]
         public IList<SelectListItem> AvailableServiceCodeTypes { get; set; }
-        public IList<ServiceCode> ServiceCodes { get; set; }
+        public IList<string> ServiceCodes { get; set; }
+        public IList<string> ServiceCodesTT { get; set; }
+        public IList<string> ServiceCodesTD { get; set; }
         public IList<string> ServiceCodeTypes { get; set; }
 
         [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.ServiceCodeType")]

@@ -13,12 +13,15 @@
             $("#dileviryTypes").children().each(function (index) {
                 if ($("#checkbox-" + index).prop('checked')) {
                     $("#label-" + index).hide();
+                    $("#fieldSet-" + index).show();
                 } else {
                     $("#fieldSet-" + index).hide();
                 }
                 $("#checkbox-" + index).change(function () {
                     if ($("#checkbox-" + index).prop('checked')) {
                         $("#checkbox-" + index + "-box").prop("checked", true);
+                        $("#TT-" + index).prop("checked", true);
+                        $("#TD-" + index).prop("checked", false);
                         $("#label-" + index).hide();
                         $("#fieldSet-" + index).show();
                     }
@@ -26,6 +29,8 @@
                 $("#checkbox-" + index + "-box").change(function () {
                     if ($("#checkbox-" + index + "-box").prop('checked') == false) {
                         $("#checkbox-" + index).prop("checked", false);
+                        $("#TT-" + index).prop("checked", false);
+                        $("#TD-" + index).prop("checked", false);
                         $("#label-" + index).show();
                         $("#fieldSet-" + index).hide();
                     }
@@ -40,6 +45,7 @@
                         $("#TD-" + index).prop('checked', true);
                     }
                 });
+
 
             });
         });
@@ -76,7 +82,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                        <nop-label asp-for="ServiceCodeType"/>
+                        <nop-label asp-for="PaymentType"/>
                     </div>
                     <div class="col-md-9">
                         <nop-select asp-for="PaymentType" asp-items="Model.AvailablePaymentTypes"/>
@@ -111,26 +117,24 @@
                         {
                             <div class="checkbox">
                                 <label id="label-@i">
-                                    <input style="margin-top:10px" type="checkbox" id="checkbox-@i" name="@(nameof(Model.ServiceCodeType))" value="@(Model.AvailableServiceCodeTypes[i].Value)" checked="@(Model.AvailableServiceCodeTypes[i].Selected)"/>
+                                    <input style="margin-top:10px" type="checkbox" id="checkbox-@i" checked="@(Model.AvailableServiceCodeTypes[i].Selected)"/>
                                     <span style="font-size:21px">@(Model.AvailableServiceCodeTypes[i].Text)</span>
                                 </label>
-                                <div id="fieldSet-@i">
+                                <div id="fieldSet-@i" style="display:none">
                                     <fieldset >
                                         <legend>
                                             <label>
-                                                <input id="checkbox-@i-box" type="checkbox" style="margin-top:10px" name="@(Model.ServiceCodes[i].Code)" value="@(Model.AvailableServiceCodeTypes[i].Value)" checked="@(Model.AvailableServiceCodeTypes[i].Selected)"/>
+                                                <input id="checkbox-@i-box" type="checkbox" style="margin-top:10px" name="ServiceCodes" value="@(Model.AvailableServiceCodeTypes[i].Value)" checked="@(Model.AvailableServiceCodeTypes[i].Selected)" />
                                                 <span>@(Model.AvailableServiceCodeTypes[i].Text)</span>
                                             </label>
                                         </legend>
                                         <div class="checkboxes" style="margin-left: 50px">
-                                            <input type="hidden" name="ServiceCodes" value="@(Model.AvailableServiceCodeTypes[i].Value)" />
                                             <div class="form-group">
-
-                                                <input id="TT-@i" name="@(Model.ServiceCodes[i].IsTTActive)" type="checkbox" checked="checked"/>
+                                                <input type="checkbox" id="TT-@i" name="ServiceCodesTT" value="TT-@i" checked="@(Model.ServiceCodesTT?.Any(x => x == Model.AvailableServiceCodeTypes[i].Value))"/>
                                                 <span>TT</span>
                                             </div>
                                             <div class="form-group">
-                                                <input id="TD-@i" name="@(Model.ServiceCodes[i].IsTDActive)" type="checkbox"/>
+                                                <input type="checkbox" id="TD-@i" name="ServiceCodesTD" value="TD-@i" checked="@(Model.ServiceCodesTD?.Any(x => x == Model.AvailableServiceCodeTypes[i].Value))"/>
                                                 <span>TD</span>
                                             </div>
                                         </div>
