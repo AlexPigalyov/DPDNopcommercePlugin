@@ -130,7 +130,7 @@ namespace Nop.Plugin.Shipping.DPD
 
                 ["Plugins.Shipping.DPD.Fields.ServiceCodeType"] = "DPD payment type",
 
-                ["Plugins.Shipping.DPD.Fields.AvailableServiceCodeType"] = "DPD service code",
+                ["Plugins.Shipping.DPD.Fields.ServiceCodeType"] = "DPD service code",
 
                 ["Plugins.Shipping.DPD.Fields.AvailableServiceVariantType"] = "Delivery variant",
 
