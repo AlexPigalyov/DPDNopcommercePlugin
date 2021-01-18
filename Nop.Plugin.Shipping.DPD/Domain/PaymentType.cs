@@ -2,7 +2,7 @@
 {
     public enum PaymentType
     {
-        OUP,
-        OUO
+        [DPDCode("ОУП")] OUP,
+        [DPDCode("ОУО")] OUO
     }
 }
