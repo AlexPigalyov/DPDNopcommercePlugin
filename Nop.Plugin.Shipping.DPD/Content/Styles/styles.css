@@ -1,0 +1,24 @@
+﻿#mainPanel > .panel-heading {
+    background-color: #C39B6A !important;
+    border-color: #C39B6A !important;
+    color: white;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #C39B6A !important; 
+    border-color: #C39B6A !important;
+}
+
+.btn-primary:hover {
+    color: #ffffff;
+    background-color: #d4ab79 !important;
+    border-color: #d4ab79 !important;
+}
+
+.list-group .department-header {
+    background-color: #C39B6A !important;
+    color: white;
+    border: 0;
+}
+
