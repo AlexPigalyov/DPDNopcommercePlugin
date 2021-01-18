@@ -1,0 +1,117 @@
+﻿@using Nop.Plugin.Shipping.DPD.Infrastructure
+@model CheckoutShippingMethodModel
+@{
+    
+    Context.Items["nop.IgnoreScriptTagLocation"] = true;
+}
+
+<div class="checkout-data">
+
+    <script asp-location="Footer">
+        var chooser = new DPDChooser('dpdchooser',
+            {
+                type: 'dpdclient', // Обязательный параметр
+                //Геопозиция:
+                address: 'Россия, Москва, Нахимовский проспект', //Адрес (Можно передавать сокращенно – только город, а можно с учетом страны, города, улицы)
+                l: 'Москва', //Адрес можно передавать короткими параметрами (город)
+                s: 'Нахимовский проспект', //Адрес можно передавать короткими параметрами (улица)
+                m: 'Крымская', //Адрес можно передавать короткими параметрами (метро)
+                g: '43.928704,56.280332', //Можно вместо адреса передавать координаты: долгота, широта (имеет бОльший приоритет, чем адрес)
+                // После загрузки данных происходит центрирование на переданной геопозиции. Если ни один пункт не попадает на карту, то карта отдаляется до 4х раз
+                // Если передан большой по площади объект для центрирования (например, вся Москва), то границы карты будут установлены так, чтобы весь объект попал в область видимости.
+                i: '111402', //центрирование по индексу
+                viewdistance: 100, // Радиус отображения пунктов в километрах вокруг указанного адреса
+
+                //Фильтры:
+                filter_wait: 1, // Ожидание на адресе доставки
+                filter_temp: 0, // Температурный режим
+                filter_cod: 0, // Наложенный платеж
+                filter_give: 0, // Выдача посылок
+                filter_take: 0, // Прием посылок
+                filter_pvz: 0, // Пункт приема и выдачи посылок
+                filter_postamat: 0, // Постамат
+
+                //Возможность выбора пункта.
+                choose: 1, //Если не передано - виджет работает только для просмотра, без кнопки «Выбрать»
+
+
+                width: '100%', // Можно указать css ширину контейнера. Пример: 500px, 100%, 50em
+                mapHeight: '600', // Можно указать высоту карты в пикселях. Пример: 500.
+                //ВНИМАНИЕ!!! Высота касается только карты, списка пунктов и детализации. Это НЕ высота всего контейнера виджета.
+                sid: 'qaioqaiuqK6sr^TaoaGoqqmu3azcq6ih3KvZ2aGur9qvoK/crazbqa3c2tquoanc3qionw==',
+                //Задать высоту виджета нельзя, т.к. детализация может "прыгнуть" вниз из-за нехватки места в ширину.
+
+
+                fullscreen: true, // Задает width = 100% и mapHeight в зависимости от window.innerHeight. Позволяет виджету занять всё пространство контейнера, если достаточно места. Должно быть не менее 400px в высоту и не менее 500px в ширину.
+            });
+
+    </script>
+
+    <script asp-location="Footer">
+        $(document).ready(function () {
+            $(".method-list").children().each(function (index) {
+                if ($("#shippingoption_" + index).val().indexOf('(TD)') >= 0) {
+                    $("#shippingoption_" + index).change(function () {
+                        if ($("#shippingoption_" + index).prop('checked') === true) {
+                            $("#dpdchooser").show();
+                        }
+                    });
+                }
+                else {
+                    $("#shippingoption_" + index).change(function() {
+                        $("#dpdchooser").hide();
+                    });
+                }
+            });
+        });
+    </script>
+
+    @if (Model.PickupPointsModel == null || !Model.PickupPointsModel.PickupInStoreOnly)
+    {
+        <div class="section shipping-method" id="shipping-methods-form">
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutShippingMethodTop })
+            @if (Model.Warnings.Count == 0)
+            {
+                <ul class="method-list">
+                    @for (var i = 0; i < Model.ShippingMethods.Count; i++)
+                    {
+                        var shippingMethod = Model.ShippingMethods[i];
+                        <li>
+                            <div class="method-name">
+                                <input id="shippingoption_@(i)" type="radio" name="shippingoption" value="@(shippingMethod.Name)___@(shippingMethod.ShippingRateComputationMethodSystemName)qeqweqeqweqweqeqeqweeqweq" checked="@shippingMethod.Selected" />
+                                <label for="shippingoption_@(i)">@T("Checkout.SelectShippingMethod.MethodAndFee", shippingMethod.Name, shippingMethod.Fee)</label>
+                            </div>
+                            @if (!string.IsNullOrEmpty(shippingMethod.Description))
+                            {
+                                <div class="method-description">
+                                    @Html.Raw(shippingMethod.Description)
+                                </div>
+                            }
+                        </li>
+                    }
+                </ul>
+                if (Model.NotifyCustomerAboutShippingFromMultipleLocations)
+                {
+                    <div class="multiple-locations">
+                        @T("Checkout.ShippingMethod.ShippingFromMultipleLocations")
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="message-error">
+                    <ul>
+                        @foreach (var warning in Model.Warnings)
+                        {
+                            <li>@warning</li>
+                        }
+                    </ul>
+                </div>
+            }
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutShippingMethodBottom })
+            <div id="dpdchooser" style="padding: 0; width: 100%; height: 600px; margin: 0 auto 30px; display: inline-block;"> 
+
+            </div> 
+        </div>
+     }
+</div>
