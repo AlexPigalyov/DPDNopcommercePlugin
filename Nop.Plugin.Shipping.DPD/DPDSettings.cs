@@ -1,4 +1,6 @@
-﻿using Nop.Core.Configuration;
+﻿using System.Collections.Generic;
+using iTextSharp.text;
+using Nop.Core.Configuration;
 using Nop.Plugin.Shipping.DPD.Domain;
 
 namespace Nop.Plugin.Shipping.DPD
@@ -15,6 +17,8 @@ namespace Nop.Plugin.Shipping.DPD
         public PickupTimePeriodType PickupTimePeriodType { get; set; }
         public string ServiceCodeType { get; set; }
         public string ServiceVariantType { get; set; }
-        public PaymentType PaymentType { get; set; }
+        public string PaymentType { get; set; }
+        public List<ServiceCode> ServiceCodes { get; set; }
+        public string ServiceCodesOffered { get; set; }
     }
 }
