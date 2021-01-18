@@ -117,14 +117,14 @@
                         {
                             <div class="checkbox">
                                 <label id="label-@i">
-                                    <input style="margin-top:10px" type="checkbox" id="checkbox-@i" checked="@(Model.AvailableServiceCodeTypes[i].Selected)"/>
+                                    <input style="margin-top:10px" type="checkbox" id="checkbox-@i" checked="@(Model.ServiceCodesTT.Any(x => x == Model.AvailableServiceCodeTypes[i].Value) || Model.ServiceCodesTD.Any(x => x == Model.AvailableServiceCodeTypes[i].Value))"/>
                                     <span style="font-size:21px">@(Model.AvailableServiceCodeTypes[i].Text)</span>
                                 </label>
                                 <div id="fieldSet-@i" style="display:none">
                                     <fieldset >
                                         <legend>
                                             <label>
-                                                <input id="checkbox-@i-box" type="checkbox" style="margin-top:10px" name="ServiceCodes" value="@(Model.AvailableServiceCodeTypes[i].Value)" checked="@(Model.AvailableServiceCodeTypes[i].Selected)" />
+                                                <input id="checkbox-@i-box" type="checkbox" style="margin-top:10px" name="ServiceCodes" value="@(Model.AvailableServiceCodeTypes[i].Value)" checked="@(Model.ServiceCodesTT.Any(x => x == Model.AvailableServiceCodeTypes[i].Value) || Model.ServiceCodesTD.Any(x => x == Model.AvailableServiceCodeTypes[i].Value))" />
                                                 <span>@(Model.AvailableServiceCodeTypes[i].Text)</span>
                                             </label>
                                         </legend>
