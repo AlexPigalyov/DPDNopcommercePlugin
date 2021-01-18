@@ -29,7 +29,8 @@ namespace Nop.Plugin.Shipping.DPD.Models
         [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.CargoRegistered")]
         public bool CargoRegistered { get; set; }
         [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.PaymentType")]
-        public int PaymentType { get; set; }
+        public string PaymentType { get; set; }
+        public IList<SelectListItem> AvailablePaymentTypes { get; set; }
         [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.PickupTimePeriodType")]
         public int PickupTimePeriodType { get; set; }
 
@@ -49,6 +50,6 @@ namespace Nop.Plugin.Shipping.DPD.Models
         [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.ServiceCodeType")]
         public int ServiceCodeType { get; set; }
 
-        public IList<SelectListItem> AvailablePaymentTypes { get; set; }
+        
     }
 }
