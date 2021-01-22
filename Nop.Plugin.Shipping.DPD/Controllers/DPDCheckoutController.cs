@@ -12,6 +12,7 @@ using Nop.Core.Domain.Payments;
 using Nop.Core.Domain.Shipping;
 using Nop.Core.Http.Extensions;
 using Nop.Plugin.Shipping.DPD.Infrastructure;
+using Nop.Plugin.Shipping.DPD.Models;
 using Nop.Services.Catalog;
 using Nop.Services.Common;
 using Nop.Services.Customers;
@@ -110,7 +111,29 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             _customerSettings = customerSettings;
             _addressSettings = addressSettings;
         }
+        protected virtual bool ParsePickupInStore(IFormCollection form)
+        {
+            var pickupInStore = false;
 
+            var pickupInStoreParameter = form["PickupInStore"].FirstOrDefault();
+            if (!string.IsNullOrWhiteSpace(pickupInStoreParameter))
+                bool.TryParse(pickupInStoreParameter, out pickupInStore);
+
+            return pickupInStore;
+        }
+        protected virtual void SavePickupOption(PickupPoint pickupPoint)
+        {
+            var pickUpInStoreShippingOption = new ShippingOption
+            {
+                Name = string.Format(_localizationService.GetResource("Checkout.PickupPoints.Name"), pickupPoint.Name),
+                Rate = pickupPoint.PickupFee,
+                Description = pickupPoint.Description,
+                ShippingRateComputationMethodSystemName = pickupPoint.ProviderSystemName,
+                IsPickupInStore = true
+            };
+            _genericAttributeService.SaveAttribute(_workContext.CurrentCustomer, NopCustomerDefaults.SelectedShippingOptionAttribute, pickUpInStoreShippingOption, _storeContext.CurrentStore.Id);
+            _genericAttributeService.SaveAttribute(_workContext.CurrentCustomer, NopCustomerDefaults.SelectedPickupPointAttribute, pickupPoint, _storeContext.CurrentStore.Id);
+        }
         public virtual IActionResult OnePageCheckout()
         {
             //validation
@@ -148,16 +171,34 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 return OpcLoadStepAfterShippingMethod(cart);
             }
 
+            var onePageModel = _checkoutModelFactory.PrepareOnePageCheckoutModel(cart);
+
+            DPDCheckoutShippingMethodModel dpdShippingMethodModel = new DPDCheckoutShippingMethodModel()
+            {
+                CustomProperties = shippingMethodModel.CustomProperties,
+                DisplayPickupInStore = shippingMethodModel.DisplayPickupInStore,
+                NotifyCustomerAboutShippingFromMultipleLocations = shippingMethodModel.NotifyCustomerAboutShippingFromMultipleLocations,
+                PickupPointsModel = shippingMethodModel.PickupPointsModel,
+                ShippingMethods = shippingMethodModel.ShippingMethods,
+                Warnings = shippingMethodModel.Warnings,
+                OnePageModel = onePageModel,
+            };
+
+            dpdShippingMethodModel.OnePageModel.BillingAddress.NewAddressPreselected = false;
+
             return Json(new
             {
                 update_section = new UpdateSectionJsonModel
                 {
                     name = "shipping-method",
-                    html = RenderPartialViewToString(PluginDefaults.CustomCheckoutViewPathFormat + "OpcShippingMethods.cshtml", shippingMethodModel)
+                    html = RenderPartialViewToString(PluginDefaults.CustomCheckoutViewPathFormat + "OpcShippingMethods.cshtml", dpdShippingMethodModel)
                 },
                 goto_section = "shipping_method"
             });
         }
+
+
+
         protected JsonResult OpcLoadStepAfterPaymentMethod(IPaymentMethod paymentMethod, IList<ShoppingCartItem> cart)
         {
             if (paymentMethod.SkipPaymentInfo ||
@@ -166,7 +207,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 //skip payment info page
                 var paymentInfo = new ProcessPaymentRequest();
 
-                //session save
+                //session save 
                 HttpContext.Session.Set("OrderPaymentInfo", paymentInfo);
 
                 var confirmOrderModel = _checkoutModelFactory.PrepareConfirmOrderModel(cart);
@@ -256,7 +297,18 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 },
                 goto_section = "confirm_order"
             });
-        }  
+        }
+        protected virtual PickupPoint ParsePickupOption(IFormCollection form)
+        {
+            var pickupPoint = form["pickup-points-id"].ToString().Split(new[] { "___" }, StringSplitOptions.None);
+            var pickupPoints = _shippingService.GetPickupPoints(_workContext.CurrentCustomer.BillingAddressId ?? 0,
+                _workContext.CurrentCustomer, pickupPoint[1], _storeContext.CurrentStore.Id).PickupPoints.ToList();
+            var selectedPoint = pickupPoints.FirstOrDefault(x => x.Id.Equals(pickupPoint[0]));
+            if (selectedPoint == null)
+                throw new Exception("Pickup point is not allowed");
+
+            return selectedPoint;
+        }
 
         [IgnoreAntiforgeryToken]
         public IActionResult OpcSaveBilling(CheckoutBillingAddressModel model, IFormCollection form)
@@ -375,15 +427,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                     //do not ship to the same address
                     var shippingAddressModel = _checkoutModelFactory.PrepareShippingAddressModel(cart, prePopulateNewAddressWithCustomerFields: true);
 
-                    return Json(new
-                    {
-                        update_section = new UpdateSectionJsonModel
-                        {
-                            name = "shipping",
-                            html = RenderPartialViewToString(PluginDefaults.CustomCheckoutViewPathFormat + "OpcShippingAddress.cshtml", shippingAddressModel)
-                        },
-                        goto_section = "shipping"
-                    });
+                    return OpcLoadStepAfterShippingAddress(cart);
                 }
 
                 //shipping is not required
@@ -397,6 +441,161 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 _logger.Warning(exc.Message, exc, _workContext.CurrentCustomer);
                 return Json(new { error = 1, message = exc.Message });
             }
+        }
+
+        [IgnoreAntiforgeryToken]
+        public virtual IActionResult OpcSaveShippingMethod(string shippingoption, IFormCollection form)
+        {
+            
+            try
+            {
+                //validation
+                if (_orderSettings.CheckoutDisabled)
+                    throw new Exception(_localizationService.GetResource("Checkout.Disabled"));
+
+                var cart =
+                    _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
+
+                if (!cart.Any())
+                    throw new Exception("Your cart is empty");
+
+                if (!_orderSettings.OnePageCheckoutEnabled)
+                    throw new Exception("One page checkout is disabled");
+
+                if (_customerService.IsGuest(_workContext.CurrentCustomer) && !_orderSettings.AnonymousCheckoutAllowed)
+                    throw new Exception("Anonymous checkout is not allowed");
+
+                if (!_shoppingCartService.ShoppingCartRequiresShipping(cart))
+                    throw new Exception("Shipping is not required");
+
+                //pickup point
+                if (_shippingSettings.AllowPickupInStore && _orderSettings.DisplayPickupInStoreOnShippingMethodPage)
+                {
+                    var pickupInStore = ParsePickupInStore(form);
+                    if (pickupInStore)
+                    {
+                        var pickupOption = ParsePickupOption(form);
+                        SavePickupOption(pickupOption);
+
+                        return OpcLoadStepAfterShippingMethod(cart);
+                    }
+
+                    //set value indicating that "pick up in store" option has not been chosen
+                    _genericAttributeService.SaveAttribute<PickupPoint>(_workContext.CurrentCustomer, NopCustomerDefaults.SelectedPickupPointAttribute, null, _storeContext.CurrentStore.Id);
+                }
+
+                //parse selected method 
+                if (string.IsNullOrEmpty(shippingoption))
+                    throw new Exception("Selected shipping method can't be parsed");
+                var splittedOption = shippingoption.Split(new[] { "___" }, StringSplitOptions.RemoveEmptyEntries);
+                if (splittedOption.Length != 2)
+                    throw new Exception("Selected shipping method can't be parsed");
+                var selectedName = splittedOption[0];
+                var shippingRateComputationMethodSystemName = splittedOption[1];
+
+                //find it
+                //performance optimization. try cache first
+                var shippingOptions = _genericAttributeService.GetAttribute<List<ShippingOption>>(_workContext.CurrentCustomer,
+                    NopCustomerDefaults.OfferedShippingOptionsAttribute, _storeContext.CurrentStore.Id);
+                if (shippingOptions == null || !shippingOptions.Any())
+                {
+                    //not found? let's load them using shipping service
+                    shippingOptions = _shippingService.GetShippingOptions(cart, _customerService.GetCustomerShippingAddress(_workContext.CurrentCustomer),
+                        _workContext.CurrentCustomer, shippingRateComputationMethodSystemName, _storeContext.CurrentStore.Id).ShippingOptions.ToList();
+                }
+                else
+                {
+                    //loaded cached results. let's filter result by a chosen shipping rate computation method
+                    shippingOptions = shippingOptions.Where(so => so.ShippingRateComputationMethodSystemName.Equals(shippingRateComputationMethodSystemName, StringComparison.InvariantCultureIgnoreCase))
+                        .ToList();
+                }
+
+                var shippingOption = shippingOptions
+                    .Find(so => !string.IsNullOrEmpty(so.Name) && so.Name.Equals(selectedName, StringComparison.InvariantCultureIgnoreCase));
+                if (shippingOption == null)
+                    throw new Exception("Selected shipping method can't be loaded");
+
+                //save
+                _genericAttributeService.SaveAttribute(_workContext.CurrentCustomer, NopCustomerDefaults.SelectedShippingOptionAttribute, shippingOption, _storeContext.CurrentStore.Id);
+
+                //load next step
+                return OpcLoadStepAfterShippingMethod(cart);
+            }
+            catch (Exception exc)
+            {
+                _logger.Warning(exc.Message, exc, _workContext.CurrentCustomer);
+                return Json(new { error = 1, message = exc.Message });
+            }
+        }
+
+        [HttpPost, ActionName("BillingAddress")]
+        public virtual IActionResult NewBillingAddress(CheckoutBillingAddressModel model, IFormCollection form)
+        {
+            //validation
+            if (_orderSettings.CheckoutDisabled)
+                return RedirectToRoute("ShoppingCart");
+
+            var cart = _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
+
+            if (!cart.Any())
+                return RedirectToRoute("ShoppingCart");
+
+            if (_orderSettings.OnePageCheckoutEnabled)
+                return RedirectToRoute("CheckoutOnePage");
+
+            if (_customerService.IsGuest(_workContext.CurrentCustomer) && !_orderSettings.AnonymousCheckoutAllowed)
+                return Challenge();
+
+            //custom address attributes
+            var customAttributes = _addressAttributeParser.ParseCustomAddressAttributes(form);
+            var customAttributeWarnings = _addressAttributeParser.GetAttributeWarnings(customAttributes);
+            foreach (var error in customAttributeWarnings)
+            {
+                ModelState.AddModelError("", error);
+            }
+
+            var newAddress = model.BillingNewAddress;
+
+            if (ModelState.IsValid)
+            {
+                //try to find an address with the same values (don't duplicate records)
+                var address = _addressService.FindAddress(_customerService.GetAddressesByCustomerId(_workContext.CurrentCustomer.Id).ToList(),
+                    newAddress.FirstName, newAddress.LastName, newAddress.PhoneNumber,
+                    newAddress.Email, newAddress.FaxNumber, newAddress.Company,
+                    newAddress.Address1, newAddress.Address2, newAddress.City,
+                    newAddress.County, newAddress.StateProvinceId, newAddress.ZipPostalCode,
+                    newAddress.CountryId, customAttributes);
+
+                if (address == null)
+                {
+                    //address is not found. let's create a new one
+                    address = newAddress.ToEntity();
+                    address.CustomAttributes = customAttributes;
+                    address.CreatedOnUtc = DateTime.UtcNow;
+
+                    //some validation
+                    if (address.CountryId == 0)
+                        address.CountryId = null;
+                    if (address.StateProvinceId == 0)
+                        address.StateProvinceId = null;
+
+                    _addressService.InsertAddress(address);
+
+                    _customerService.InsertCustomerAddress(_workContext.CurrentCustomer, address);
+                }
+
+                _workContext.CurrentCustomer.BillingAddressId = address.Id;
+
+                _customerService.UpdateCustomer(_workContext.CurrentCustomer);
+
+                return RedirectToRoute("CheckoutShippingAddress");
+            }
+
+            //If we got this far, something failed, redisplay form
+            model = _checkoutModelFactory.PrepareBillingAddressModel(cart,
+                selectedCountryId: newAddress.CountryId,
+                overrideAttributesXml: customAttributes);
+            return View(model);
         }
     }
 }

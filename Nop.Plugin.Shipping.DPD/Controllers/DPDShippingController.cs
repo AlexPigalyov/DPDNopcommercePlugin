@@ -154,6 +154,8 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
 
             return View("~/Plugins/Shipping.DPD/Views/Configure.cshtml", model);
         }
+        
+        
 
         [HttpPost]
         public IActionResult Configure(DPDShippingModel model)

@@ -1,7 +1,9 @@
 ﻿@using Nop.Plugin.Shipping.DPD.Infrastructure
-@model CheckoutShippingMethodModel
+@using Nop.Core
+@inject IWebHelper webHelper
+@model DPDCheckoutShippingMethodModel
 @{
-    
+    var storeLocation = webHelper.GetStoreLocation();
     Context.Items["nop.IgnoreScriptTagLocation"] = true;
 }
 
@@ -20,7 +22,7 @@
                 // После загрузки данных происходит центрирование на переданной геопозиции. Если ни один пункт не попадает на карту, то карта отдаляется до 4х раз
                 // Если передан большой по площади объект для центрирования (например, вся Москва), то границы карты будут установлены так, чтобы весь объект попал в область видимости.
                 i: '111402', //центрирование по индексу
-                viewdistance: 100, // Радиус отображения пунктов в километрах вокруг указанного адреса
+                viewdistance: 75, // Радиус отображения пунктов в километрах вокруг указанного адреса
 
                 //Фильтры:
                 filter_wait: 1, // Ожидание на адресе доставки
@@ -38,7 +40,7 @@
                 width: '100%', // Можно указать css ширину контейнера. Пример: 500px, 100%, 50em
                 mapHeight: '600', // Можно указать высоту карты в пикселях. Пример: 500.
                 //ВНИМАНИЕ!!! Высота касается только карты, списка пунктов и детализации. Это НЕ высота всего контейнера виджета.
-                sid: 'qaioqaiuqK6sr^TaoaGoqqmu3azcq6ih3KvZ2aGur9qvoK/crazbqa3c2tquoanc3qionw==',
+                sid: 'HB0dHB0bHRsZGlFvFBQdHxwbaBlpHh0UaR5sbBQbGm8aFRppGBluHBhpb28bFBxpax0dKg==',
                 //Задать высоту виджета нельзя, т.к. детализация может "прыгнуть" вниз из-за нехватки места в ширину.
 
 
@@ -54,12 +56,29 @@
                     $("#shippingoption_" + index).change(function () {
                         if ($("#shippingoption_" + index).prop('checked') === true) {
                             $("#dpdchooser").show();
+                            $("#createNewShippingAddress").hide();
+                            $("#newBillingAddressFormPickup").shi();
+                            $("input#Courier").each(function () {
+                                $(this).attr('disabled', 'disabled');
+                            });
+                            $("input#PickUp").each(function () {
+                                $(this).removeAttr('disabled');
+                            });
+
                         }
                     });
                 }
                 else {
-                    $("#shippingoption_" + index).change(function() {
+                    $("#shippingoption_" + index).change(function () {
                         $("#dpdchooser").hide();
+                        $("#createNewShippingAddress").show();
+                        $("#newBillingAddressFormPickup").hide();
+                        $("input#PickUp").each(function () {
+                            $(this).attr('disabled', 'disabled');
+                        });
+                        $("input#Courier").each(function () {
+                            $(this).removeAttr('disabled');
+                        });
                     });
                 }
             });
@@ -78,7 +97,7 @@
                         var shippingMethod = Model.ShippingMethods[i];
                         <li>
                             <div class="method-name">
-                                <input id="shippingoption_@(i)" type="radio" name="shippingoption" value="@(shippingMethod.Name)___@(shippingMethod.ShippingRateComputationMethodSystemName)qeqweqeqweqweqeqeqweeqweq" checked="@shippingMethod.Selected" />
+                                <input id="shippingoption_@(i)" type="radio" name="shippingoption" value="@(shippingMethod.Name)___@(shippingMethod.ShippingRateComputationMethodSystemName)" checked="@shippingMethod.Selected" />
                                 <label for="shippingoption_@(i)">@T("Checkout.SelectShippingMethod.MethodAndFee", shippingMethod.Name, shippingMethod.Fee)</label>
                             </div>
                             @if (!string.IsNullOrEmpty(shippingMethod.Description))
@@ -109,9 +128,25 @@
                 </div>
             }
             @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutShippingMethodBottom })
-            <div id="dpdchooser" style="padding: 0; width: 100%; height: 600px; margin: 0 auto 30px; display: inline-block;"> 
-
-            </div> 
+            <div class="section new-billing-address" id="newBillingAddressFormPickup">
+                <div class="enter-address">
+                <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                @{
+                    var dataDictAddress = new ViewDataDictionary(ViewData);
+                    dataDictAddress.TemplateInfo.HtmlFieldPrefix = "BillingNewAddress";
+                    @await Html.PartialAsync(PluginDefaults.CustomSharedViewPathFormat + "_DPDCreateShippingDataPickupPoint.cshtml", Model.OnePageModel.BillingAddress.BillingNewAddress, dataDictAddress)
+                }
+                </div>
+            </div>
+            <div id="dpdchooser" style="padding: 0; width: 100%; height: 600px; margin: 0 auto 30px; display: inline-block;">
+            </div>
+            <div id="createNewShippingAddress" class="section new-billing-address" style="display: none;">
+                <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                @{
+                    dataDictAddress = new ViewDataDictionary(ViewData);
+                    @await Html.PartialAsync(PluginDefaults.CustomSharedViewPathFormat + "_DPDCreateShippingDataCourier.cshtml", Model.OnePageModel.BillingAddress.BillingNewAddress, dataDictAddress)
+                }
+            </div>
         </div>
      }
 </div>
