@@ -318,6 +318,9 @@
             "projectReferences": {
               "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj": {
                 "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj"
+              },
+              "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web\\Nop.Web.csproj": {
+                "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web\\Nop.Web.csproj"
               }
             }
           }
@@ -331,6 +334,20 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "System.ServiceModel.Duplex": {
+              "target": "Package",
+              "version": "[4.4.*, )"
+            },
+            "System.ServiceModel.NetTcp": {
+              "target": "Package",
+              "version": "[4.4.*, )"
+            },
+            "System.ServiceModel.Security": {
+              "target": "Package",
+              "version": "[4.4.*, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -416,6 +433,76 @@
               "version": "[2.8.1, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web\\Nop.Web.csproj": {
+      "version": "4.3.0",
+      "restore": {
+        "projectUniqueName": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web\\Nop.Web.csproj",
+        "projectName": "Nop.Web",
+        "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web\\Nop.Web.csproj",
+        "packagesPath": "C:\\Users\\alexpigalyov\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\alexpigalyov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Libraries\\Nop.Core\\Nop.Core.csproj": {
+                "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Libraries\\Nop.Core\\Nop.Core.csproj"
+              },
+              "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Libraries\\Nop.Data\\Nop.Data.csproj": {
+                "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Libraries\\Nop.Data\\Nop.Data.csproj"
+              },
+              "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Libraries\\Nop.Services\\Nop.Services.csproj": {
+                "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Libraries\\Nop.Services\\Nop.Services.csproj"
+              },
+              "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj": {
+                "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",

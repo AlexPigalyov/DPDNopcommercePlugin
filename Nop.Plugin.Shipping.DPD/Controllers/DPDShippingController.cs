@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+
+using Nop.Core.Domain.Orders;
 using Nop.Plugin.Shipping.DPD.Domain;
 using Nop.Plugin.Shipping.DPD.Models;
 using Nop.Plugin.Shipping.DPD.Services;
 using Nop.Services;
 using Nop.Services.Configuration;
+using Nop.Services.Events;
 using Nop.Services.Localization;
 using Nop.Services.Messages;
 using Nop.Services.Orders;
@@ -61,61 +66,39 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 ClientNumber = _dpdSettings.ClientNumber,
                 ClientKey = _dpdSettings.ClientKey,
                 CargoRegistered = _dpdSettings.CargoRegistered,
-                UseSandbox = _dpdSettings.UseSandbox
+                UseSandbox = _dpdSettings.UseSandbox,
+                AddressCode = _dpdSettings.AddressCode
             };
 
-            if (_dpdSettings.ServiceVariantType == null)
-            {
-                var serviceVariantTypes = new List<string>
-                {
-                    _dpdService.GetUpsCode(ServiceVariantType.TT)
-                };
-
-                _dpdSettings.ServiceVariantType = string.Join(':', serviceVariantTypes.Select(service => $"[{service}]"));
-            }
-
-            if (_dpdSettings.ServiceVariantType == null)
-            {
-                var serviceVariantTypes = new List<string>
-                {
-                    _dpdService.GetUpsCode(ServiceVariantType.TT)
-                };
-
-                _dpdSettings.ServiceVariantType = string.Join(':', serviceVariantTypes.Select(service => $"[{service}]"));
-            }
-
-            //prepare offered delivery services
-            var servicesVariantCodes = _dpdSettings.ServiceVariantType.Split(':', StringSplitOptions.RemoveEmptyEntries)
-                .Select(idValue => idValue.Trim('[', ']')).ToList();
-
             List<string> serviceCodes = new List<string>();
-
             if (_dpdSettings.ServiceCodesOffered != null)
             {
                 if (_dpdSettings.ServiceCodesOffered.Split(':', StringSplitOptions.RemoveEmptyEntries).ToList().Count > 0)
                 {
                     serviceCodes = _dpdSettings.ServiceCodesOffered.Split(':', StringSplitOptions.RemoveEmptyEntries)
-                        .Select(idValue => idValue.Trim('[', ']')).ToList();
+                         .Select(idValue => idValue.Replace("[", "").Replace("]", "")).ToList();
                 }
                 else
                 {
-                    serviceCodes.Add(_dpdSettings.ServiceCodesOffered.Trim('[', ']'));
+                    serviceCodes.Add(_dpdSettings.ServiceCodesOffered.Replace("[", "").Replace("]", ""));
                 }
             }
 
-//prepare available options
-            model.AvailablePickupTimePeriodTypes = PickupTimePeriodType.NineAMToSixPM.ToSelectList(false)
-                .Select(item => new SelectListItem(
-                    _localizationService
-                        .GetResource($"Enums.Nop.Plugin.Shipping.DPD.PickupTimePeriodType.{item.Text.Replace(" ", "")}"),
-                    item.Value))
-                .ToList();
-            model.AvailablePaymentTypes = PaymentType.OUP.ToSelectList(false).Select(item =>
+            List<string> serviceVariants = new List<string>();
+            if (_dpdSettings.ServiceVariantsOffered != null)
             {
-                var paymentType = _dpdService.GetUpsCode((PaymentType)int.Parse(item.Value));
-                return new SelectListItem(item.Text.Replace(" ", "").Trim(), paymentType);
+                if (_dpdSettings.ServiceVariantsOffered.Split(':', StringSplitOptions.RemoveEmptyEntries).ToList().Count > 0)
+                {
+                    serviceVariants = _dpdSettings.ServiceVariantsOffered.Split(':', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(idValue => idValue.Replace("[", "").Replace("]", "")).ToList();
+                }
+                else
+                {
+                    serviceVariants.Add(_dpdSettings.ServiceVariantsOffered.Replace("[", "").Replace("]", ""));
+                }
+            }
 
-            }).ToList();
+            //prepare available options
             model.AvailableServiceCodeTypes = ServiceCodeType.DPDOnlineExpress.ToSelectList(false).Select(item =>
             {
                 var serviceCode = _dpdService.GetUpsCode((ServiceCodeType)int.Parse(item.Value));
@@ -123,34 +106,17 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 return new SelectListItem(
                     $"{item.Text?.TrimStart('_').Replace(" ", "")}",
                     serviceCode,
-                    _dpdSettings.ServiceCodes == null ? false : _dpdSettings.ServiceCodes.Any(x => x.Code == serviceCode));
+                    serviceCodes == null ? false : serviceCodes.Any(x => x == item.Text?.TrimStart('_').Replace(" ", "")));
             }).ToList();
 
             model.AvailableServiceVariantTypes = ServiceVariantType.TT.ToSelectList(false).Select(item =>
             {
-                var serviceCode = _dpdService.GetUpsCode((ServiceVariantType)int.Parse(item.Value));
-                return new SelectListItem($"{item.Text?.TrimStart('_').Replace(" ", "")}", serviceCode,
-                    servicesVariantCodes.Contains(serviceCode));
+                var serviceVariant = _dpdService.GetUpsCode((ServiceVariantType)int.Parse(item.Value));
+                return new SelectListItem(
+                    $"{item.Text?.TrimStart('_').Replace(" ", "")}",
+                    serviceVariant,
+                    serviceVariants == null ? false : serviceVariants.Any(x => x == item.Text?.TrimStart('_').Replace(" ", "")));
             }).ToList();
-
-            model.ServiceCodesTD = new List<string>();
-            model.ServiceCodesTT = new List<string>();
-
-            if (serviceCodes != null)
-            {
-                foreach (string serviceCode in serviceCodes)
-                {
-                    string[] splittedValuesOfServiceCode = serviceCode.Split('-');
-
-                    model.ServiceCodesTD.Add(bool.Parse(splittedValuesOfServiceCode[1]) && splittedValuesOfServiceCode[1] != null
-                        ? splittedValuesOfServiceCode[0]
-                        : null);
-
-                    model.ServiceCodesTT.Add(bool.Parse(splittedValuesOfServiceCode[2]) && splittedValuesOfServiceCode[2] != null
-                        ? splittedValuesOfServiceCode[0]
-                        : null);
-                }
-            }
 
             return View("~/Plugins/Shipping.DPD/Views/Configure.cshtml", model);
         }
@@ -166,26 +132,13 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             _dpdSettings.ClientNumber = model.ClientNumber;
             _dpdSettings.ClientKey = model.ClientKey;
             _dpdSettings.UseSandbox = model.UseSandbox;
-            _dpdSettings.PaymentType = model.PaymentType;
-            _dpdSettings.PickupTimePeriodType = (PickupTimePeriodType)model.PickupTimePeriodType;
             _dpdSettings.CargoRegistered = model.CargoRegistered;
+            _dpdSettings.AddressCode = model.AddressCode;
 
-            _dpdSettings.ServiceCodes = new List<ServiceCode>();
-
-            for (int i = 0; i < model.ServiceCodes.Count; i++)
-            {
-                _dpdSettings.ServiceCodes.Add(new ServiceCode()
-                {
-                    Code = model?.ServiceCodes[i],
-                    IsTDActive = model.ServiceCodesTD != null && model.ServiceCodesTD.Count >= i ? model.ServiceCodesTD[i] != null : false,
-                    IsTTActive = model.ServiceCodesTT != null && model.ServiceCodesTT.Count >= i ? model.ServiceCodesTT[i] != null : false
-                });
-            }
-
+            _dpdSettings.ServiceVariantsOffered =
+                string.Join(':', model.ServiceVariantTypes.Select(service => $"[{service}]"));
             _dpdSettings.ServiceCodesOffered =
-                string.Join(':', _dpdSettings.ServiceCodes.Select(service => $"[{service.Code}-{service.IsTDActive}-{service.IsTTActive}]"));
-
-_dpdSettings.ServiceVariantType = string.Join(':', model.ServiceVariantTypes?.Select(service => $"[{service}]") ?? Array.Empty<string>());
+                string.Join(':', model.ServiceCodeTypes.Select(service => $"[{service}]"));
 
             _settingService.SaveSetting(_dpdSettings);
 

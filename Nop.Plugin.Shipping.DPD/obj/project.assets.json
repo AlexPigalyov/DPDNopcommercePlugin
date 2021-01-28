@@ -3717,6 +3717,19 @@
           }
         }
       },
+      "System.ServiceModel.Duplex/4.4.4": {
+        "type": "package",
+        "dependencies": {
+          "System.Private.ServiceModel": "4.4.4",
+          "System.ServiceModel.Primitives": "4.4.4"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceModel.Duplex.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.Duplex.dll": {}
+        }
+      },
       "System.ServiceModel.Http/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -3728,6 +3741,19 @@
         },
         "runtime": {
           "lib/netstandard2.0/System.ServiceModel.Http.dll": {}
+        }
+      },
+      "System.ServiceModel.NetTcp/4.4.4": {
+        "type": "package",
+        "dependencies": {
+          "System.Private.ServiceModel": "4.4.4",
+          "System.ServiceModel.Primitives": "4.4.4"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceModel.NetTcp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.NetTcp.dll": {}
         }
       },
       "System.ServiceModel.Primitives/4.7.0": {
@@ -3742,6 +3768,19 @@
         "runtime": {
           "lib/netcoreapp2.1/System.ServiceModel.Primitives.dll": {},
           "lib/netcoreapp2.1/System.ServiceModel.dll": {}
+        }
+      },
+      "System.ServiceModel.Security/4.4.4": {
+        "type": "package",
+        "dependencies": {
+          "System.Private.ServiceModel": "4.4.4",
+          "System.ServiceModel.Primitives": "4.4.4"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.ServiceModel.Security.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.Security.dll": {}
         }
       },
       "System.Spatial/5.8.4": {
@@ -4241,6 +4280,25 @@
         },
         "runtime": {
           "bin/placeholder/Nop.Services.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Nop.Web/4.3.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Nop.Core": "4.3.0",
+          "Nop.Data": "4.3.0",
+          "Nop.Services": "4.3.0",
+          "Nop.Web.Framework": "4.3.0"
+        },
+        "compile": {
+          "bin/placeholder/Nop.Web.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Nop.Web.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
@@ -11388,6 +11446,46 @@
         "system.security.securestring.nuspec"
       ]
     },
+    "System.ServiceModel.Duplex/4.4.4": {
+      "sha512": "y/XLnKJ+xnuEUjrgJkXeLKCH4A+EwkX2TdOcTdgsEtxWmWq1+RbCjMd0zIlyNrbGD+nM9BxNg9rLVWVAPq81RA==",
+      "type": "package",
+      "path": "system.servicemodel.duplex/4.4.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net461/System.ServiceModel.Duplex.dll",
+        "lib/netcore50/System.ServiceModel.Duplex.dll",
+        "lib/netstandard1.3/System.ServiceModel.Duplex.dll",
+        "lib/netstandard2.0/System.ServiceModel.Duplex.dll",
+        "lib/portable-net45+win8/_._",
+        "lib/win8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net461/System.ServiceModel.Duplex.dll",
+        "ref/netcore50/System.ServiceModel.Duplex.dll",
+        "ref/netstandard1.1/System.ServiceModel.Duplex.dll",
+        "ref/netstandard2.0/System.ServiceModel.Duplex.dll",
+        "ref/portable-net45+win8/_._",
+        "ref/win8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.servicemodel.duplex.4.4.4.nupkg.sha512",
+        "system.servicemodel.duplex.nuspec",
+        "version.txt"
+      ]
+    },
     "System.ServiceModel.Http/4.7.0": {
       "sha512": "+BB61ycl1cSlRbJDpABoqMa7bRE4boJfK1CfWfbNzTGeADFVmDkhylpfmC1bKloxtf95p2owj8/n7kilgRBAow==",
       "type": "package",
@@ -11433,6 +11531,49 @@
         "ref/xamarinwatchos10/_._",
         "system.servicemodel.http.4.7.0.nupkg.sha512",
         "system.servicemodel.http.nuspec"
+      ]
+    },
+    "System.ServiceModel.NetTcp/4.4.4": {
+      "sha512": "TZUwkBUHK+HgPVpypcnCEzenn+Hly3mQ+QDqDtHKyqVBP2Yt+DAMp3NwuW35mTSMRqna5p9hd0U0vVq5azovOQ==",
+      "type": "package",
+      "path": "system.servicemodel.nettcp/4.4.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net46/System.ServiceModel.NetTcp.dll",
+        "lib/net461/System.ServiceModel.NetTcp.dll",
+        "lib/netcore50/System.ServiceModel.NetTcp.dll",
+        "lib/netstandard1.3/System.ServiceModel.NetTcp.dll",
+        "lib/netstandard2.0/System.ServiceModel.NetTcp.dll",
+        "lib/portable-net45+win8/_._",
+        "lib/win8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net46/System.ServiceModel.NetTcp.dll",
+        "ref/net461/System.ServiceModel.NetTcp.dll",
+        "ref/netcore50/System.ServiceModel.NetTcp.dll",
+        "ref/netstandard1.1/System.ServiceModel.NetTcp.dll",
+        "ref/netstandard1.3/System.ServiceModel.NetTcp.dll",
+        "ref/netstandard2.0/System.ServiceModel.NetTcp.dll",
+        "ref/portable-net45+win8/_._",
+        "ref/win8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.servicemodel.nettcp.4.4.4.nupkg.sha512",
+        "system.servicemodel.nettcp.nuspec",
+        "version.txt"
       ]
     },
     "System.ServiceModel.Primitives/4.7.0": {
@@ -11487,6 +11628,47 @@
         "ref/xamarinwatchos10/_._",
         "system.servicemodel.primitives.4.7.0.nupkg.sha512",
         "system.servicemodel.primitives.nuspec"
+      ]
+    },
+    "System.ServiceModel.Security/4.4.4": {
+      "sha512": "8mJj3lUNbBkntouQ3Eg3IF04GxiDrDK2X79+kcfq8V+W7NoYBREgWczaD60ZmW4KKRKnL0q3OnUNJlkzJJfe5w==",
+      "type": "package",
+      "path": "system.servicemodel.security/4.4.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.ServiceModel.Security.dll",
+        "lib/netstandard1.3/System.ServiceModel.Security.dll",
+        "lib/netstandard2.0/System.ServiceModel.Security.dll",
+        "lib/portable-net45+win8+wp8/_._",
+        "lib/win8/_._",
+        "lib/wp8/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/System.ServiceModel.Security.dll",
+        "ref/netstandard1.0/System.ServiceModel.Security.dll",
+        "ref/netstandard1.1/System.ServiceModel.Security.dll",
+        "ref/netstandard2.0/System.ServiceModel.Security.dll",
+        "ref/portable-net45+win8+wp8/_._",
+        "ref/win8/_._",
+        "ref/wp8/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.servicemodel.security.4.4.4.nupkg.sha512",
+        "system.servicemodel.security.nuspec",
+        "version.txt"
       ]
     },
     "System.Spatial/5.8.4": {
@@ -12743,6 +12925,11 @@
       "path": "../../Libraries/Nop.Services/Nop.Services.csproj",
       "msbuildProject": "../../Libraries/Nop.Services/Nop.Services.csproj"
     },
+    "Nop.Web/4.3.0": {
+      "type": "project",
+      "path": "../../Presentation/Nop.Web/Nop.Web.csproj",
+      "msbuildProject": "../../Presentation/Nop.Web/Nop.Web.csproj"
+    },
     "Nop.Web.Framework/4.3.0": {
       "type": "project",
       "path": "../../Presentation/Nop.Web.Framework/Nop.Web.Framework.csproj",
@@ -12751,7 +12938,11 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Nop.Web.Framework >= 4.3.0"
+      "Nop.Web >= 4.3.0",
+      "Nop.Web.Framework >= 4.3.0",
+      "System.ServiceModel.Duplex >= 4.4.*",
+      "System.ServiceModel.NetTcp >= 4.4.*",
+      "System.ServiceModel.Security >= 4.4.*"
     ]
   },
   "packageFolders": {
@@ -12783,6 +12974,9 @@
           "projectReferences": {
             "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj": {
               "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj"
+            },
+            "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web\\Nop.Web.csproj": {
+              "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Presentation\\Nop.Web\\Nop.Web.csproj"
             }
           }
         }
@@ -12796,6 +12990,20 @@
     "frameworks": {
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
+        "dependencies": {
+          "System.ServiceModel.Duplex": {
+            "target": "Package",
+            "version": "[4.4.*, )"
+          },
+          "System.ServiceModel.NetTcp": {
+            "target": "Package",
+            "version": "[4.4.*, )"
+          },
+          "System.ServiceModel.Security": {
+            "target": "Package",
+            "version": "[4.4.*, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

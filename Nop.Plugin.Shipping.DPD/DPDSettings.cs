@@ -14,11 +14,8 @@ namespace Nop.Plugin.Shipping.DPD
         public string ClientKey { get; set; }
         public bool UseSandbox { get; set; }
         public bool CargoRegistered { get; set; }
-        public PickupTimePeriodType PickupTimePeriodType { get; set; }
-        public string ServiceCodeType { get; set; }
-        public string ServiceVariantType { get; set; }
-        public string PaymentType { get; set; }
-        public List<ServiceCode> ServiceCodes { get; set; }
+        public string AddressCode { get; set; }
         public string ServiceCodesOffered { get; set; }
+        public string ServiceVariantsOffered { get; set; }
     }
 }

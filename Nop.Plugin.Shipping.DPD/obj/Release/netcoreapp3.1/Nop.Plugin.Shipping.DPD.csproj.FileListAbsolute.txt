@@ -297,10 +297,10 @@ D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Presentation\Nop.Web\Plugi
 D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Presentation\Nop.Web\Plugins\Shipping.DPD\refs\System.Xml.XPath.dll
 D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Presentation\Nop.Web\Plugins\Shipping.DPD\refs\System.Xml.XPath.XDocument.dll
 D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Presentation\Nop.Web\Plugins\Shipping.DPD\refs\WindowsBase.dll
-D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Debug\netcoreapp3.1\Nop.Plugin.Shipping.DPD.csprojAssemblyReference.cache
-D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Debug\netcoreapp3.1\Nop.Plugin.Shipping.DPD.AssemblyInfoInputs.cache
-D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Debug\netcoreapp3.1\Nop.Plugin.Shipping.DPD.AssemblyInfo.cs
-D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Debug\netcoreapp3.1\Nop.Plugin.Shipping.DPD.csproj.CoreCompileInputs.cache
-D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Debug\netcoreapp3.1\Nop.Plugin.Shipping.DPD.csproj.CopyComplete
-D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Debug\netcoreapp3.1\Nop.Plugin.Shipping.DPD.dll
-D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Debug\netcoreapp3.1\Nop.Plugin.Shipping.DPD.pdb
+D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Release\netcoreapp3.1\Nop.Plugin.Shipping.DPD.csprojAssemblyReference.cache
+D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Release\netcoreapp3.1\Nop.Plugin.Shipping.DPD.AssemblyInfoInputs.cache
+D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Release\netcoreapp3.1\Nop.Plugin.Shipping.DPD.AssemblyInfo.cs
+D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Release\netcoreapp3.1\Nop.Plugin.Shipping.DPD.csproj.CoreCompileInputs.cache
+D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Release\netcoreapp3.1\Nop.Plugin.Shipping.DPD.csproj.CopyComplete
+D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Release\netcoreapp3.1\Nop.Plugin.Shipping.DPD.dll
+D:\Project\goldtech-market.ru\nopCommerce_4.30_Source\Plugins\Nop.Plugin.Shipping.DPD\obj\Release\netcoreapp3.1\Nop.Plugin.Shipping.DPD.pdb

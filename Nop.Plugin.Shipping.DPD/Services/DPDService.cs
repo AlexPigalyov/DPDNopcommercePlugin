@@ -1,8 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
 using Calculator;
 using Geography;
+
+using Newtonsoft.Json;
+
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
@@ -10,7 +17,11 @@ using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Shipping;
 using Nop.Data;
 using Nop.Plugin.Shipping.DPD.Domain;
+using Nop.Plugin.Shipping.DPD.Models;
+using Nop.Services.Catalog;
+using Nop.Services.Common;
 using Nop.Services.Localization;
+using Nop.Services.Orders;
 using Nop.Services.Shipping;
 using auth = Order.auth;
 
@@ -18,31 +29,49 @@ namespace Nop.Plugin.Shipping.DPD.Services
 {
     public class DPDService
     {
-        private readonly IRepository<Address> _addressRepository;
         private readonly DPDSettings _dpdSettings;
+        private readonly HttpClient _httpClient;
+        private readonly Calculator.DPDCalculatorClient _dpdCalculator;
+        private readonly Geography.DPDGeography2Client _dpdGeography;
+        private readonly Order.DPDOrderClient _dpdOrderClient;
+        private readonly SandboxOrder.DPDOrderClient _dpdSandboxOrderClient;
+        private readonly IOrderService _orderService;
+        private readonly IAddressService _addressService;
         private readonly ILocalizationService _localizationService;
-        private readonly IRepository<Product> _productRepository;
-        private readonly IRepository<ShoppingCartItem> _shoppingCartItemRepository;
+        private readonly IProductService _productService;
+        private readonly IShoppingCartService _shoppingCartService;
+        private readonly ICategoryService _catergoryService;
+        private readonly IStoreContext _storeContext;
         private readonly IWorkContext _workContext;
         
         private readonly IShippingService _shippingService;
-
         public DPDService(
             ILocalizationService localizationService,
-            IRepository<ShoppingCartItem> shoppingCartItemRepository,
-            IRepository<Product> productRepository,
+            IOrderService orderService,
             IWorkContext workContext,
+            IShoppingCartService shoppingCartService,
+            IStoreContext storeContext,
+            IAddressService addressService,
+            IProductService productService,
+            ICategoryService categoryService,
             DPDSettings dpdSettings, 
-            IRepository<Address> addressRepository,
             IShippingService shippingService)
         {
+            _dpdCalculator = new DPDCalculatorClient();
+            _dpdGeography = new DPDGeography2Client();
+            _dpdOrderClient = new Order.DPDOrderClient();
+            _dpdSandboxOrderClient = new SandboxOrder.DPDOrderClient();
+            _httpClient = new HttpClient();
             _localizationService = localizationService;
             _dpdSettings = dpdSettings;
-            _addressRepository = addressRepository;
+            _storeContext = storeContext;
+            _shoppingCartService = shoppingCartService;
+            _addressService = addressService;
+            _orderService = orderService;
             _shippingService = shippingService;
             _workContext = workContext;
-            _productRepository = productRepository;
-            _shoppingCartItemRepository = shoppingCartItemRepository;
+            _productService = productService;
+            _catergoryService = categoryService;
         }
 
         /// <summary>
@@ -69,192 +98,287 @@ namespace Nop.Plugin.Shipping.DPD.Services
         {
             return GetAttributeValue<DPDCodeAttribute>(enumValue)?.Code;
         }
-        /*
-        private List<ServiceCode> GetServicesCodes()
+        public object CreateShippingRequest(int orderId, PickupPointAddress dpdPickupPointAddress)
         {
-            
-            //List<string> serviceCodesSTR = new List<string>();
-            /*
-            if (_dpdSettings.ServiceCodesOffered != null)
+            var orderAuth = PrepareOrderAuth();
+            var orderHeader = PrepareOrderHeader();
+            var orderSettings = PrepareOrderSettings(orderId, dpdPickupPointAddress);
+            if (_dpdSettings.UseSandbox)
             {
-                if (_dpdSettings.ServiceCodesOffered.Split(':', StringSplitOptions.RemoveEmptyEntries).ToList().Count > 0)
+                var orderResponse = _dpdSandboxOrderClient.createOrderAsync(new SandboxOrder.dpdOrdersData()
                 {
-                    serviceCodesSTR = _dpdSettings.ServiceCodesOffered.Split(':', StringSplitOptions.RemoveEmptyEntries)
-                        .Select(idValue => idValue.Trim('[', ']')).ToList();
-                }
-                else
-                {
-                    serviceCodesSTR.Add(_dpdSettings.ServiceCodesOffered.Trim('[', ']'));
-                }
-            }
-            */
-            //List<ServiceCode> serviceCodes = new List<ServiceCode>();                            ;
-            /*
-            for (int i = 0; i < serviceCodesSTR.Count; i++)
-            {
-                serviceCodes.Add(new ServiceCode()
-                {
-                    Code = serviceCodesSTR[i].Split('-')[0],
-                    IsTDActive = bool.Parse(serviceCodesSTR[i].Split('-')[1]),
-                    IsTTActive = bool.Parse(serviceCodesSTR[i].Split('-')[2])
-                });
-            }
-            
-            serviceCodes.Add(new ServiceCode()
-            {
-                Code = "PickUp Delivery (TT)",
-                IsTDActive = true, 
-                IsTTActive = true;
-            })
-            return serviceCodes;
-        }
-        
-        private List<Product> GetCustomerShoppingCartItems()
-        {
-            var shoppingCartItems = new List<Product>();
-
-            foreach (var shoppingCartItem in _shoppingCartItemRepository.Table)
-            {
-                if (shoppingCartItem.CustomerId == _workContext.CurrentCustomer.Id)
-                {
-                    foreach (var product in _productRepository.Table)
+                    auth = new SandboxOrder.auth()
                     {
-                        if (product.Id == shoppingCartItem.ProductId)
+                        clientKey = orderAuth.clientKey,
+                        clientNumber = orderAuth.clientNumber
+                    },
+                    header = new SandboxOrder.header()
+                    {
+                        datePickup = orderHeader.datePickup,
+                        senderAddress = new SandboxOrder.address()
                         {
-                            shoppingCartItems.Add(product);
+                            code = orderHeader.senderAddress.code
                         }
+                    },
+                    order = new SandboxOrder.order[]
+                    {
+                        new SandboxOrder.order()
+                        {
+                            cargoCategory = orderSettings.cargoCategory,
+                            cargoRegistered = orderSettings.cargoRegistered,
+                            cargoValue = orderSettings.cargoValue,
+                            cargoValueSpecified = true,
+                            cargoWeight = orderSettings.cargoWeight,
+                            orderNumberInternal = orderSettings.orderNumberInternal,
+                            serviceCode = orderSettings.serviceCode,
+                            serviceVariant = orderSettings.serviceVariant,
+                            receiverAddress = new SandboxOrder.address()
+                            {
+                                name = orderSettings.receiverAddress.name,
+                                countryName = orderSettings.receiverAddress.countryName,
+                                city = orderSettings.receiverAddress.city,
+                                street = orderSettings.receiverAddress.street,
+                                contactFio = orderSettings.receiverAddress.contactFio,
+                                contactPhone = orderSettings.receiverAddress.contactPhone,
+                                contactEmail = orderSettings.receiverAddress.contactEmail
+                            }
+                        }
+                    }
+                }).Result;
+
+                return new Order.createOrderResponse()
+                {
+                    @return = orderResponse.@return.ToList().Select(x => new Order.dpdOrderStatus()
+                    {
+                        errorMessage = x.errorMessage,
+                        orderNum = x.orderNum,
+                        orderNumberInternal = x.orderNumberInternal,
+                        status = x.status
+                    }).ToArray()
+                };
+            }
+            else
+            {
+                var orderResponse = _dpdOrderClient.createOrderAsync(new Order.dpdOrdersData()
+                {
+                    auth = orderAuth,
+                    header = orderHeader,
+                    order = new Order.order[]
+                    {
+                        orderSettings
+                    }
+                }).Result;
+
+                return orderResponse;
+            }
+        }
+
+        private Order.auth PrepareOrderAuth()
+        {
+            return new auth()
+            {
+                clientKey = _dpdSettings.ClientKey,
+                clientNumber = _dpdSettings.ClientNumber
+            };
+        }
+        private Order.header PrepareOrderHeader()
+        {
+            return new Order.header()
+            {
+                datePickup = DateTime.Now,
+                senderAddress = new Order.address()
+                {
+                    code = _dpdSettings.AddressCode
+                }
+            };
+        }
+        private Order.address PrepareReceiverAdress(Core.Domain.Orders.Order currentOrder, bool isTTServiceVariantType, PickupPointAddress dpdPickupPointAddress)
+        {
+            var receiverAddress = new Order.address();
+            
+            if (isTTServiceVariantType)
+            {
+                var shippingAddress = _addressService.GetAddressById(currentOrder.ShippingAddressId.GetValueOrDefault());
+
+                string receiverFullName = shippingAddress.FirstName + " " + shippingAddress.LastName;
+
+                receiverAddress = new Order.address()
+                {
+                    name = receiverFullName,
+                    countryName = shippingAddress.County,
+                    city = shippingAddress.City,
+                    street = shippingAddress.Address1 ?? shippingAddress.Address2 ?? throw new ArgumentNullException("Shipping street can be null"),
+                    contactFio = receiverFullName,
+                    contactPhone = shippingAddress.PhoneNumber,
+                    contactEmail = shippingAddress.Email
+                };
+            }
+            else
+            {
+                receiverAddress = new Order.address()
+                {
+                    terminalCode = dpdPickupPointAddress.TerminalCode,
+                    countryName = dpdPickupPointAddress.CountryName,
+                    city = dpdPickupPointAddress.City,
+                    street = dpdPickupPointAddress.Street,
+                    name = dpdPickupPointAddress.CustomerFullName
+                };
+            }
+
+            return receiverAddress;
+        }
+        private Order.order PrepareOrderSettings(int orderId, PickupPointAddress dpdPickupPointAddress)
+        {
+            double productsWeight = 0;
+            double productsCost = 0;
+
+            var currentOrder = _orderService.GetOrderById(orderId);
+
+            bool isTTServiceVariantType = new string(currentOrder.ShippingRateComputationMethodSystemName.Reverse().Take(2).Reverse().ToArray()) == "TT" ? true : false;
+
+            var cart = _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
+
+            List<string> productsCategories = new List<string>();
+
+            foreach (var productId in cart.Select(x => x.ProductId))
+            {
+                var product = _productService.GetProductById(productId);
+
+                productsWeight += (double)product.Weight;
+                productsCost += (double)product.Price;
+
+                int[] categoriyIds = _catergoryService
+                    .GetProductCategoriesByCategoryId(product.TaxCategoryId)
+                        .Select(x => x.CategoryId)
+                    .ToArray();
+
+                List<Category> categories = _catergoryService
+                    .GetCategoriesByIds(categoriyIds);
+
+                List<string> uniqueCategoryNames = categories.Select(x => x.Name).ToList();
+
+                productsCategories.AddRange(uniqueCategoryNames);
+            }
+
+            var receiverAddress = PrepareReceiverAdress(currentOrder, isTTServiceVariantType, dpdPickupPointAddress);
+
+            string uniqueCategoryNamesString = string.Join(", ", productsCategories.Distinct());
+
+            return new Order.order()
+            {
+                orderNumberInternal = currentOrder.Id.ToString(),
+                serviceCode = currentOrder.ShippingMethod.Split('(', ')')[1],
+                serviceVariant = isTTServiceVariantType ? "ТТ" : "ТД",
+                cargoNumPack = 1,
+                cargoWeight = productsWeight,
+                cargoRegistered = _dpdSettings.CargoRegistered,
+                cargoValue = productsCost,
+                cargoValueSpecified = true,
+                cargoCategory = uniqueCategoryNamesString,
+                receiverAddress = receiverAddress
+            };
+        }
+
+        private async Task<string> GetCityByCityNameAsync(string cityName)
+        {
+            var requestContent = new StringContent($"text={cityName}",
+                Encoding.UTF8, MimeTypes.ApplicationXWwwFormUrlencoded);
+            var cityReponse = await _httpClient.PostAsync("http://rentoolo.ru/api/AllCities", requestContent);
+            cityReponse.EnsureSuccessStatusCode();
+            return await cityReponse.Content.ReadAsStringAsync();
+        }
+        public virtual GetShippingOptionResponse GetRates(GetShippingOptionRequest shippingOptionRequest)
+        {
+            var response = new GetShippingOptionResponse();
+
+            /*
+            var cityDeliveryJson = GetCityByCityNameAsync(shippingOptionRequest.CityFrom).Result;
+            var cityDelivery = JsonConvert.DeserializeObject<Geography.city>(cityDeliveryJson);
+
+            var cityFromJson = GetCityByCityNameAsync(shippingOptionRequest.ShippingAddress.City).Result;
+            var cityFrom = JsonConvert.DeserializeObject<Geography.city>(cityFromJson);
+            */          
+
+            var serviceVariantTypes = _dpdSettings
+                .ServiceVariantsOffered.Split(':')
+                .Select(x => x.Replace("[", "").Replace("]", ""))
+                .ToList();
+
+            var serviceCodeTypes = _dpdSettings
+                .ServiceCodesOffered.Split(':')
+                .Select(x => x.Replace("[", "").Replace("]", ""))
+                .ToList();
+
+            double priceOfProducts = 0;
+
+            foreach(var product in shippingOptionRequest.Items.Select(x => x.Product))
+            {
+                priceOfProducts += (double)product.Price;
+            }
+
+            var cities = _dpdGeography.getCitiesCashPayAsync(new dpdCitiesCashPayRequest()
+            {
+                auth = new Geography.auth()
+                {
+                    clientKey = _dpdSettings.ClientKey,
+                    clientNumber = _dpdSettings.ClientNumber
+                }
+            }).Result;
+
+            var cityFrom = cities.@return.FirstOrDefault(x => x.cityName == shippingOptionRequest.CityFrom);
+            var cityDelivery = cities.@return.FirstOrDefault(x => x.cityName == shippingOptionRequest.ShippingAddress.City);
+
+            for (int i = 0; i < serviceVariantTypes.Count; i++)
+            {
+                 var serviceCosts = _dpdCalculator.getServiceCost2Async(new serviceCostRequest()
+                 {
+                    auth = new Calculator.auth()
+                    {
+                        clientKey = _dpdSettings.ClientKey,
+                        clientNumber = _dpdSettings.ClientNumber
+                    },
+
+                    delivery = new cityRequest()
+                    {
+                        cityId = cityFrom.cityId,
+                        countryCode = cityFrom.countryCode,
+                        cityName = cityFrom.cityName,
+                        regionCode = cityFrom.regionCode,
+                        cityIdSpecified = true,
+                        index = shippingOptionRequest.ShippingAddress.ZipPostalCode,
+                        regionCodeSpecified = true,
+                    },
+                    pickup = new cityRequest()
+                    {
+                        cityId = cityDelivery.cityId,
+                        countryCode = cityDelivery.countryCode,
+                        cityName = cityDelivery.cityName,
+                        cityIdSpecified = true,
+                        regionCodeSpecified = true,
+                        index = shippingOptionRequest.ZipPostalCodeFrom,
+                        regionCode = cityDelivery.regionCode,
+                    },
+                    selfPickup = false,
+                    selfDelivery = serviceVariantTypes[i] == "TD",
+                    declaredValue = priceOfProducts,
+                    weight = 0.050
+                }).Result;
+
+                foreach(var service in serviceCosts.@return.ToList())
+                {
+                    if(serviceCodeTypes.Any(x => x.ToLower() == service.serviceName.Replace(" ", "").ToLower()))
+                    {
+                        response.ShippingOptions.Add(new ShippingOption()
+                        {
+                            Name = (serviceVariantTypes[i] == "TD" ? "DPD Pick-up delivery" : "DPD Courier delivery") + $" ({service.serviceName})",
+                            Rate = (decimal)service.cost,
+                            TransitDays = service.days,
+                            ShippingRateComputationMethodSystemName = "DPD-" + serviceVariantTypes[i]
+                        });
                     }
                 }
             }
 
-            return shoppingCartItems;
-        }
-    
-        private (double, double, double) GetProductsPriceVolumeWeight(List<Product> products)
-        {
-            double priceOfShoppingCart = 0;
-            double volumeOfShoppingCart = 0;
-            double weightOfShoppingCart = 0;
-
-            foreach (var shoppingCartItem in products)
-            {
-                priceOfShoppingCart += (double)shoppingCartItem.Price;
-                volumeOfShoppingCart += (double)shoppingCartItem.Length * (double)shoppingCartItem.Width * (double)shoppingCartItem.Height;
-                weightOfShoppingCart += (double)shoppingCartItem.Weight;
-            }
-
-            return (priceOfShoppingCart, volumeOfShoppingCart, weightOfShoppingCart);
-        }
-    */
-        public virtual GetShippingOptionResponse GetRates(GetShippingOptionRequest shippingOptionRequest)
-        {
-            
-            var response = new GetShippingOptionResponse();
-            /*
-            //get services variants and codes
-            List<ServiceCode> servicesCode = GetServicesCodes();
-
-            List<Product> shoppingCartItems = GetCustomerShoppingCartItems();
-
-            double priceOfShoppingCart = 0;
-            double volumeOfShoppingCart = 0;
-            double weightOfShoppingCart = 0;
-
-            //get price, volume and weight of all items in shopping cart 
-            (priceOfShoppingCart, volumeOfShoppingCart, weightOfShoppingCart) =
-                GetProductsPriceVolumeWeight(shoppingCartItems);
-
-            priceOfShoppingCart = Math.Round(priceOfShoppingCart, 2);
-
-            var calculator = new DPDCalculatorClient();
-
-            var geographyClient = new DPDGeography2Client();
-
-            var customerAddress =
-                _addressRepository.Table.FirstOrDefault(x => x.Id == _workContext.CurrentCustomer.ShippingAddressId);
-            var geographyResponse = geographyClient.getCitiesCashPayAsync(new dpdCitiesCashPayRequest
-            {
-                auth = new Geography.auth
-                {
-                    clientKey = _dpdSettings.ClientKey,
-                    clientNumber = _dpdSettings.ClientNumber
-                },
-                countryCode = "RU"
-            }).Result;
-            var deliveryCity = geographyResponse.@return.FirstOrDefault(x =>
-                x.cityName.Trim().ToLower() == "москва");
-            var pickupCity = geographyResponse.@return.FirstOrDefault(x =>
-                x.cityName == "Санкт-Петербург"); 
-
-            
-            foreach (var serviceCode in servicesCode)
-            {
-                int countRequests = 1;
-                bool[] serviceVariantsDelivery = new bool[2];
-                serviceVariantsDelivery[0] = !serviceCode.IsTTActive;
-                if (serviceCode.IsTDActive && serviceCode.IsTTActive)
-                {
-                    countRequests = 2;
-                    serviceVariantsDelivery[0] = false;
-                    serviceVariantsDelivery[1] = true;
-                }
-                
-                for (int i = 0; i < countRequests; i++)
-                {
-                    
-                    var serviceCost = calculator.getServiceCost2Async(new serviceCostRequest
-                    {
-                        auth = new Calculator.auth
-                        {
-                            clientKey = _dpdSettings.ClientKey,
-                            clientNumber = _dpdSettings.ClientNumber
-                        },
-                        declaredValue = priceOfShoppingCart,
-                        delivery = new cityRequest
-                        {
-                            cityId = deliveryCity.cityId,
-                            cityIdSpecified = deliveryCity.cityIdSpecified,
-                            cityName = deliveryCity.cityName,
-                            countryCode = deliveryCity.countryCode,
-                            regionCode = deliveryCity.regionCode,
-                            regionCodeSpecified = deliveryCity.regionCodeSpecified
-                        },
-                        pickup = new cityRequest()
-                        {
-                            cityId = pickupCity.cityId,
-                            cityIdSpecified = pickupCity.cityIdSpecified,
-                            cityName = pickupCity.cityName,
-                            countryCode = pickupCity.countryCode,
-                            regionCode = pickupCity.regionCode,
-                            regionCodeSpecified = pickupCity.regionCodeSpecified
-                        },
-                        serviceCode = serviceCode.Code,
-                        selfDelivery = serviceVariantsDelivery[i],
-                        weight = 1
-                    }).Result;
-
-                    response.ShippingOptions.Add(new ShippingOption
-                    {
-                        Name = serviceCode.Code,
-                        Description = serviceVariantsDelivery[i] ? "<button>12312312</button>" : "Самовывоз",
-                        Rate = Math.Ceiling((decimal)serviceCost.@return[0].cost)
-                    });
-                }
-                
-            }
-            */
-            response.ShippingOptions.Add(new ShippingOption
-            {
-                Name = "Pick-up in shop (TD)",
-                Description = "Delivery to the some Shop",
-                Rate = 555
-            });
-            response.ShippingOptions.Add(new ShippingOption
-            {
-                Name = "Courier delivery (TT)",
-                Description = "Delivery from door to door",
-                Rate = 200
-            });
             return response;
         }
     }

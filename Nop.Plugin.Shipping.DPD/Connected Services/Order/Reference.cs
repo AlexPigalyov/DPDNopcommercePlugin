@@ -55,12 +55,10 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class dpdOrderStatus
+    public partial class parcelStatus
     {
         
-        private string orderNumberInternalField;
-        
-        private string orderNumField;
+        private string numberField;
         
         private string statusField;
         
@@ -68,34 +66,20 @@ namespace Order
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string orderNumberInternal
+        public string number
         {
             get
             {
-                return this.orderNumberInternalField;
+                return this.numberField;
             }
             set
             {
-                this.orderNumberInternalField = value;
+                this.numberField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string orderNum
-        {
-            get
-            {
-                return this.orderNumField;
-            }
-            set
-            {
-                this.orderNumField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
         public string status
         {
             get
@@ -109,7 +93,7 @@ namespace Order
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
         public string errorMessage
         {
             get
@@ -127,326 +111,70 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class unitLoad
+    public partial class dpdOrderCorrectionStatus
     {
         
-        private string articleField;
+        private string orderNumField;
         
-        private string descriptField;
+        private string statusField;
         
-        private string client_codeField;
+        private string errorMessageField;
         
-        private string declared_valueField;
-        
-        private string parcel_numField;
-        
-        private string npp_amountField;
-        
-        private int vat_percentField;
-        
-        private bool vat_percentFieldSpecified;
-        
-        private bool without_vatField;
-        
-        private bool without_vatFieldSpecified;
-        
-        private string country_codeField;
-        
-        private string gTDField;
-        
-        private string gTINField;
-        
-        private string serialField;
-        
-        private int countField;
-        
-        private string providerNameField;
-        
-        private string providerInnField;
-        
-        private string providerPhoneField;
-        
-        private decimal sellingPriceField;
-        
-        private bool sellingPriceFieldSpecified;
+        private parcelStatus[] parcelStatusField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string article
+        public string orderNum
         {
             get
             {
-                return this.articleField;
+                return this.orderNumField;
             }
             set
             {
-                this.articleField = value;
+                this.orderNumField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string descript
+        public string status
         {
             get
             {
-                return this.descriptField;
+                return this.statusField;
             }
             set
             {
-                this.descriptField = value;
+                this.statusField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string client_code
+        public string errorMessage
         {
             get
             {
-                return this.client_codeField;
+                return this.errorMessageField;
             }
             set
             {
-                this.client_codeField = value;
+                this.errorMessageField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public string declared_value
+        [System.Xml.Serialization.XmlElementAttribute("parcelStatus", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=3)]
+        public parcelStatus[] parcelStatus
         {
             get
             {
-                return this.declared_valueField;
+                return this.parcelStatusField;
             }
             set
             {
-                this.declared_valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public string parcel_num
-        {
-            get
-            {
-                return this.parcel_numField;
-            }
-            set
-            {
-                this.parcel_numField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public string npp_amount
-        {
-            get
-            {
-                return this.npp_amountField;
-            }
-            set
-            {
-                this.npp_amountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        public int vat_percent
-        {
-            get
-            {
-                return this.vat_percentField;
-            }
-            set
-            {
-                this.vat_percentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool vat_percentSpecified
-        {
-            get
-            {
-                return this.vat_percentFieldSpecified;
-            }
-            set
-            {
-                this.vat_percentFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
-        public bool without_vat
-        {
-            get
-            {
-                return this.without_vatField;
-            }
-            set
-            {
-                this.without_vatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool without_vatSpecified
-        {
-            get
-            {
-                return this.without_vatFieldSpecified;
-            }
-            set
-            {
-                this.without_vatFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
-        public string country_code
-        {
-            get
-            {
-                return this.country_codeField;
-            }
-            set
-            {
-                this.country_codeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
-        public string GTD
-        {
-            get
-            {
-                return this.gTDField;
-            }
-            set
-            {
-                this.gTDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
-        public string GTIN
-        {
-            get
-            {
-                return this.gTINField;
-            }
-            set
-            {
-                this.gTINField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
-        public string serial
-        {
-            get
-            {
-                return this.serialField;
-            }
-            set
-            {
-                this.serialField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
-        public int count
-        {
-            get
-            {
-                return this.countField;
-            }
-            set
-            {
-                this.countField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
-        public string providerName
-        {
-            get
-            {
-                return this.providerNameField;
-            }
-            set
-            {
-                this.providerNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
-        public string providerInn
-        {
-            get
-            {
-                return this.providerInnField;
-            }
-            set
-            {
-                this.providerInnField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
-        public string providerPhone
-        {
-            get
-            {
-                return this.providerPhoneField;
-            }
-            set
-            {
-                this.providerPhoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=16)]
-        public decimal sellingPrice
-        {
-            get
-            {
-                return this.sellingPriceField;
-            }
-            set
-            {
-                this.sellingPriceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool sellingPriceSpecified
-        {
-            get
-            {
-                return this.sellingPriceFieldSpecified;
-            }
-            set
-            {
-                this.sellingPriceFieldSpecified = value;
+                this.parcelStatusField = value;
             }
         }
     }
@@ -767,1014 +495,6 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class extraService
-    {
-        
-        private string esCodeField;
-        
-        private parameter[] paramField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string esCode
-        {
-            get
-            {
-                return this.esCodeField;
-            }
-            set
-            {
-                this.esCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("param", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=1)]
-        public parameter[] param
-        {
-            get
-            {
-                return this.paramField;
-            }
-            set
-            {
-                this.paramField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class parameter
-    {
-        
-        private string nameField;
-        
-        private string valueField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class dataInternational
-    {
-        
-        private string currencyField;
-        
-        private string currencyDeclaredValueField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string currency
-        {
-            get
-            {
-                return this.currencyField;
-            }
-            set
-            {
-                this.currencyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string currencyDeclaredValue
-        {
-            get
-            {
-                return this.currencyDeclaredValueField;
-            }
-            set
-            {
-                this.currencyDeclaredValueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class order
-    {
-        
-        private string preOrderNumberField;
-        
-        private string orderNumberInternalField;
-        
-        private string serviceCodeField;
-        
-        private string serviceVariantField;
-        
-        private int cargoNumPackField;
-        
-        private double cargoWeightField;
-        
-        private double cargoVolumeField;
-        
-        private bool cargoVolumeFieldSpecified;
-        
-        private bool cargoRegisteredField;
-        
-        private double cargoValueField;
-        
-        private bool cargoValueFieldSpecified;
-        
-        private string cargoCategoryField;
-        
-        private string deliveryTimePeriodField;
-        
-        private string paymentTypeField;
-        
-        private parameter[] extraParamField;
-        
-        private dataInternational dataIntField;
-        
-        private address receiverAddressField;
-        
-        private address returnAddressField;
-        
-        private extraService[] extraServiceField;
-        
-        private parcel[] parcelField;
-        
-        private unitLoad[] unitLoadField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string preOrderNumber
-        {
-            get
-            {
-                return this.preOrderNumberField;
-            }
-            set
-            {
-                this.preOrderNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string orderNumberInternal
-        {
-            get
-            {
-                return this.orderNumberInternalField;
-            }
-            set
-            {
-                this.orderNumberInternalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string serviceCode
-        {
-            get
-            {
-                return this.serviceCodeField;
-            }
-            set
-            {
-                this.serviceCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public string serviceVariant
-        {
-            get
-            {
-                return this.serviceVariantField;
-            }
-            set
-            {
-                this.serviceVariantField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public int cargoNumPack
-        {
-            get
-            {
-                return this.cargoNumPackField;
-            }
-            set
-            {
-                this.cargoNumPackField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public double cargoWeight
-        {
-            get
-            {
-                return this.cargoWeightField;
-            }
-            set
-            {
-                this.cargoWeightField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        public double cargoVolume
-        {
-            get
-            {
-                return this.cargoVolumeField;
-            }
-            set
-            {
-                this.cargoVolumeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool cargoVolumeSpecified
-        {
-            get
-            {
-                return this.cargoVolumeFieldSpecified;
-            }
-            set
-            {
-                this.cargoVolumeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
-        public bool cargoRegistered
-        {
-            get
-            {
-                return this.cargoRegisteredField;
-            }
-            set
-            {
-                this.cargoRegisteredField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
-        public double cargoValue
-        {
-            get
-            {
-                return this.cargoValueField;
-            }
-            set
-            {
-                this.cargoValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool cargoValueSpecified
-        {
-            get
-            {
-                return this.cargoValueFieldSpecified;
-            }
-            set
-            {
-                this.cargoValueFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
-        public string cargoCategory
-        {
-            get
-            {
-                return this.cargoCategoryField;
-            }
-            set
-            {
-                this.cargoCategoryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
-        public string deliveryTimePeriod
-        {
-            get
-            {
-                return this.deliveryTimePeriodField;
-            }
-            set
-            {
-                this.deliveryTimePeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
-        public string paymentType
-        {
-            get
-            {
-                return this.paymentTypeField;
-            }
-            set
-            {
-                this.paymentTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("extraParam", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=12)]
-        public parameter[] extraParam
-        {
-            get
-            {
-                return this.extraParamField;
-            }
-            set
-            {
-                this.extraParamField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
-        public dataInternational dataInt
-        {
-            get
-            {
-                return this.dataIntField;
-            }
-            set
-            {
-                this.dataIntField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
-        public address receiverAddress
-        {
-            get
-            {
-                return this.receiverAddressField;
-            }
-            set
-            {
-                this.receiverAddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
-        public address returnAddress
-        {
-            get
-            {
-                return this.returnAddressField;
-            }
-            set
-            {
-                this.returnAddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("extraService", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=16)]
-        public extraService[] extraService
-        {
-            get
-            {
-                return this.extraServiceField;
-            }
-            set
-            {
-                this.extraServiceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("parcel", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=17)]
-        public parcel[] parcel
-        {
-            get
-            {
-                return this.parcelField;
-            }
-            set
-            {
-                this.parcelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("unitLoad", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=18)]
-        public unitLoad[] unitLoad
-        {
-            get
-            {
-                return this.unitLoadField;
-            }
-            set
-            {
-                this.unitLoadField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class address
-    {
-        
-        private string codeField;
-        
-        private string nameField;
-        
-        private string terminalCodeField;
-        
-        private string addressStringField;
-        
-        private string countryNameField;
-        
-        private string indexField;
-        
-        private string regionField;
-        
-        private string cityField;
-        
-        private string streetField;
-        
-        private string streetAbbrField;
-        
-        private string houseField;
-        
-        private string houseKorpusField;
-        
-        private string strField;
-        
-        private string vladField;
-        
-        private string extraInfoField;
-        
-        private string officeField;
-        
-        private string flatField;
-        
-        private string workTimeFromField;
-        
-        private string workTimeToField;
-        
-        private string dinnerTimeFromField;
-        
-        private string dinnerTimeToField;
-        
-        private string contactFioField;
-        
-        private string contactPhoneField;
-        
-        private string contactEmailField;
-        
-        private string instructionsField;
-        
-        private bool needPassField;
-        
-        private bool needPassFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string code
-        {
-            get
-            {
-                return this.codeField;
-            }
-            set
-            {
-                this.codeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string terminalCode
-        {
-            get
-            {
-                return this.terminalCodeField;
-            }
-            set
-            {
-                this.terminalCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public string addressString
-        {
-            get
-            {
-                return this.addressStringField;
-            }
-            set
-            {
-                this.addressStringField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public string countryName
-        {
-            get
-            {
-                return this.countryNameField;
-            }
-            set
-            {
-                this.countryNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public string index
-        {
-            get
-            {
-                return this.indexField;
-            }
-            set
-            {
-                this.indexField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        public string region
-        {
-            get
-            {
-                return this.regionField;
-            }
-            set
-            {
-                this.regionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
-        public string city
-        {
-            get
-            {
-                return this.cityField;
-            }
-            set
-            {
-                this.cityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
-        public string street
-        {
-            get
-            {
-                return this.streetField;
-            }
-            set
-            {
-                this.streetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
-        public string streetAbbr
-        {
-            get
-            {
-                return this.streetAbbrField;
-            }
-            set
-            {
-                this.streetAbbrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
-        public string house
-        {
-            get
-            {
-                return this.houseField;
-            }
-            set
-            {
-                this.houseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
-        public string houseKorpus
-        {
-            get
-            {
-                return this.houseKorpusField;
-            }
-            set
-            {
-                this.houseKorpusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
-        public string str
-        {
-            get
-            {
-                return this.strField;
-            }
-            set
-            {
-                this.strField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
-        public string vlad
-        {
-            get
-            {
-                return this.vladField;
-            }
-            set
-            {
-                this.vladField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
-        public string extraInfo
-        {
-            get
-            {
-                return this.extraInfoField;
-            }
-            set
-            {
-                this.extraInfoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
-        public string office
-        {
-            get
-            {
-                return this.officeField;
-            }
-            set
-            {
-                this.officeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=16)]
-        public string flat
-        {
-            get
-            {
-                return this.flatField;
-            }
-            set
-            {
-                this.flatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=17)]
-        public string workTimeFrom
-        {
-            get
-            {
-                return this.workTimeFromField;
-            }
-            set
-            {
-                this.workTimeFromField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=18)]
-        public string workTimeTo
-        {
-            get
-            {
-                return this.workTimeToField;
-            }
-            set
-            {
-                this.workTimeToField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=19)]
-        public string dinnerTimeFrom
-        {
-            get
-            {
-                return this.dinnerTimeFromField;
-            }
-            set
-            {
-                this.dinnerTimeFromField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=20)]
-        public string dinnerTimeTo
-        {
-            get
-            {
-                return this.dinnerTimeToField;
-            }
-            set
-            {
-                this.dinnerTimeToField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=21)]
-        public string contactFio
-        {
-            get
-            {
-                return this.contactFioField;
-            }
-            set
-            {
-                this.contactFioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=22)]
-        public string contactPhone
-        {
-            get
-            {
-                return this.contactPhoneField;
-            }
-            set
-            {
-                this.contactPhoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=23)]
-        public string contactEmail
-        {
-            get
-            {
-                return this.contactEmailField;
-            }
-            set
-            {
-                this.contactEmailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=24)]
-        public string instructions
-        {
-            get
-            {
-                return this.instructionsField;
-            }
-            set
-            {
-                this.instructionsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=25)]
-        public bool needPass
-        {
-            get
-            {
-                return this.needPassField;
-            }
-            set
-            {
-                this.needPassField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool needPassSpecified
-        {
-            get
-            {
-                return this.needPassFieldSpecified;
-            }
-            set
-            {
-                this.needPassFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class header
-    {
-        
-        private System.DateTime datePickupField;
-        
-        private long payerField;
-        
-        private bool payerFieldSpecified;
-        
-        private address senderAddressField;
-        
-        private string pickupTimePeriodField;
-        
-        private string regularNumField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=0)]
-        public System.DateTime datePickup
-        {
-            get
-            {
-                return this.datePickupField;
-            }
-            set
-            {
-                this.datePickupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public long payer
-        {
-            get
-            {
-                return this.payerField;
-            }
-            set
-            {
-                this.payerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool payerSpecified
-        {
-            get
-            {
-                return this.payerFieldSpecified;
-            }
-            set
-            {
-                this.payerFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public address senderAddress
-        {
-            get
-            {
-                return this.senderAddressField;
-            }
-            set
-            {
-                this.senderAddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public string pickupTimePeriod
-        {
-            get
-            {
-                return this.pickupTimePeriodField;
-            }
-            set
-            {
-                this.pickupTimePeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public string regularNum
-        {
-            get
-            {
-                return this.regularNumField;
-            }
-            set
-            {
-                this.regularNumField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
     public partial class auth
     {
         
@@ -1808,657 +528,6 @@ namespace Order
             {
                 this.clientKeyField = value;
             }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class dpdOrdersData
-    {
-        
-        private auth authField;
-        
-        private header headerField;
-        
-        private order[] orderField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public auth auth
-        {
-            get
-            {
-                return this.authField;
-            }
-            set
-            {
-                this.authField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public header header
-        {
-            get
-            {
-                return this.headerField;
-            }
-            set
-            {
-                this.headerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("order", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public order[] order
-        {
-            get
-            {
-                return this.orderField;
-            }
-            set
-            {
-                this.orderField = value;
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", ConfigurationName="Order.DPDOrder")]
-    public interface DPDOrder
-    {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createOrderRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createOrderResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createOrder/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.createOrderResponse> createOrderAsync(Order.createOrderRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/cancelOrderRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/cancelOrderResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/cancelOrder/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.cancelOrderResponse> cancelOrderAsync(Order.cancelOrderRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderStatusRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderStatusResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderStatus/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.getOrderStatusResponse> getOrderStatusAsync(Order.getOrderStatusRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getInvoiceFileRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getInvoiceFileResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getInvoiceFile/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.getInvoiceFileResponse> getInvoiceFileAsync(Order.getInvoiceFileRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addParcelsRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addParcelsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addParcels/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.addParcelsResponse> addParcelsAsync(Order.addParcelsRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/removeParcelsRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/removeParcelsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/removeParcels/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.removeParcelsResponse> removeParcelsAsync(Order.removeParcelsRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddressRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddressResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddress/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.createAddressResponse> createAddressAsync(Order.createAddressRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddressRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddressResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddress/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.updateAddressResponse> updateAddressAsync(Order.updateAddressRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getRegisterFileRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getRegisterFileResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getRegisterFile/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.getRegisterFileResponse> getRegisterFileAsync(Order.getRegisterFileRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addAirwayBillRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addAirwayBillResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addAirwayBill/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.addAirwayBillResponse> addAirwayBillAsync(Order.addAirwayBillRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/orderReDirectRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/orderReDirectResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/orderReDirect/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.orderReDirectResponse> orderReDirectAsync(Order.orderReDirectRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeUnitLoadRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeUnitLoadResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeUnitLoad/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.changeUnitLoadResponse> changeUnitLoadAsync(Order.changeUnitLoadRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderSMSRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderSMSResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderSMS/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.getOrderSMSResponse> getOrderSMSAsync(Order.getOrderSMSRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddressScheduleRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddressScheduleResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddressSchedule/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.updateAddressScheduleResponse> updateAddressScheduleAsync(Order.updateAddressScheduleRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeDeliveryDateRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeDeliveryDateResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeDeliveryDate/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.changeDeliveryDateResponse> changeDeliveryDateAsync(Order.changeDeliveryDateRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddressScheduleRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddressScheduleResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddressSchedule/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.createAddressScheduleResponse> createAddressScheduleAsync(Order.createAddressScheduleRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/registerParcelsForTripRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/registerParcelsForTripResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/registerParcelsForTrip/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Order.registerParcelsForTripResponse> registerParcelsForTripAsync(Order.registerParcelsForTripRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="createOrder", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class createOrderRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdOrdersData orders;
-        
-        public createOrderRequest()
-        {
-        }
-        
-        public createOrderRequest(Order.dpdOrdersData orders)
-        {
-            this.orders = orders;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="createOrderResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class createOrderResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdOrderStatus[] @return;
-        
-        public createOrderResponse()
-        {
-        }
-        
-        public createOrderResponse(Order.dpdOrderStatus[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class dpdOrderCancellation
-    {
-        
-        private auth authField;
-        
-        private orderCancel[] cancelField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public auth auth
-        {
-            get
-            {
-                return this.authField;
-            }
-            set
-            {
-                this.authField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("cancel", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public orderCancel[] cancel
-        {
-            get
-            {
-                return this.cancelField;
-            }
-            set
-            {
-                this.cancelField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class orderCancel
-    {
-        
-        private string orderNumberInternalField;
-        
-        private string orderNumField;
-        
-        private System.DateTime pickupdateField;
-        
-        private bool pickupdateFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string orderNumberInternal
-        {
-            get
-            {
-                return this.orderNumberInternalField;
-            }
-            set
-            {
-                this.orderNumberInternalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string orderNum
-        {
-            get
-            {
-                return this.orderNumField;
-            }
-            set
-            {
-                this.orderNumField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=2)]
-        public System.DateTime pickupdate
-        {
-            get
-            {
-                return this.pickupdateField;
-            }
-            set
-            {
-                this.pickupdateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool pickupdateSpecified
-        {
-            get
-            {
-                return this.pickupdateFieldSpecified;
-            }
-            set
-            {
-                this.pickupdateFieldSpecified = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="cancelOrder", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class cancelOrderRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdOrderCancellation orders;
-        
-        public cancelOrderRequest()
-        {
-        }
-        
-        public cancelOrderRequest(Order.dpdOrderCancellation orders)
-        {
-            this.orders = orders;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="cancelOrderResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class cancelOrderResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdOrderStatus[] @return;
-        
-        public cancelOrderResponse()
-        {
-        }
-        
-        public cancelOrderResponse(Order.dpdOrderStatus[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class dpdGetOrderStatus
-    {
-        
-        private auth authField;
-        
-        private internalOrderNumber[] orderField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public auth auth
-        {
-            get
-            {
-                return this.authField;
-            }
-            set
-            {
-                this.authField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("order", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public internalOrderNumber[] order
-        {
-            get
-            {
-                return this.orderField;
-            }
-            set
-            {
-                this.orderField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class internalOrderNumber
-    {
-        
-        private string orderNumberInternalField;
-        
-        private System.DateTime datePickupField;
-        
-        private bool datePickupFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string orderNumberInternal
-        {
-            get
-            {
-                return this.orderNumberInternalField;
-            }
-            set
-            {
-                this.orderNumberInternalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=1)]
-        public System.DateTime datePickup
-        {
-            get
-            {
-                return this.datePickupField;
-            }
-            set
-            {
-                this.datePickupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool datePickupSpecified
-        {
-            get
-            {
-                return this.datePickupFieldSpecified;
-            }
-            set
-            {
-                this.datePickupFieldSpecified = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getOrderStatus", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class getOrderStatusRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdGetOrderStatus orderStatus;
-        
-        public getOrderStatusRequest()
-        {
-        }
-        
-        public getOrderStatusRequest(Order.dpdGetOrderStatus orderStatus)
-        {
-            this.orderStatus = orderStatus;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getOrderStatusResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class getOrderStatusResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdOrderStatus[] @return;
-        
-        public getOrderStatusResponse()
-        {
-        }
-        
-        public getOrderStatusResponse(Order.dpdOrderStatus[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class dpdGetInvoiceFile
-    {
-        
-        private auth authField;
-        
-        private string orderNumField;
-        
-        private int parcelCountField;
-        
-        private bool parcelCountFieldSpecified;
-        
-        private decimal cargoValueField;
-        
-        private bool cargoValueFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public auth auth
-        {
-            get
-            {
-                return this.authField;
-            }
-            set
-            {
-                this.authField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string orderNum
-        {
-            get
-            {
-                return this.orderNumField;
-            }
-            set
-            {
-                this.orderNumField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public int parcelCount
-        {
-            get
-            {
-                return this.parcelCountField;
-            }
-            set
-            {
-                this.parcelCountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool parcelCountSpecified
-        {
-            get
-            {
-                return this.parcelCountFieldSpecified;
-            }
-            set
-            {
-                this.parcelCountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public decimal cargoValue
-        {
-            get
-            {
-                return this.cargoValueField;
-            }
-            set
-            {
-                this.cargoValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool cargoValueSpecified
-        {
-            get
-            {
-                return this.cargoValueFieldSpecified;
-            }
-            set
-            {
-                this.cargoValueFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class dpdInvoiceFile
-    {
-        
-        private byte[] fileField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary", Order=0)]
-        public byte[] file
-        {
-            get
-            {
-                return this.fileField;
-            }
-            set
-            {
-                this.fileField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getInvoiceFile", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class getInvoiceFileRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdGetInvoiceFile request;
-        
-        public getInvoiceFileRequest()
-        {
-        }
-        
-        public getInvoiceFileRequest(Order.dpdGetInvoiceFile request)
-        {
-            this.request = request;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getInvoiceFileResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class getInvoiceFileResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdInvoiceFile @return;
-        
-        public getInvoiceFileResponse()
-        {
-        }
-        
-        public getInvoiceFileResponse(Order.dpdInvoiceFile @return)
-        {
-            this.@return = @return;
         }
     }
     
@@ -2678,181 +747,102 @@ namespace Order
         }
     }
     
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class dpdOrderCorrectionStatus
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", ConfigurationName="Order.DPDOrder")]
+    internal interface DPDOrder
     {
         
-        private string orderNumField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/removeParcelsRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/removeParcelsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/removeParcels/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.removeParcelsResponse> removeParcelsAsync(Order.removeParcelsRequest request);
         
-        private string statusField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddressRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddressResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddress/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.createAddressResponse> createAddressAsync(Order.createAddressRequest request);
         
-        private string errorMessageField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddressRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddressResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddress/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.updateAddressResponse> updateAddressAsync(Order.updateAddressRequest request);
         
-        private parcelStatus[] parcelStatusField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getRegisterFileRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getRegisterFileResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getRegisterFile/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.getRegisterFileResponse> getRegisterFileAsync(Order.getRegisterFileRequest request);
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string orderNum
-        {
-            get
-            {
-                return this.orderNumField;
-            }
-            set
-            {
-                this.orderNumField = value;
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addAirwayBillRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addAirwayBillResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addAirwayBill/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.addAirwayBillResponse> addAirwayBillAsync(Order.addAirwayBillRequest request);
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string status
-        {
-            get
-            {
-                return this.statusField;
-            }
-            set
-            {
-                this.statusField = value;
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/orderReDirectRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/orderReDirectResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/orderReDirect/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.orderReDirectResponse> orderReDirectAsync(Order.orderReDirectRequest request);
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string errorMessage
-        {
-            get
-            {
-                return this.errorMessageField;
-            }
-            set
-            {
-                this.errorMessageField = value;
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeUnitLoadRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeUnitLoadResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeUnitLoad/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.changeUnitLoadResponse> changeUnitLoadAsync(Order.changeUnitLoadRequest request);
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("parcelStatus", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=3)]
-        public parcelStatus[] parcelStatus
-        {
-            get
-            {
-                return this.parcelStatusField;
-            }
-            set
-            {
-                this.parcelStatusField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class parcelStatus
-    {
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderSMSRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderSMSResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderSMS/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.getOrderSMSResponse> getOrderSMSAsync(Order.getOrderSMSRequest request);
         
-        private string numberField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/registerParcelsForTripRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/registerParcelsForTripResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/registerParcelsForTrip/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.registerParcelsForTripResponse> registerParcelsForTripAsync(Order.registerParcelsForTripRequest request);
         
-        private string statusField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderStatusRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderStatusResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getOrderStatus/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.getOrderStatusResponse> getOrderStatusAsync(Order.getOrderStatusRequest request);
         
-        private string errorMessageField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getInvoiceFileRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getInvoiceFileResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/getInvoiceFile/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.getInvoiceFileResponse> getInvoiceFileAsync(Order.getInvoiceFileRequest request);
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string number
-        {
-            get
-            {
-                return this.numberField;
-            }
-            set
-            {
-                this.numberField = value;
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addParcelsRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addParcelsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/addParcels/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.addParcelsResponse> addParcelsAsync(Order.addParcelsRequest request);
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string status
-        {
-            get
-            {
-                return this.statusField;
-            }
-            set
-            {
-                this.statusField = value;
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddressScheduleRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddressScheduleResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createAddressSchedule/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.createAddressScheduleResponse> createAddressScheduleAsync(Order.createAddressScheduleRequest request);
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string errorMessage
-        {
-            get
-            {
-                return this.errorMessageField;
-            }
-            set
-            {
-                this.errorMessageField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="addParcels", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class addParcelsRequest
-    {
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddressScheduleRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddressScheduleResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/updateAddressSchedule/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.updateAddressScheduleResponse> updateAddressScheduleAsync(Order.updateAddressScheduleRequest request);
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdOrderCorrection parcels;
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createOrderRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createOrderResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/createOrder/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.createOrderResponse> createOrderAsync(Order.createOrderRequest request);
         
-        public addParcelsRequest()
-        {
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/cancelOrderRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/cancelOrderResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/cancelOrder/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.cancelOrderResponse> cancelOrderAsync(Order.cancelOrderRequest request);
         
-        public addParcelsRequest(Order.dpdOrderCorrection parcels)
-        {
-            this.parcels = parcels;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="addParcelsResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class addParcelsResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdOrderCorrectionStatus @return;
-        
-        public addParcelsResponse()
-        {
-        }
-        
-        public addParcelsResponse(Order.dpdOrderCorrectionStatus @return)
-        {
-            this.@return = @return;
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeDeliveryDateRequest", ReplyAction="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeDeliveryDateResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Order.WSFault), Action="http://dpd.ru/ws/order2/2012-04-04/DPDOrder/changeDeliveryDate/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Order.changeDeliveryDateResponse> changeDeliveryDateAsync(Order.changeDeliveryDateRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="removeParcels", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class removeParcelsRequest
+    internal partial class removeParcelsRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -2873,7 +863,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="removeParcelsResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class removeParcelsResponse
+    internal partial class removeParcelsResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -3414,7 +1404,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="createAddress", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class createAddressRequest
+    internal partial class createAddressRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -3435,7 +1425,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="createAddressResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class createAddressResponse
+    internal partial class createAddressResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -3456,7 +1446,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="updateAddress", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class updateAddressRequest
+    internal partial class updateAddressRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -3477,7 +1467,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="updateAddressResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class updateAddressResponse
+    internal partial class updateAddressResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -3602,7 +1592,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="getRegisterFile", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class getRegisterFileRequest
+    internal partial class getRegisterFileRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -3623,7 +1613,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="getRegisterFileResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class getRegisterFileResponse
+    internal partial class getRegisterFileResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -3853,7 +1843,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="addAirwayBill", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class addAirwayBillRequest
+    internal partial class addAirwayBillRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -3874,7 +1864,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="addAirwayBillResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class addAirwayBillResponse
+    internal partial class addAirwayBillResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -4064,7 +2054,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="orderReDirect", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class orderReDirectRequest
+    internal partial class orderReDirectRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -4085,7 +2075,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="orderReDirectResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class orderReDirectResponse
+    internal partial class orderReDirectResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -4406,11 +2396,411 @@ namespace Order
         }
     }
     
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class unitLoad
+    {
+        
+        private string articleField;
+        
+        private string descriptField;
+        
+        private string client_codeField;
+        
+        private string declared_valueField;
+        
+        private string parcel_numField;
+        
+        private string npp_amountField;
+        
+        private int vat_percentField;
+        
+        private bool vat_percentFieldSpecified;
+        
+        private bool without_vatField;
+        
+        private bool without_vatFieldSpecified;
+        
+        private string country_codeField;
+        
+        private string gTDField;
+        
+        private string gTINField;
+        
+        private string serialField;
+        
+        private int countField;
+        
+        private string providerNameField;
+        
+        private string providerInnField;
+        
+        private string providerPhoneField;
+        
+        private decimal sellingPriceField;
+        
+        private bool sellingPriceFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string article
+        {
+            get
+            {
+                return this.articleField;
+            }
+            set
+            {
+                this.articleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string descript
+        {
+            get
+            {
+                return this.descriptField;
+            }
+            set
+            {
+                this.descriptField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string client_code
+        {
+            get
+            {
+                return this.client_codeField;
+            }
+            set
+            {
+                this.client_codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string declared_value
+        {
+            get
+            {
+                return this.declared_valueField;
+            }
+            set
+            {
+                this.declared_valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string parcel_num
+        {
+            get
+            {
+                return this.parcel_numField;
+            }
+            set
+            {
+                this.parcel_numField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string npp_amount
+        {
+            get
+            {
+                return this.npp_amountField;
+            }
+            set
+            {
+                this.npp_amountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public int vat_percent
+        {
+            get
+            {
+                return this.vat_percentField;
+            }
+            set
+            {
+                this.vat_percentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool vat_percentSpecified
+        {
+            get
+            {
+                return this.vat_percentFieldSpecified;
+            }
+            set
+            {
+                this.vat_percentFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public bool without_vat
+        {
+            get
+            {
+                return this.without_vatField;
+            }
+            set
+            {
+                this.without_vatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool without_vatSpecified
+        {
+            get
+            {
+                return this.without_vatFieldSpecified;
+            }
+            set
+            {
+                this.without_vatFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public string country_code
+        {
+            get
+            {
+                return this.country_codeField;
+            }
+            set
+            {
+                this.country_codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public string GTD
+        {
+            get
+            {
+                return this.gTDField;
+            }
+            set
+            {
+                this.gTDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public string GTIN
+        {
+            get
+            {
+                return this.gTINField;
+            }
+            set
+            {
+                this.gTINField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public string serial
+        {
+            get
+            {
+                return this.serialField;
+            }
+            set
+            {
+                this.serialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public int count
+        {
+            get
+            {
+                return this.countField;
+            }
+            set
+            {
+                this.countField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        public string providerName
+        {
+            get
+            {
+                return this.providerNameField;
+            }
+            set
+            {
+                this.providerNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
+        public string providerInn
+        {
+            get
+            {
+                return this.providerInnField;
+            }
+            set
+            {
+                this.providerInnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
+        public string providerPhone
+        {
+            get
+            {
+                return this.providerPhoneField;
+            }
+            set
+            {
+                this.providerPhoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=16)]
+        public decimal sellingPrice
+        {
+            get
+            {
+                return this.sellingPriceField;
+            }
+            set
+            {
+                this.sellingPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool sellingPriceSpecified
+        {
+            get
+            {
+                return this.sellingPriceFieldSpecified;
+            }
+            set
+            {
+                this.sellingPriceFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class dpdOrderStatus
+    {
+        
+        private string orderNumberInternalField;
+        
+        private string orderNumField;
+        
+        private string statusField;
+        
+        private string errorMessageField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string orderNumberInternal
+        {
+            get
+            {
+                return this.orderNumberInternalField;
+            }
+            set
+            {
+                this.orderNumberInternalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string orderNum
+        {
+            get
+            {
+                return this.orderNumField;
+            }
+            set
+            {
+                this.orderNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string status
+        {
+            get
+            {
+                return this.statusField;
+            }
+            set
+            {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string errorMessage
+        {
+            get
+            {
+                return this.errorMessageField;
+            }
+            set
+            {
+                this.errorMessageField = value;
+            }
+        }
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="changeUnitLoad", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class changeUnitLoadRequest
+    internal partial class changeUnitLoadRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -4431,7 +2821,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="changeUnitLoadResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class changeUnitLoadResponse
+    internal partial class changeUnitLoadResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -4572,7 +2962,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="getOrderSMS", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class getOrderSMSRequest
+    internal partial class getOrderSMSRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -4593,7 +2983,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="getOrderSMSResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class getOrderSMSResponse
+    internal partial class getOrderSMSResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -4606,357 +2996,6 @@ namespace Order
         }
         
         public getOrderSMSResponse(Order.dpdOrderSmsStatus[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class dpdClientAddressSchedule
-    {
-        
-        private auth authField;
-        
-        private clientAddress clientAddressField;
-        
-        private clientWorkDay[] scheduleField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public auth auth
-        {
-            get
-            {
-                return this.authField;
-            }
-            set
-            {
-                this.authField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public clientAddress clientAddress
-        {
-            get
-            {
-                return this.clientAddressField;
-            }
-            set
-            {
-                this.clientAddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("workDay", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public clientWorkDay[] schedule
-        {
-            get
-            {
-                return this.scheduleField;
-            }
-            set
-            {
-                this.scheduleField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class clientWorkDay
-    {
-        
-        private int dayOfweekField;
-        
-        private string openTimeFromField;
-        
-        private string openTimeToField;
-        
-        private bool isPickupField;
-        
-        private bool isPickupFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public int dayOfweek
-        {
-            get
-            {
-                return this.dayOfweekField;
-            }
-            set
-            {
-                this.dayOfweekField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string openTimeFrom
-        {
-            get
-            {
-                return this.openTimeFromField;
-            }
-            set
-            {
-                this.openTimeFromField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string openTimeTo
-        {
-            get
-            {
-                return this.openTimeToField;
-            }
-            set
-            {
-                this.openTimeToField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public bool isPickup
-        {
-            get
-            {
-                return this.isPickupField;
-            }
-            set
-            {
-                this.isPickupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool isPickupSpecified
-        {
-            get
-            {
-                return this.isPickupFieldSpecified;
-            }
-            set
-            {
-                this.isPickupFieldSpecified = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="updateAddressSchedule", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class updateAddressScheduleRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdClientAddressSchedule address;
-        
-        public updateAddressScheduleRequest()
-        {
-        }
-        
-        public updateAddressScheduleRequest(Order.dpdClientAddressSchedule address)
-        {
-            this.address = address;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="updateAddressScheduleResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class updateAddressScheduleResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdClientAddressStatus @return;
-        
-        public updateAddressScheduleResponse()
-        {
-        }
-        
-        public updateAddressScheduleResponse(Order.dpdClientAddressStatus @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class dpdChangeDeliveryDate
-    {
-        
-        private auth authField;
-        
-        private orderDeliveryDate[] orderField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public auth auth
-        {
-            get
-            {
-                return this.authField;
-            }
-            set
-            {
-                this.authField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("order", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public orderDeliveryDate[] order
-        {
-            get
-            {
-                return this.orderField;
-            }
-            set
-            {
-                this.orderField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
-    public partial class orderDeliveryDate
-    {
-        
-        private string orderNumField;
-        
-        private System.DateTime newDeliveryDateField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string orderNum
-        {
-            get
-            {
-                return this.orderNumField;
-            }
-            set
-            {
-                this.orderNumField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=1)]
-        public System.DateTime newDeliveryDate
-        {
-            get
-            {
-                return this.newDeliveryDateField;
-            }
-            set
-            {
-                this.newDeliveryDateField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="changeDeliveryDate", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class changeDeliveryDateRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdChangeDeliveryDate request;
-        
-        public changeDeliveryDateRequest()
-        {
-        }
-        
-        public changeDeliveryDateRequest(Order.dpdChangeDeliveryDate request)
-        {
-            this.request = request;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="changeDeliveryDateResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class changeDeliveryDateResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdOrderStatus[] @return;
-        
-        public changeDeliveryDateResponse()
-        {
-        }
-        
-        public changeDeliveryDateResponse(Order.dpdOrderStatus[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="createAddressSchedule", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class createAddressScheduleRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdClientAddressSchedule address;
-        
-        public createAddressScheduleRequest()
-        {
-        }
-        
-        public createAddressScheduleRequest(Order.dpdClientAddressSchedule address)
-        {
-            this.address = address;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="createAddressScheduleResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class createAddressScheduleResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Order.dpdClientAddressStatus @return;
-        
-        public createAddressScheduleResponse()
-        {
-        }
-        
-        public createAddressScheduleResponse(Order.dpdClientAddressStatus @return)
         {
             this.@return = @return;
         }
@@ -5198,7 +3237,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="registerParcelsForTrip", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class registerParcelsForTripRequest
+    internal partial class registerParcelsForTripRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -5219,7 +3258,7 @@ namespace Order
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="registerParcelsForTripResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
-    public partial class registerParcelsForTripResponse
+    internal partial class registerParcelsForTripResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
@@ -5236,14 +3275,1975 @@ namespace Order
         }
     }
     
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    public interface DPDOrderChannel : Order.DPDOrder, System.ServiceModel.IClientChannel
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class dpdGetOrderStatus
+    {
+        
+        private auth authField;
+        
+        private internalOrderNumber[] orderField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public auth auth
+        {
+            get
+            {
+                return this.authField;
+            }
+            set
+            {
+                this.authField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("order", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public internalOrderNumber[] order
+        {
+            get
+            {
+                return this.orderField;
+            }
+            set
+            {
+                this.orderField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class internalOrderNumber
+    {
+        
+        private string orderNumberInternalField;
+        
+        private System.DateTime datePickupField;
+        
+        private bool datePickupFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string orderNumberInternal
+        {
+            get
+            {
+                return this.orderNumberInternalField;
+            }
+            set
+            {
+                this.orderNumberInternalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=1)]
+        public System.DateTime datePickup
+        {
+            get
+            {
+                return this.datePickupField;
+            }
+            set
+            {
+                this.datePickupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool datePickupSpecified
+        {
+            get
+            {
+                return this.datePickupFieldSpecified;
+            }
+            set
+            {
+                this.datePickupFieldSpecified = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getOrderStatus", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class getOrderStatusRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdGetOrderStatus orderStatus;
+        
+        public getOrderStatusRequest()
+        {
+        }
+        
+        public getOrderStatusRequest(Order.dpdGetOrderStatus orderStatus)
+        {
+            this.orderStatus = orderStatus;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getOrderStatusResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class getOrderStatusResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdOrderStatus[] @return;
+        
+        public getOrderStatusResponse()
+        {
+        }
+        
+        public getOrderStatusResponse(Order.dpdOrderStatus[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class dpdGetInvoiceFile
+    {
+        
+        private auth authField;
+        
+        private string orderNumField;
+        
+        private int parcelCountField;
+        
+        private bool parcelCountFieldSpecified;
+        
+        private decimal cargoValueField;
+        
+        private bool cargoValueFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public auth auth
+        {
+            get
+            {
+                return this.authField;
+            }
+            set
+            {
+                this.authField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string orderNum
+        {
+            get
+            {
+                return this.orderNumField;
+            }
+            set
+            {
+                this.orderNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public int parcelCount
+        {
+            get
+            {
+                return this.parcelCountField;
+            }
+            set
+            {
+                this.parcelCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool parcelCountSpecified
+        {
+            get
+            {
+                return this.parcelCountFieldSpecified;
+            }
+            set
+            {
+                this.parcelCountFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public decimal cargoValue
+        {
+            get
+            {
+                return this.cargoValueField;
+            }
+            set
+            {
+                this.cargoValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool cargoValueSpecified
+        {
+            get
+            {
+                return this.cargoValueFieldSpecified;
+            }
+            set
+            {
+                this.cargoValueFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class dpdInvoiceFile
+    {
+        
+        private byte[] fileField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary", Order=0)]
+        public byte[] file
+        {
+            get
+            {
+                return this.fileField;
+            }
+            set
+            {
+                this.fileField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getInvoiceFile", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class getInvoiceFileRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdGetInvoiceFile request;
+        
+        public getInvoiceFileRequest()
+        {
+        }
+        
+        public getInvoiceFileRequest(Order.dpdGetInvoiceFile request)
+        {
+            this.request = request;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getInvoiceFileResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class getInvoiceFileResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdInvoiceFile @return;
+        
+        public getInvoiceFileResponse()
+        {
+        }
+        
+        public getInvoiceFileResponse(Order.dpdInvoiceFile @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="addParcels", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class addParcelsRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdOrderCorrection parcels;
+        
+        public addParcelsRequest()
+        {
+        }
+        
+        public addParcelsRequest(Order.dpdOrderCorrection parcels)
+        {
+            this.parcels = parcels;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="addParcelsResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class addParcelsResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdOrderCorrectionStatus @return;
+        
+        public addParcelsResponse()
+        {
+        }
+        
+        public addParcelsResponse(Order.dpdOrderCorrectionStatus @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class dpdClientAddressSchedule
+    {
+        
+        private auth authField;
+        
+        private clientAddress clientAddressField;
+        
+        private clientWorkDay[] scheduleField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public auth auth
+        {
+            get
+            {
+                return this.authField;
+            }
+            set
+            {
+                this.authField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public clientAddress clientAddress
+        {
+            get
+            {
+                return this.clientAddressField;
+            }
+            set
+            {
+                this.clientAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("workDay", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public clientWorkDay[] schedule
+        {
+            get
+            {
+                return this.scheduleField;
+            }
+            set
+            {
+                this.scheduleField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class clientWorkDay
+    {
+        
+        private int dayOfweekField;
+        
+        private string openTimeFromField;
+        
+        private string openTimeToField;
+        
+        private bool isPickupField;
+        
+        private bool isPickupFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public int dayOfweek
+        {
+            get
+            {
+                return this.dayOfweekField;
+            }
+            set
+            {
+                this.dayOfweekField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string openTimeFrom
+        {
+            get
+            {
+                return this.openTimeFromField;
+            }
+            set
+            {
+                this.openTimeFromField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string openTimeTo
+        {
+            get
+            {
+                return this.openTimeToField;
+            }
+            set
+            {
+                this.openTimeToField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public bool isPickup
+        {
+            get
+            {
+                return this.isPickupField;
+            }
+            set
+            {
+                this.isPickupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool isPickupSpecified
+        {
+            get
+            {
+                return this.isPickupFieldSpecified;
+            }
+            set
+            {
+                this.isPickupFieldSpecified = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="createAddressSchedule", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class createAddressScheduleRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdClientAddressSchedule address;
+        
+        public createAddressScheduleRequest()
+        {
+        }
+        
+        public createAddressScheduleRequest(Order.dpdClientAddressSchedule address)
+        {
+            this.address = address;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="createAddressScheduleResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class createAddressScheduleResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdClientAddressStatus @return;
+        
+        public createAddressScheduleResponse()
+        {
+        }
+        
+        public createAddressScheduleResponse(Order.dpdClientAddressStatus @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateAddressSchedule", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class updateAddressScheduleRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdClientAddressSchedule address;
+        
+        public updateAddressScheduleRequest()
+        {
+        }
+        
+        public updateAddressScheduleRequest(Order.dpdClientAddressSchedule address)
+        {
+            this.address = address;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateAddressScheduleResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class updateAddressScheduleResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdClientAddressStatus @return;
+        
+        public updateAddressScheduleResponse()
+        {
+        }
+        
+        public updateAddressScheduleResponse(Order.dpdClientAddressStatus @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class dpdOrdersData
+    {
+        
+        private auth authField;
+        
+        private header headerField;
+        
+        private order[] orderField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public auth auth
+        {
+            get
+            {
+                return this.authField;
+            }
+            set
+            {
+                this.authField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public header header
+        {
+            get
+            {
+                return this.headerField;
+            }
+            set
+            {
+                this.headerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("order", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public order[] order
+        {
+            get
+            {
+                return this.orderField;
+            }
+            set
+            {
+                this.orderField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class header
+    {
+        
+        private System.DateTime datePickupField;
+        
+        private long payerField;
+        
+        private bool payerFieldSpecified;
+        
+        private address senderAddressField;
+        
+        private string pickupTimePeriodField;
+        
+        private string regularNumField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=0)]
+        public System.DateTime datePickup
+        {
+            get
+            {
+                return this.datePickupField;
+            }
+            set
+            {
+                this.datePickupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public long payer
+        {
+            get
+            {
+                return this.payerField;
+            }
+            set
+            {
+                this.payerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool payerSpecified
+        {
+            get
+            {
+                return this.payerFieldSpecified;
+            }
+            set
+            {
+                this.payerFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public address senderAddress
+        {
+            get
+            {
+                return this.senderAddressField;
+            }
+            set
+            {
+                this.senderAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string pickupTimePeriod
+        {
+            get
+            {
+                return this.pickupTimePeriodField;
+            }
+            set
+            {
+                this.pickupTimePeriodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string regularNum
+        {
+            get
+            {
+                return this.regularNumField;
+            }
+            set
+            {
+                this.regularNumField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class address
+    {
+        
+        private string codeField;
+        
+        private string nameField;
+        
+        private string terminalCodeField;
+        
+        private string addressStringField;
+        
+        private string countryNameField;
+        
+        private string indexField;
+        
+        private string regionField;
+        
+        private string cityField;
+        
+        private string streetField;
+        
+        private string streetAbbrField;
+        
+        private string houseField;
+        
+        private string houseKorpusField;
+        
+        private string strField;
+        
+        private string vladField;
+        
+        private string extraInfoField;
+        
+        private string officeField;
+        
+        private string flatField;
+        
+        private string workTimeFromField;
+        
+        private string workTimeToField;
+        
+        private string dinnerTimeFromField;
+        
+        private string dinnerTimeToField;
+        
+        private string contactFioField;
+        
+        private string contactPhoneField;
+        
+        private string contactEmailField;
+        
+        private string instructionsField;
+        
+        private bool needPassField;
+        
+        private bool needPassFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string code
+        {
+            get
+            {
+                return this.codeField;
+            }
+            set
+            {
+                this.codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string terminalCode
+        {
+            get
+            {
+                return this.terminalCodeField;
+            }
+            set
+            {
+                this.terminalCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string addressString
+        {
+            get
+            {
+                return this.addressStringField;
+            }
+            set
+            {
+                this.addressStringField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string countryName
+        {
+            get
+            {
+                return this.countryNameField;
+            }
+            set
+            {
+                this.countryNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string index
+        {
+            get
+            {
+                return this.indexField;
+            }
+            set
+            {
+                this.indexField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public string region
+        {
+            get
+            {
+                return this.regionField;
+            }
+            set
+            {
+                this.regionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public string city
+        {
+            get
+            {
+                return this.cityField;
+            }
+            set
+            {
+                this.cityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public string street
+        {
+            get
+            {
+                return this.streetField;
+            }
+            set
+            {
+                this.streetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public string streetAbbr
+        {
+            get
+            {
+                return this.streetAbbrField;
+            }
+            set
+            {
+                this.streetAbbrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public string house
+        {
+            get
+            {
+                return this.houseField;
+            }
+            set
+            {
+                this.houseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public string houseKorpus
+        {
+            get
+            {
+                return this.houseKorpusField;
+            }
+            set
+            {
+                this.houseKorpusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public string str
+        {
+            get
+            {
+                return this.strField;
+            }
+            set
+            {
+                this.strField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        public string vlad
+        {
+            get
+            {
+                return this.vladField;
+            }
+            set
+            {
+                this.vladField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
+        public string extraInfo
+        {
+            get
+            {
+                return this.extraInfoField;
+            }
+            set
+            {
+                this.extraInfoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
+        public string office
+        {
+            get
+            {
+                return this.officeField;
+            }
+            set
+            {
+                this.officeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=16)]
+        public string flat
+        {
+            get
+            {
+                return this.flatField;
+            }
+            set
+            {
+                this.flatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=17)]
+        public string workTimeFrom
+        {
+            get
+            {
+                return this.workTimeFromField;
+            }
+            set
+            {
+                this.workTimeFromField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=18)]
+        public string workTimeTo
+        {
+            get
+            {
+                return this.workTimeToField;
+            }
+            set
+            {
+                this.workTimeToField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=19)]
+        public string dinnerTimeFrom
+        {
+            get
+            {
+                return this.dinnerTimeFromField;
+            }
+            set
+            {
+                this.dinnerTimeFromField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=20)]
+        public string dinnerTimeTo
+        {
+            get
+            {
+                return this.dinnerTimeToField;
+            }
+            set
+            {
+                this.dinnerTimeToField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=21)]
+        public string contactFio
+        {
+            get
+            {
+                return this.contactFioField;
+            }
+            set
+            {
+                this.contactFioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=22)]
+        public string contactPhone
+        {
+            get
+            {
+                return this.contactPhoneField;
+            }
+            set
+            {
+                this.contactPhoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=23)]
+        public string contactEmail
+        {
+            get
+            {
+                return this.contactEmailField;
+            }
+            set
+            {
+                this.contactEmailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=24)]
+        public string instructions
+        {
+            get
+            {
+                return this.instructionsField;
+            }
+            set
+            {
+                this.instructionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=25)]
+        public bool needPass
+        {
+            get
+            {
+                return this.needPassField;
+            }
+            set
+            {
+                this.needPassField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool needPassSpecified
+        {
+            get
+            {
+                return this.needPassFieldSpecified;
+            }
+            set
+            {
+                this.needPassFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class order
+    {
+        
+        private string preOrderNumberField;
+        
+        private string orderNumberInternalField;
+        
+        private string serviceCodeField;
+        
+        private string serviceVariantField;
+        
+        private int cargoNumPackField;
+        
+        private double cargoWeightField;
+        
+        private double cargoVolumeField;
+        
+        private bool cargoVolumeFieldSpecified;
+        
+        private bool cargoRegisteredField;
+        
+        private double cargoValueField;
+        
+        private bool cargoValueFieldSpecified;
+        
+        private string cargoCategoryField;
+        
+        private string deliveryTimePeriodField;
+        
+        private string paymentTypeField;
+        
+        private parameter[] extraParamField;
+        
+        private dataInternational dataIntField;
+        
+        private address receiverAddressField;
+        
+        private address returnAddressField;
+        
+        private extraService[] extraServiceField;
+        
+        private parcel[] parcelField;
+        
+        private unitLoad[] unitLoadField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string preOrderNumber
+        {
+            get
+            {
+                return this.preOrderNumberField;
+            }
+            set
+            {
+                this.preOrderNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string orderNumberInternal
+        {
+            get
+            {
+                return this.orderNumberInternalField;
+            }
+            set
+            {
+                this.orderNumberInternalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public string serviceCode
+        {
+            get
+            {
+                return this.serviceCodeField;
+            }
+            set
+            {
+                this.serviceCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string serviceVariant
+        {
+            get
+            {
+                return this.serviceVariantField;
+            }
+            set
+            {
+                this.serviceVariantField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public int cargoNumPack
+        {
+            get
+            {
+                return this.cargoNumPackField;
+            }
+            set
+            {
+                this.cargoNumPackField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public double cargoWeight
+        {
+            get
+            {
+                return this.cargoWeightField;
+            }
+            set
+            {
+                this.cargoWeightField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public double cargoVolume
+        {
+            get
+            {
+                return this.cargoVolumeField;
+            }
+            set
+            {
+                this.cargoVolumeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool cargoVolumeSpecified
+        {
+            get
+            {
+                return this.cargoVolumeFieldSpecified;
+            }
+            set
+            {
+                this.cargoVolumeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public bool cargoRegistered
+        {
+            get
+            {
+                return this.cargoRegisteredField;
+            }
+            set
+            {
+                this.cargoRegisteredField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public double cargoValue
+        {
+            get
+            {
+                return this.cargoValueField;
+            }
+            set
+            {
+                this.cargoValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool cargoValueSpecified
+        {
+            get
+            {
+                return this.cargoValueFieldSpecified;
+            }
+            set
+            {
+                this.cargoValueFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public string cargoCategory
+        {
+            get
+            {
+                return this.cargoCategoryField;
+            }
+            set
+            {
+                this.cargoCategoryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public string deliveryTimePeriod
+        {
+            get
+            {
+                return this.deliveryTimePeriodField;
+            }
+            set
+            {
+                this.deliveryTimePeriodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public string paymentType
+        {
+            get
+            {
+                return this.paymentTypeField;
+            }
+            set
+            {
+                this.paymentTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("extraParam", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=12)]
+        public parameter[] extraParam
+        {
+            get
+            {
+                return this.extraParamField;
+            }
+            set
+            {
+                this.extraParamField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        public dataInternational dataInt
+        {
+            get
+            {
+                return this.dataIntField;
+            }
+            set
+            {
+                this.dataIntField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
+        public address receiverAddress
+        {
+            get
+            {
+                return this.receiverAddressField;
+            }
+            set
+            {
+                this.receiverAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
+        public address returnAddress
+        {
+            get
+            {
+                return this.returnAddressField;
+            }
+            set
+            {
+                this.returnAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("extraService", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=16)]
+        public extraService[] extraService
+        {
+            get
+            {
+                return this.extraServiceField;
+            }
+            set
+            {
+                this.extraServiceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("parcel", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=17)]
+        public parcel[] parcel
+        {
+            get
+            {
+                return this.parcelField;
+            }
+            set
+            {
+                this.parcelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("unitLoad", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=18)]
+        public unitLoad[] unitLoad
+        {
+            get
+            {
+                return this.unitLoadField;
+            }
+            set
+            {
+                this.unitLoadField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class parameter
+    {
+        
+        private string nameField;
+        
+        private string valueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string value
+        {
+            get
+            {
+                return this.valueField;
+            }
+            set
+            {
+                this.valueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class dataInternational
+    {
+        
+        private string currencyField;
+        
+        private string currencyDeclaredValueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string currency
+        {
+            get
+            {
+                return this.currencyField;
+            }
+            set
+            {
+                this.currencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string currencyDeclaredValue
+        {
+            get
+            {
+                return this.currencyDeclaredValueField;
+            }
+            set
+            {
+                this.currencyDeclaredValueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class extraService
+    {
+        
+        private string esCodeField;
+        
+        private parameter[] paramField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string esCode
+        {
+            get
+            {
+                return this.esCodeField;
+            }
+            set
+            {
+                this.esCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("param", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=1)]
+        public parameter[] param
+        {
+            get
+            {
+                return this.paramField;
+            }
+            set
+            {
+                this.paramField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="createOrder", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class createOrderRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdOrdersData orders;
+        
+        public createOrderRequest()
+        {
+        }
+        
+        public createOrderRequest(Order.dpdOrdersData orders)
+        {
+            this.orders = orders;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="createOrderResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class createOrderResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdOrderStatus[] @return;
+        
+        public createOrderResponse()
+        {
+        }
+        
+        public createOrderResponse(Order.dpdOrderStatus[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class dpdOrderCancellation
+    {
+        
+        private auth authField;
+        
+        private orderCancel[] cancelField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public auth auth
+        {
+            get
+            {
+                return this.authField;
+            }
+            set
+            {
+                this.authField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("cancel", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public orderCancel[] cancel
+        {
+            get
+            {
+                return this.cancelField;
+            }
+            set
+            {
+                this.cancelField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class orderCancel
+    {
+        
+        private string orderNumberInternalField;
+        
+        private string orderNumField;
+        
+        private System.DateTime pickupdateField;
+        
+        private bool pickupdateFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string orderNumberInternal
+        {
+            get
+            {
+                return this.orderNumberInternalField;
+            }
+            set
+            {
+                this.orderNumberInternalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string orderNum
+        {
+            get
+            {
+                return this.orderNumField;
+            }
+            set
+            {
+                this.orderNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=2)]
+        public System.DateTime pickupdate
+        {
+            get
+            {
+                return this.pickupdateField;
+            }
+            set
+            {
+                this.pickupdateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool pickupdateSpecified
+        {
+            get
+            {
+                return this.pickupdateFieldSpecified;
+            }
+            set
+            {
+                this.pickupdateFieldSpecified = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cancelOrder", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class cancelOrderRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdOrderCancellation orders;
+        
+        public cancelOrderRequest()
+        {
+        }
+        
+        public cancelOrderRequest(Order.dpdOrderCancellation orders)
+        {
+            this.orders = orders;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cancelOrderResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class cancelOrderResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdOrderStatus[] @return;
+        
+        public cancelOrderResponse()
+        {
+        }
+        
+        public cancelOrderResponse(Order.dpdOrderStatus[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class dpdChangeDeliveryDate
+    {
+        
+        private auth authField;
+        
+        private orderDeliveryDate[] orderField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public auth auth
+        {
+            get
+            {
+                return this.authField;
+            }
+            set
+            {
+                this.authField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("order", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public orderDeliveryDate[] order
+        {
+            get
+            {
+                return this.orderField;
+            }
+            set
+            {
+                this.orderField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04")]
+    public partial class orderDeliveryDate
+    {
+        
+        private string orderNumField;
+        
+        private System.DateTime newDeliveryDateField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string orderNum
+        {
+            get
+            {
+                return this.orderNumField;
+            }
+            set
+            {
+                this.orderNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=1)]
+        public System.DateTime newDeliveryDate
+        {
+            get
+            {
+                return this.newDeliveryDateField;
+            }
+            set
+            {
+                this.newDeliveryDateField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="changeDeliveryDate", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class changeDeliveryDateRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdChangeDeliveryDate request;
+        
+        public changeDeliveryDateRequest()
+        {
+        }
+        
+        public changeDeliveryDateRequest(Order.dpdChangeDeliveryDate request)
+        {
+            this.request = request;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="changeDeliveryDateResponse", WrapperNamespace="http://dpd.ru/ws/order2/2012-04-04", IsWrapped=true)]
+    internal partial class changeDeliveryDateResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/order2/2012-04-04", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Order.dpdOrderStatus[] @return;
+        
+        public changeDeliveryDateResponse()
+        {
+        }
+        
+        public changeDeliveryDateResponse(Order.dpdOrderStatus[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    internal interface DPDOrderChannel : Order.DPDOrder, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    public partial class DPDOrderClient : System.ServiceModel.ClientBase<Order.DPDOrder>, Order.DPDOrder
+    internal partial class DPDOrderClient : System.ServiceModel.ClientBase<Order.DPDOrder>, Order.DPDOrder
     {
         
         /// <summary>
@@ -5284,71 +5284,6 @@ namespace Order
         public DPDOrderClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Order.createOrderResponse> Order.DPDOrder.createOrderAsync(Order.createOrderRequest request)
-        {
-            return base.Channel.createOrderAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Order.createOrderResponse> createOrderAsync(Order.dpdOrdersData orders)
-        {
-            Order.createOrderRequest inValue = new Order.createOrderRequest();
-            inValue.orders = orders;
-            return ((Order.DPDOrder)(this)).createOrderAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Order.cancelOrderResponse> Order.DPDOrder.cancelOrderAsync(Order.cancelOrderRequest request)
-        {
-            return base.Channel.cancelOrderAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Order.cancelOrderResponse> cancelOrderAsync(Order.dpdOrderCancellation orders)
-        {
-            Order.cancelOrderRequest inValue = new Order.cancelOrderRequest();
-            inValue.orders = orders;
-            return ((Order.DPDOrder)(this)).cancelOrderAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Order.getOrderStatusResponse> Order.DPDOrder.getOrderStatusAsync(Order.getOrderStatusRequest request)
-        {
-            return base.Channel.getOrderStatusAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Order.getOrderStatusResponse> getOrderStatusAsync(Order.dpdGetOrderStatus orderStatus)
-        {
-            Order.getOrderStatusRequest inValue = new Order.getOrderStatusRequest();
-            inValue.orderStatus = orderStatus;
-            return ((Order.DPDOrder)(this)).getOrderStatusAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Order.getInvoiceFileResponse> Order.DPDOrder.getInvoiceFileAsync(Order.getInvoiceFileRequest request)
-        {
-            return base.Channel.getInvoiceFileAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Order.getInvoiceFileResponse> getInvoiceFileAsync(Order.dpdGetInvoiceFile request)
-        {
-            Order.getInvoiceFileRequest inValue = new Order.getInvoiceFileRequest();
-            inValue.request = request;
-            return ((Order.DPDOrder)(this)).getInvoiceFileAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Order.addParcelsResponse> Order.DPDOrder.addParcelsAsync(Order.addParcelsRequest request)
-        {
-            return base.Channel.addParcelsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Order.addParcelsResponse> addParcelsAsync(Order.dpdOrderCorrection parcels)
-        {
-            Order.addParcelsRequest inValue = new Order.addParcelsRequest();
-            inValue.parcels = parcels;
-            return ((Order.DPDOrder)(this)).addParcelsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -5456,29 +5391,55 @@ namespace Order
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Order.updateAddressScheduleResponse> Order.DPDOrder.updateAddressScheduleAsync(Order.updateAddressScheduleRequest request)
+        System.Threading.Tasks.Task<Order.registerParcelsForTripResponse> Order.DPDOrder.registerParcelsForTripAsync(Order.registerParcelsForTripRequest request)
         {
-            return base.Channel.updateAddressScheduleAsync(request);
+            return base.Channel.registerParcelsForTripAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Order.updateAddressScheduleResponse> updateAddressScheduleAsync(Order.dpdClientAddressSchedule address)
+        public System.Threading.Tasks.Task<Order.registerParcelsForTripResponse> registerParcelsForTripAsync(Order.dpdRegisterForTrip request)
         {
-            Order.updateAddressScheduleRequest inValue = new Order.updateAddressScheduleRequest();
-            inValue.address = address;
-            return ((Order.DPDOrder)(this)).updateAddressScheduleAsync(inValue);
+            Order.registerParcelsForTripRequest inValue = new Order.registerParcelsForTripRequest();
+            inValue.request = request;
+            return ((Order.DPDOrder)(this)).registerParcelsForTripAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Order.changeDeliveryDateResponse> Order.DPDOrder.changeDeliveryDateAsync(Order.changeDeliveryDateRequest request)
+        System.Threading.Tasks.Task<Order.getOrderStatusResponse> Order.DPDOrder.getOrderStatusAsync(Order.getOrderStatusRequest request)
         {
-            return base.Channel.changeDeliveryDateAsync(request);
+            return base.Channel.getOrderStatusAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Order.changeDeliveryDateResponse> changeDeliveryDateAsync(Order.dpdChangeDeliveryDate request)
+        public System.Threading.Tasks.Task<Order.getOrderStatusResponse> getOrderStatusAsync(Order.dpdGetOrderStatus orderStatus)
         {
-            Order.changeDeliveryDateRequest inValue = new Order.changeDeliveryDateRequest();
+            Order.getOrderStatusRequest inValue = new Order.getOrderStatusRequest();
+            inValue.orderStatus = orderStatus;
+            return ((Order.DPDOrder)(this)).getOrderStatusAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Order.getInvoiceFileResponse> Order.DPDOrder.getInvoiceFileAsync(Order.getInvoiceFileRequest request)
+        {
+            return base.Channel.getInvoiceFileAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Order.getInvoiceFileResponse> getInvoiceFileAsync(Order.dpdGetInvoiceFile request)
+        {
+            Order.getInvoiceFileRequest inValue = new Order.getInvoiceFileRequest();
             inValue.request = request;
-            return ((Order.DPDOrder)(this)).changeDeliveryDateAsync(inValue);
+            return ((Order.DPDOrder)(this)).getInvoiceFileAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Order.addParcelsResponse> Order.DPDOrder.addParcelsAsync(Order.addParcelsRequest request)
+        {
+            return base.Channel.addParcelsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Order.addParcelsResponse> addParcelsAsync(Order.dpdOrderCorrection parcels)
+        {
+            Order.addParcelsRequest inValue = new Order.addParcelsRequest();
+            inValue.parcels = parcels;
+            return ((Order.DPDOrder)(this)).addParcelsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -5495,16 +5456,55 @@ namespace Order
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Order.registerParcelsForTripResponse> Order.DPDOrder.registerParcelsForTripAsync(Order.registerParcelsForTripRequest request)
+        System.Threading.Tasks.Task<Order.updateAddressScheduleResponse> Order.DPDOrder.updateAddressScheduleAsync(Order.updateAddressScheduleRequest request)
         {
-            return base.Channel.registerParcelsForTripAsync(request);
+            return base.Channel.updateAddressScheduleAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Order.registerParcelsForTripResponse> registerParcelsForTripAsync(Order.dpdRegisterForTrip request)
+        public System.Threading.Tasks.Task<Order.updateAddressScheduleResponse> updateAddressScheduleAsync(Order.dpdClientAddressSchedule address)
         {
-            Order.registerParcelsForTripRequest inValue = new Order.registerParcelsForTripRequest();
+            Order.updateAddressScheduleRequest inValue = new Order.updateAddressScheduleRequest();
+            inValue.address = address;
+            return ((Order.DPDOrder)(this)).updateAddressScheduleAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Order.createOrderResponse> Order.DPDOrder.createOrderAsync(Order.createOrderRequest request)
+        {
+            return base.Channel.createOrderAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Order.createOrderResponse> createOrderAsync(Order.dpdOrdersData orders)
+        {
+            Order.createOrderRequest inValue = new Order.createOrderRequest();
+            inValue.orders = orders;
+            return ((Order.DPDOrder)(this)).createOrderAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Order.cancelOrderResponse> Order.DPDOrder.cancelOrderAsync(Order.cancelOrderRequest request)
+        {
+            return base.Channel.cancelOrderAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Order.cancelOrderResponse> cancelOrderAsync(Order.dpdOrderCancellation orders)
+        {
+            Order.cancelOrderRequest inValue = new Order.cancelOrderRequest();
+            inValue.orders = orders;
+            return ((Order.DPDOrder)(this)).cancelOrderAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Order.changeDeliveryDateResponse> Order.DPDOrder.changeDeliveryDateAsync(Order.changeDeliveryDateRequest request)
+        {
+            return base.Channel.changeDeliveryDateAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Order.changeDeliveryDateResponse> changeDeliveryDateAsync(Order.dpdChangeDeliveryDate request)
+        {
+            Order.changeDeliveryDateRequest inValue = new Order.changeDeliveryDateRequest();
             inValue.request = request;
-            return ((Order.DPDOrder)(this)).registerParcelsForTripAsync(inValue);
+            return ((Order.DPDOrder)(this)).changeDeliveryDateAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -5535,7 +5535,7 @@ namespace Order
         {
             if ((endpointConfiguration == EndpointConfiguration.DPDOrderPort))
             {
-                return new System.ServiceModel.EndpointAddress("http://wstest.dpd.ru/services/order2");
+                return new System.ServiceModel.EndpointAddress("http://ws.dpd.ru/services/order2");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

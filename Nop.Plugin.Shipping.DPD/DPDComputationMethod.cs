@@ -8,6 +8,7 @@ using Nop.Services.Configuration;
 using Nop.Services.Localization;
 using Nop.Services.Plugins;
 using Nop.Services.Shipping;
+using Nop.Data;
 using Nop.Services.Shipping.Tracking;
 
 namespace Nop.Plugin.Shipping.DPD
@@ -56,8 +57,12 @@ namespace Nop.Plugin.Shipping.DPD
             if (!getShippingOptionRequest.Items?.Any() ?? true)
                 return new GetShippingOptionResponse { Errors = new[] { "No shipment items" } };
 
-            if (getShippingOptionRequest.ShippingAddress?.CountryId == null)
+            if (getShippingOptionRequest.ShippingAddress == null)
                 return new GetShippingOptionResponse { Errors = new[] { "Shipping address is not set" } };
+
+            if (getShippingOptionRequest.ShippingAddress?.CountryId == null || string.IsNullOrEmpty(getShippingOptionRequest.ShippingAddress?.City))
+                return new GetShippingOptionResponse { Errors = new[] { "Shipping address is not set" } };
+
 
             return _DPDService.GetRates(getShippingOptionRequest);
         }
@@ -86,23 +91,13 @@ namespace Nop.Plugin.Shipping.DPD
         public override void Install()
         {
 
-            
-
-
-            /*
-            //settings
             _settingService.SaveSetting(new DPDSettings
             {
                 UseSandbox = true,
-                CustomerClassification = CustomerClassification.StandardListRates,
-                PickupType = PickupType.OneTimePickup,
-                PackagingType = PackagingType.ExpressBox,
-                PackingPackageVolume = 5184,
-                PackingType = PackingType.PackByDimensions,
-                PassDimensions = true,
-                WeightType = "LBS",
-                DimensionsType = "IN"
-            });*/
+                CargoRegistered = false,
+                ServiceCodesOffered = "[NDY:CUR:CMS:PCL:ECN]",
+                ServiceVariantsOffered = "[TT:TD]",
+            });
 
             //all locales
             _localizationService.AddPluginLocaleResource(new Dictionary<string, string>
@@ -128,11 +123,12 @@ namespace Nop.Plugin.Shipping.DPD
 
                 ["Plugins.Shipping.DPD.Fields.PickupTimePeriodType"] = "Time period of receipt of goods",
 
-                ["Plugins.Shipping.DPD.Fields.ServiceCodeType"] = "DPD payment type",
-
                 ["Plugins.Shipping.DPD.Fields.ServiceCodeType"] = "DPD service code",
 
                 ["Plugins.Shipping.DPD.Fields.AvailableServiceVariantType"] = "Delivery variant",
+
+                ["Plugins.Shipping.DPD.Fields.AddressCode"] = "Address code",
+                ["Plugins.Shipping.DPD.Fields.AddressCode.Hint"] = "Address code in DPD",
 
                 ["Plugins.Shipping.DPD.Fields.CargoRegistered"] = "Cargo registered",
                 ["Plugins.Shipping.DPD.Fields.CargoRegistered.Hint"] =

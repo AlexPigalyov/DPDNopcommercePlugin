@@ -4,21 +4,6 @@
 }
 
 <div class="checkout-data">
-    @if (Model.DisplayPickupInStore && Model.PickupPointsModel.AllowPickupInStore)
-    {
-        @await Html.PartialAsync("_PickupPoints", Model.PickupPointsModel)
-        <script>
-            $(document).ready(function () {
-                $(document).unbind('checkout_toggle_pickup_in_store');
-                $(document).on('checkout_toggle_pickup_in_store', function (e) {
-                    if (e.checked)
-                        $('#shipping-addresses-form').hide();
-                    else
-                        $('#shipping-addresses-form').show();
-                });
-            });
-        </script>
-    }
     @if (Model.PickupPointsModel == null || !Model.PickupPointsModel.PickupInStoreOnly)
     {
         <div class="shipping-addresses" id="shipping-addresses-form">

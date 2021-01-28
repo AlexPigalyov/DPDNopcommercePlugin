@@ -7,6 +7,5 @@
         [DPDCode("CSM")] DPDOnlineExpress,
         [DPDCode("PCL")] DPDOptium,
         [DPDCode("ECN")] DPDEconomy,
-        [DPDCode("DPI")] DPDClassicInternational
     }
 }

@@ -24,6 +24,7 @@
 		<None Remove="Views\Checkout\BillingAddress.cshtml" />
 		<None Remove="Views\Checkout\Completed.cshtml" />
 		<None Remove="Views\Checkout\Confirm.cshtml" />
+		<None Remove="Views\Checkout\DPDSelectShippingataCourier.cshtml" />
 		<None Remove="Views\Checkout\OnePageCheckout.cshtml" />
 		<None Remove="Views\Checkout\OpcBillingAddress.cshtml" />
 		<None Remove="Views\Checkout\OpcConfirmOrder.cshtml" />
@@ -37,6 +38,8 @@
 		<None Remove="Views\Checkout\ShippingMethod.cshtml" />
 		<None Remove="Views\Checkout\_PickupPoints.cshtml" />
 		<None Remove="Views\Configure.cshtml" />
+		<None Remove="Views\Shared\_AddressAttributes.cshtml" />
+		<None Remove="Views\Shared\_CreateOrUpdateAddress.cshtml" />
 		<None Remove="Views\_ViewImports.cshtml" />
 	</ItemGroup>
 
@@ -128,6 +131,16 @@
 		<Content Include="Views\Configure.cshtml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Views\Shared\_AddressAttributes.cshtml">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Views\Shared\_CreateOrUpdateAddress.cshtml">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Views\_ViewImports.cshtml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
@@ -143,7 +156,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Content\Scripts\" />
+	  <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
+	  <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
+	  <PackageReference Include="System.ServiceModel.Security" Version="4.4.*" />
 	</ItemGroup>
 
 	<Target Name="NopTarget" AfterTargets="Build">

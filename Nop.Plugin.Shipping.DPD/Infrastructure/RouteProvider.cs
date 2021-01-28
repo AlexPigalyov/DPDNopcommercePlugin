@@ -32,9 +32,14 @@ namespace Nop.Plugin.Shipping.DPD.Infrastructure
             //checkout pages
             endpointRouteBuilder.MapControllerRoute("areaRouteDPDCheckoutSaveBilling", $"checkout/OpcSaveBilling",
                 new { controller = "DPDCheckout", action = "OpcSaveBilling" });
+            endpointRouteBuilder.MapControllerRoute("areaRouteDPDSaveShippingMethod", $"checkout/opcsaveshippingmethod/",
+                new { controller = "DPDCheckout", action = "OpcSaveShippingMethod" });
+            endpointRouteBuilder.MapControllerRoute("areaRouteDPDSaveShipping", $"checkout/opcsaveshipping/",
+                new { controller = "DPDCheckout", action = "OpcSaveShipping" });
             endpointRouteBuilder.MapControllerRoute("areaRouteCheckoutOnePage", $"onepagecheckout/",
-                new { controller = "DPDCheckout", action = "OnePageCheckout" });
-
+                new { controller = "DPDCheckout", action = "OnePageCheckout" }); 
+                endpointRouteBuilder.MapControllerRoute("areaRouteOpcConfirmOrder", $"checkout/opcconfirmorder",
+                new { controller = "DPDCheckout", action = "OpcConfirmOrder" });
             /*
             endpointRouteBuilder.MapControllerRoute("Checkout", $"{pattern}checkout/",
                 new { controller = "DPDCheckout", action = "Index" });

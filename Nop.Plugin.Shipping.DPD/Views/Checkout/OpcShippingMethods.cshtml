@@ -1,93 +1,205 @@
 ﻿@using Nop.Plugin.Shipping.DPD.Infrastructure
-@model CheckoutShippingMethodModel
+@using Nop.Core
+@inject IWebHelper webHelper
+@model DPDCheckoutShippingMethodModel
 @{
-    
+    var storeLocation = webHelper.GetStoreLocation();
     Context.Items["nop.IgnoreScriptTagLocation"] = true;
 }
 
 <div class="checkout-data">
 
     <script asp-location="Footer">
+        $(document).ready(function () {
+            $(".method-list").children().each(function (index) {
+                $("#shippingoption_" + index).change(function () {
+                    $("#pickup-terminal-code").val(null);
+                    $("#pickup-country-name").val(null);
+                    $("#pickup-city").val(null);
+                    $("#pickup-street").val(null);
+                });
+            });
+            $("#shippingoption_dpdTT-input").change(function () {
+                $("#pickup-terminal-code").val(null);
+                $("#pickup-country-name").val(null);
+                $("#pickup-city").val(null);
+                $("#pickup-street").val(null);
+            });
+
+        });
+
         var chooser = new DPDChooser('dpdchooser',
             {
                 type: 'dpdclient', // Обязательный параметр
                 //Геопозиция:
-                address: 'Россия, Москва, Нахимовский проспект', //Адрес (Можно передавать сокращенно – только город, а можно с учетом страны, города, улицы)
-                l: 'Москва', //Адрес можно передавать короткими параметрами (город)
-                s: 'Нахимовский проспект', //Адрес можно передавать короткими параметрами (улица)
-                m: 'Крымская', //Адрес можно передавать короткими параметрами (метро)
-                g: '43.928704,56.280332', //Можно вместо адреса передавать координаты: долгота, широта (имеет бОльший приоритет, чем адрес)
-                // После загрузки данных происходит центрирование на переданной геопозиции. Если ни один пункт не попадает на карту, то карта отдаляется до 4х раз
-                // Если передан большой по площади объект для центрирования (например, вся Москва), то границы карты будут установлены так, чтобы весь объект попал в область видимости.
-                i: '111402', //центрирование по индексу
-                viewdistance: 100, // Радиус отображения пунктов в километрах вокруг указанного адреса
-
+                address: 'Москва', //Адрес (Можно передавать сокращенно – только город, а можно с учетом страны, города, улицы)
+                viewdistance: 55, // Радиус отображения пунктов в километрах вокруг указанного адреса
                 //Фильтры:
-                filter_wait: 1, // Ожидание на адресе доставки
+                filter_wait: 0, // Ожидание на адресе доставки
                 filter_temp: 0, // Температурный режим
                 filter_cod: 0, // Наложенный платеж
-                filter_give: 0, // Выдача посылок
+                filter_give: 1, // Выдача посылок
                 filter_take: 0, // Прием посылок
-                filter_pvz: 0, // Пункт приема и выдачи посылок
-                filter_postamat: 0, // Постамат
-
+                filter_pvz: 1, // Пункт приема и выдачи посылок
+                filter_postamat: 1, // Постамат
                 //Возможность выбора пункта.
                 choose: 1, //Если не передано - виджет работает только для просмотра, без кнопки «Выбрать»
-
-
                 width: '100%', // Можно указать css ширину контейнера. Пример: 500px, 100%, 50em
                 mapHeight: '600', // Можно указать высоту карты в пикселях. Пример: 500.
                 //ВНИМАНИЕ!!! Высота касается только карты, списка пунктов и детализации. Это НЕ высота всего контейнера виджета.
-                sid: 'qaioqaiuqK6sr^TaoaGoqqmu3azcq6ih3KvZ2aGur9qvoK/crazbqa3c2tquoanc3qionw==',
+                sid: 'HB0dHB0bHRsZGlFvFBQdHxwbaBlpHh0UaR5sbBQbGm8aFRppGBluHBhpb28bFBxpax0dKg==',
                 //Задать высоту виджета нельзя, т.к. детализация может "прыгнуть" вниз из-за нехватки места в ширину.
-
-
                 fullscreen: true, // Задает width = 100% и mapHeight в зависимости от window.innerHeight. Позволяет виджету занять всё пространство контейнера, если достаточно места. Должно быть не менее 400px в высоту и не менее 500px в ширину.
             });
+
+        chooser.onChoose(function (dep) {
+            pickupAddress = dep;
+            console.log(dep);
+            $("#pickup-terminal-code").val(dep.code);
+            $("#pickup-country-name").val(dep.addressString.split(',')[1]);
+            $("#pickup-city").val(dep.cityName);
+            $("#pickup-street").val(dep.address.street);
+        });
+
+        chooser.onCancel(function () {
+            $("#pickup-terminal-code").val(null);
+            $("#pickup-country-name").val(null);
+            $("#pickup-city").val(null);
+            $("#pickup-street").val(null);
+        });
+
 
     </script>
 
     <script asp-location="Footer">
         $(document).ready(function () {
+            if ($("#shippingoption_dpdTT-input").prop('checked') == true) {
+                $("#dpdchooser").hide();
+                $("#dpd-td-services-box").hide();
+                $("#dpd-tt-services-box").show();
+            }
+            else if ($("#shippingoption_dpdTD-input").prop('checked') == true) {
+                $("#dpdchooser").show();
+                $("#dpd-td-services-box").show();
+                $("#dpd-tt-services-box").hide();
+            }
+            $("#shippingoption_dpdTT-input").change(function () {
+                if ($("#shippingoption_dpdTT-input").prop('checked') == true) {
+                    $("#dpdchooser").hide();
+                    $("#dpd-td-services-box").hide();
+                    $("#dpd-tt-services-box").show();
+                }
+            });
+            $("#shippingoption_dpdTD-input").change(function () {
+                if ($("#shippingoption_dpdTD-input").prop('checked') == true) {
+                    $("#dpdchooser").show();
+                    $("#dpd-td-services-box").show();
+                    $("#dpd-tt-services-box").hide();
+                }
+            });
+            $("#dpd-tt-services-select").change(function () {
+                $("#dpd-tt-services-select").children().each(function (index) {
+                    if ($("#dpd-option-tt-" + index).prop('selected') == true) {
+                        $("#shippingoption_dpdTT-label").html($("#dpd-option-tt-" + index).html());
+                        $("#shippingoption_dpdTT-label").val($("#dpd-option-tt-" + index).val());
+                    }
+                });
+            });
+            $("#dpd-td-services-select").change(function () {
+                $("#dpd-td-services-select").children().each(function (index) {
+                    if ($("#dpd-option-td-" + index).prop('selected') == true) {
+                        $("#shippingoption_dpdTD-label").html($("#dpd-option-td-" + index).html());
+                        $("#shippingoption_dpdTD-label").val($("#dpd-option-td-" + index).val());
+                    }
+                });
+            });
             $(".method-list").children().each(function (index) {
-                if ($("#shippingoption_" + index).val().indexOf('(TD)') >= 0) {
-                    $("#shippingoption_" + index).change(function () {
-                        if ($("#shippingoption_" + index).prop('checked') === true) {
-                            $("#dpdchooser").show();
-                        }
-                    });
-                }
-                else {
-                    $("#shippingoption_" + index).change(function() {
-                        $("#dpdchooser").hide();
-                    });
-                }
+                $("#shippingoption_" + index).change(function () {
+                    $("#dpdchooser").hide();
+                    $("#dpd-td-services-box").hide();
+                    $("#dpd-tt-services-box").hide();
+                });
             });
         });
     </script>
 
     @if (Model.PickupPointsModel == null || !Model.PickupPointsModel.PickupInStoreOnly)
     {
+        <input id="pickup-terminal-code" name="pickupaddress" type="hidden" />
+        <input id="pickup-country-name" name="pickupaddress" type="hidden" />
+        <input id="pickup-city" name="pickupaddress" type="hidden" />
+        <input id="pickup-street" name="pickupaddress" type="hidden" />
         <div class="section shipping-method" id="shipping-methods-form">
             @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutShippingMethodTop })
             @if (Model.Warnings.Count == 0)
             {
+                var dpdShippingMethodsTT = Model.ShippingMethods.Where(x => x.ShippingRateComputationMethodSystemName == "DPD-TT").ToList();
+                var dpdShippingMethodsTD = Model.ShippingMethods.Where(x => x.ShippingRateComputationMethodSystemName == "DPD-TD").ToList();
+
+                dpdShippingMethodsTD.ForEach(x => Model.ShippingMethods.Remove(x));
+                dpdShippingMethodsTT.ForEach(x => Model.ShippingMethods.Remove(x));
                 <ul class="method-list">
+                    @if (dpdShippingMethodsTD.Count > 0)
+                    {
+                        <li>
+                            <div class="method-name">
+                                <input id="shippingoption_dpdTD-input" type="radio" name="shippingoption" value="@(dpdShippingMethodsTD[0].Name)___@(dpdShippingMethodsTD[0].ShippingRateComputationMethodSystemName)" checked="@dpdShippingMethodsTD[0].Selected" />
+                                <label id="shippingoption_dpdTD-label" for="shippingoption_dpdTD-label">@T("Checkout.SelectShippingMethod.MethodAndFee", dpdShippingMethodsTD[0].Name, dpdShippingMethodsTD[0].Fee)</label>
+                                <div id="dpd-td-services-box" style="display: none; margin-top: 20px;">
+                                    <select id="dpd-td-services-select">
+                                        @for (int i = 0; i < dpdShippingMethodsTD.Count; i++)
+                                        {
+                                            <option id="dpd-option-td-@(i)" value="@(dpdShippingMethodsTD[i].Name)___@(dpdShippingMethodsTD[i].ShippingRateComputationMethodSystemName)">@(dpdShippingMethodsTD[i].Name) (@(dpdShippingMethodsTD[i].ShippingOption.Rate) &#8381;)</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    @if (dpdShippingMethodsTT.Count > 0)
+                    {
+                        <li>
+                            <div class="method-name">
+                                <input id="shippingoption_dpdTT-input" type="radio" name="shippingoption" value="@(dpdShippingMethodsTT[0].Name)___@(dpdShippingMethodsTT[0].ShippingRateComputationMethodSystemName)" checked="@dpdShippingMethodsTT[0].Selected" />
+                                <label id="shippingoption_dpdTT-label" for="shippingoption_dpdTT-label">@T("Checkout.SelectShippingMethod.MethodAndFee", dpdShippingMethodsTT[0].Name, dpdShippingMethodsTT[0].Fee)</label>
+                                <div id="dpd-tt-services-box" style="display: none; margin-top: 20px;">
+                                    <select id="dpd-tt-services-select">
+                                        @for (int i = 0; i < dpdShippingMethodsTT.Count; i++)
+                                        {
+                                            <option id="dpd-option-tt-@(i)" value="@(dpdShippingMethodsTT[i].Name)___@(dpdShippingMethodsTT[i].ShippingRateComputationMethodSystemName)">@(dpdShippingMethodsTT[i].Name) (@(dpdShippingMethodsTT[i].ShippingOption.Rate) &#8381;)</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            @if (!string.IsNullOrEmpty(dpdShippingMethodsTT[0].Description))
+                            {
+                                <div class="method-description">
+                                    @Html.Raw(dpdShippingMethodsTT[0].Description)
+                                </div>
+                            }
+
+                        </li>
+                    }
+
                     @for (var i = 0; i < Model.ShippingMethods.Count; i++)
                     {
                         var shippingMethod = Model.ShippingMethods[i];
-                        <li>
-                            <div class="method-name">
-                                <input id="shippingoption_@(i)" type="radio" name="shippingoption" value="@(shippingMethod.Name)___@(shippingMethod.ShippingRateComputationMethodSystemName)qeqweqeqweqweqeqeqweeqweq" checked="@shippingMethod.Selected" />
-                                <label for="shippingoption_@(i)">@T("Checkout.SelectShippingMethod.MethodAndFee", shippingMethod.Name, shippingMethod.Fee)</label>
-                            </div>
-                            @if (!string.IsNullOrEmpty(shippingMethod.Description))
-                            {
-                                <div class="method-description">
-                                    @Html.Raw(shippingMethod.Description)
+                        if (!shippingMethod.ShippingRateComputationMethodSystemName.Contains("DPD"))
+                        {
+                            <li>
+                                <div class="method-name">
+                                    <input id="shippingoption_@(i)" type="radio" name="shippingoption" value="@(shippingMethod.Name)___@(shippingMethod.ShippingRateComputationMethodSystemName)" checked="@shippingMethod.Selected" />
+                                    <label for="shippingoption_@(i)">@T("Checkout.SelectShippingMethod.MethodAndFee", shippingMethod.Name, shippingMethod.Fee)</label>
                                 </div>
-                            }
-                        </li>
+                                @if (!string.IsNullOrEmpty(shippingMethod.Description))
+                                {
+                                    <div class="method-description">
+                                        @Html.Raw(shippingMethod.Description)
+                                    </div>
+                                }
+                            </li>
+                        }
+
                     }
                 </ul>
                 if (Model.NotifyCustomerAboutShippingFromMultipleLocations)
@@ -109,9 +221,8 @@
                 </div>
             }
             @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutShippingMethodBottom })
-            <div id="dpdchooser" style="padding: 0; width: 100%; height: 600px; margin: 0 auto 30px; display: inline-block;"> 
-
-            </div> 
+            <div id="dpdchooser" style="padding: 0; width: 100%; height: 600px; margin: 0 auto 30px; display: none;">
+            </div>
         </div>
-     }
+    }
 </div>
