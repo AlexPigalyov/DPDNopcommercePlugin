@@ -32,8 +32,21 @@
             {
                 type: 'dpdclient', // Обязательный параметр
                 //Геопозиция:
+<<<<<<< HEAD
                 address: 'Москва', //Адрес (Можно передавать сокращенно – только город, а можно с учетом страны, города, улицы)
                 viewdistance: 55, // Радиус отображения пунктов в километрах вокруг указанного адреса
+=======
+                address: 'Россия, Москва, Нахимовский проспект', //Адрес (Можно передавать сокращенно – только город, а можно с учетом страны, города, улицы)
+                l: 'Москва', //Адрес можно передавать короткими параметрами (город)
+                s: 'Нахимовский проспект', //Адрес можно передавать короткими параметрами (улица)
+                m: 'Крымская', //Адрес можно передавать короткими параметрами (метро)
+                g: '43.928704,56.280332', //Можно вместо адреса передавать координаты: долгота, широта (имеет бОльший приоритет, чем адрес)
+                // После загрузки данных происходит центрирование на переданной геопозиции. Если ни один пункт не попадает на карту, то карта отдаляется до 4х раз
+                // Если передан большой по площади объект для центрирования (например, вся Москва), то границы карты будут установлены так, чтобы весь объект попал в область видимости.
+                i: '111402', //центрирование по индексу
+                viewdistance: 75, // Радиус отображения пунктов в километрах вокруг указанного адреса
+
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
                 //Фильтры:
                 filter_wait: 0, // Ожидание на адресе доставки
                 filter_temp: 0, // Температурный режим
@@ -73,6 +86,7 @@
 
     <script asp-location="Footer">
         $(document).ready(function () {
+<<<<<<< HEAD
             if ($("#shippingoption_dpdTT-input").prop('checked') == true) {
                 $("#dpdchooser").hide();
                 $("#dpd-td-services-box").hide();
@@ -95,6 +109,37 @@
                     $("#dpdchooser").show();
                     $("#dpd-td-services-box").show();
                     $("#dpd-tt-services-box").hide();
+=======
+            $(".method-list").children().each(function (index) {
+                if ($("#shippingoption_" + index).val().indexOf('(TD)') >= 0) {
+                    $("#shippingoption_" + index).change(function () {
+                        if ($("#shippingoption_" + index).prop('checked') === true) {
+                            $("#dpdchooser").show();
+                            $("#createNewShippingAddress").hide();
+                            $("#newBillingAddressFormPickup").shi();
+                            $("input#Courier").each(function () {
+                                $(this).attr('disabled', 'disabled');
+                            });
+                            $("input#PickUp").each(function () {
+                                $(this).removeAttr('disabled');
+                            });
+
+                        }
+                    });
+                }
+                else {
+                    $("#shippingoption_" + index).change(function () {
+                        $("#dpdchooser").hide();
+                        $("#createNewShippingAddress").show();
+                        $("#newBillingAddressFormPickup").hide();
+                        $("input#PickUp").each(function () {
+                            $(this).attr('disabled', 'disabled');
+                        });
+                        $("input#Courier").each(function () {
+                            $(this).removeAttr('disabled');
+                        });
+                    });
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
                 }
             });
             $("#dpd-tt-services-select").change(function () {
@@ -143,6 +188,7 @@
                     {
                         <li>
                             <div class="method-name">
+<<<<<<< HEAD
                                 <input id="shippingoption_dpdTD-input" type="radio" name="shippingoption" value="@(dpdShippingMethodsTD[0].Name)___@(dpdShippingMethodsTD[0].ShippingRateComputationMethodSystemName)" checked="@dpdShippingMethodsTD[0].Selected" />
                                 <label id="shippingoption_dpdTD-label" for="shippingoption_dpdTD-label">@T("Checkout.SelectShippingMethod.MethodAndFee", dpdShippingMethodsTD[0].Name, dpdShippingMethodsTD[0].Fee)</label>
                                 <div id="dpd-td-services-box" style="display: none; margin-top: 20px;">
@@ -153,6 +199,10 @@
                                         }
                                     </select>
                                 </div>
+=======
+                                <input id="shippingoption_@(i)" type="radio" name="shippingoption" value="@(shippingMethod.Name)___@(shippingMethod.ShippingRateComputationMethodSystemName)" checked="@shippingMethod.Selected" />
+                                <label for="shippingoption_@(i)">@T("Checkout.SelectShippingMethod.MethodAndFee", shippingMethod.Name, shippingMethod.Fee)</label>
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
                             </div>
                         </li>
                     }
@@ -221,7 +271,28 @@
                 </div>
             }
             @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutShippingMethodBottom })
+<<<<<<< HEAD
             <div id="dpdchooser" style="padding: 0; width: 100%; height: 600px; margin: 0 auto 30px; display: none;">
+=======
+            <div class="section new-billing-address" id="newBillingAddressFormPickup">
+                <div class="enter-address">
+                <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                @{
+                    var dataDictAddress = new ViewDataDictionary(ViewData);
+                    dataDictAddress.TemplateInfo.HtmlFieldPrefix = "BillingNewAddress";
+                    @await Html.PartialAsync(PluginDefaults.CustomSharedViewPathFormat + "_DPDCreateShippingDataPickupPoint.cshtml", Model.OnePageModel.BillingAddress.BillingNewAddress, dataDictAddress)
+                }
+                </div>
+            </div>
+            <div id="dpdchooser" style="padding: 0; width: 100%; height: 600px; margin: 0 auto 30px; display: inline-block;">
+            </div>
+            <div id="createNewShippingAddress" class="section new-billing-address" style="display: none;">
+                <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                @{
+                    dataDictAddress = new ViewDataDictionary(ViewData);
+                    @await Html.PartialAsync(PluginDefaults.CustomSharedViewPathFormat + "_DPDCreateShippingDataCourier.cshtml", Model.OnePageModel.BillingAddress.BillingNewAddress, dataDictAddress)
+                }
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
             </div>
         </div>
     }

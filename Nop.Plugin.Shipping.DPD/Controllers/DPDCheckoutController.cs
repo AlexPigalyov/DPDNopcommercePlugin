@@ -14,7 +14,10 @@ using Nop.Core.Http.Extensions;
 using Nop.Plugin.Shipping.DPD.Domain;
 using Nop.Plugin.Shipping.DPD.Infrastructure;
 using Nop.Plugin.Shipping.DPD.Models;
+<<<<<<< HEAD
 using Nop.Plugin.Shipping.DPD.Services;
+=======
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
 using Nop.Services.Catalog;
 using Nop.Services.Common;
 using Nop.Services.Customers;
@@ -131,7 +134,10 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             _customerSettings = customerSettings;
             _addressSettings = addressSettings;
         }
+<<<<<<< HEAD
         
+=======
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
         protected virtual bool ParsePickupInStore(IFormCollection form)
         {
             var pickupInStore = false;
@@ -341,7 +347,11 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             var selectedPoint = pickupPoints.FirstOrDefault(x => x.Id.Equals(pickupPoint[0]));
             if (selectedPoint == null)
                 throw new Exception("Pickup point is not allowed");
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
             return selectedPoint;
         }
 
@@ -468,15 +478,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                     //do not ship to the same address
                     var shippingAddressModel = _checkoutModelFactory.PrepareShippingAddressModel(cart, prePopulateNewAddressWithCustomerFields: true);
 
-                    return Json(new
-                    {
-                        update_section = new UpdateSectionJsonModel
-                        {
-                            name = "shipping",
-                            html = RenderPartialViewToString(PluginDefaults.CustomCheckoutViewPathFormat + "OpcShippingAddress.cshtml", shippingAddressModel)
-                        },
-                        goto_section = "shipping"
-                    });
+                    return OpcLoadStepAfterShippingAddress(cart);
                 }
 
                 //shipping is not required
@@ -491,6 +493,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 return Json(new { error = 1, message = exc.Message });
             }
         }
+<<<<<<< HEAD
         [IgnoreAntiforgeryToken]
         public virtual IActionResult OpcSaveShipping(CheckoutShippingAddressModel model, IFormCollection form)
         {
@@ -644,6 +647,19 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 if (_orderSettings.CheckoutDisabled)
                     throw new Exception(_localizationService.GetResource("Checkout.Disabled"));
                 
+=======
+
+        [IgnoreAntiforgeryToken]
+        public virtual IActionResult OpcSaveShippingMethod(string shippingoption, IFormCollection form)
+        {
+            
+            try
+            {
+                //validation
+                if (_orderSettings.CheckoutDisabled)
+                    throw new Exception(_localizationService.GetResource("Checkout.Disabled"));
+
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
                 var cart =
                     _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
 
@@ -705,7 +721,11 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                     .Find(so => !string.IsNullOrEmpty(so.Name) && so.Name.Equals(selectedName, StringComparison.InvariantCultureIgnoreCase));
                 if (shippingOption == null)
                     throw new Exception("Selected shipping method can't be loaded");
+<<<<<<< HEAD
                
+=======
+
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
                 //save
                 _genericAttributeService.SaveAttribute(_workContext.CurrentCustomer, NopCustomerDefaults.SelectedShippingOptionAttribute, shippingOption, _storeContext.CurrentStore.Id);
 
@@ -719,6 +739,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             }
         }
 
+<<<<<<< HEAD
         [IgnoreAntiforgeryToken]
         public virtual IActionResult OpcConfirmOrder()
         {
@@ -822,6 +843,11 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
         public virtual IActionResult NewBillingAddress(CheckoutBillingAddressModel model, IFormCollection form)
         {
             
+=======
+        [HttpPost, ActionName("BillingAddress")]
+        public virtual IActionResult NewBillingAddress(CheckoutBillingAddressModel model, IFormCollection form)
+        {
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
             //validation
             if (_orderSettings.CheckoutDisabled)
                 return RedirectToRoute("ShoppingCart");
@@ -886,6 +912,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             model = _checkoutModelFactory.PrepareBillingAddressModel(cart,
                 selectedCountryId: newAddress.CountryId,
                 overrideAttributesXml: customAttributes);
+<<<<<<< HEAD
 
             return View(model);
         }
@@ -941,6 +968,10 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 
             }
         }
+=======
+            return View(model);
+        }
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
     }
 }
 

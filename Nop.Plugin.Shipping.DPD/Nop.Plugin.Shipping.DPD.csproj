@@ -40,6 +40,11 @@
 		<None Remove="Views\Configure.cshtml" />
 		<None Remove="Views\Shared\_AddressAttributes.cshtml" />
 		<None Remove="Views\Shared\_CreateOrUpdateAddress.cshtml" />
+<<<<<<< HEAD
+=======
+		<None Remove="Views\Shared\_DPDCreateShippingDataCourier.cshtml" />
+		<None Remove="Views\Shared\_DPDCreateShippingDataPickupPoint.cshtml" />
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
 		<None Remove="Views\_ViewImports.cshtml" />
 	</ItemGroup>
 
@@ -141,6 +146,15 @@
 		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+<<<<<<< HEAD
+=======
+		<Content Include="Views\Shared\_DPDCreateShippingDataCourier.cshtml">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Views\Shared\_DPDCreateShippingDataPickupPoint.cshtml">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
 		<Content Include="Views\_ViewImports.cshtml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>

@@ -20,6 +20,7 @@
         <nop-required />
         <span asp-validation-for="Email"></span>
     </div>
+<<<<<<< HEAD
     @if (Model.CompanyEnabled)
     {
         <div class="inputs">
@@ -55,6 +56,29 @@
             <span asp-validation-for="StateProvinceId"></span>
         </div>
     }
+=======
+
+    <div class="inputs">
+        <label asp-for="CountryId" asp-postfix=":"></label>
+        <select asp-for="CountryId" asp-items="Model.AvailableCountries"
+                data-trigger="country-select"
+                data-url="@(Url.RouteUrl("GetStatesByCountryId"))"
+                data-stateprovince="#@Html.IdFor(model => model.StateProvinceId)"
+                data-loading="#states-loading-progress"></select>
+        <nop-required />
+        <span asp-validation-for="CountryId"></span>
+    </div>я
+
+
+
+    <div class="inputs">
+        <label asp-for="StateProvinceId" asp-postfix=":"></label>
+        <select asp-for="StateProvinceId" asp-items="Model.AvailableStates"></select>
+        <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
+        <span asp-validation-for="StateProvinceId"></span>
+    </div>
+    
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
     @if (Model.CountyEnabled)
     {
         <div class="inputs">
@@ -67,6 +91,7 @@
             <span asp-validation-for="County"></span>
         </div>
     }
+<<<<<<< HEAD
     @if (Model.CityEnabled)
     {
         <div class="inputs">
@@ -142,5 +167,52 @@
     @if (Model.CustomAddressAttributes.Count > 0)
     {
         @await Html.PartialAsync(PluginDefaults.CustomSharedViewPathFormat + "_AddressAttributes.cshtml", Model.CustomAddressAttributes)
+=======
+    <div class="inputs">
+        <label asp-for="City" asp-postfix=":"></label>
+        <input asp-for="City" />
+        @if (Model.CityRequired)
+        {
+            <nop-required />
+        }
+        <span asp-validation-for="City"></span>
+    </div>
+
+    <div class="inputs">
+        <label asp-for="Address1" asp-postfix=":"></label>
+        <input asp-for="Address1" />
+        @if (Model.StreetAddressRequired)
+        {
+            <nop-required />
+        }
+        <span asp-validation-for="Address1"></span>
+    </div>
+
+
+    <div class="inputs">
+        <label asp-for="ZipPostalCode" asp-postfix=":"></label>
+        <input asp-for="ZipPostalCode" />
+        @if (Model.ZipPostalCodeRequired)
+        {
+            <nop-required />
+        }
+        <span asp-validation-for="ZipPostalCode"></span>
+    </div>
+
+
+    <div class="inputs">
+        <label asp-for="PhoneNumber" asp-postfix=":"></label>
+        <input asp-for="PhoneNumber" />
+        @if (Model.PhoneRequired)
+        {
+            <nop-required />
+        }
+        <span asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    @if (Model.CustomAddressAttributes.Count > 0)
+    {
+        @await Html.PartialAsync(PluginDefaults.CustomSharedViewPathFormat + "_AddressAttributes.cahtml", Model.CustomAddressAttributes)
+>>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
     }
 </div>
