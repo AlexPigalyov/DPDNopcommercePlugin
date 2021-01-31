@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 using Nop.Core.Domain.Orders;
 using Nop.Plugin.Shipping.DPD.Domain;
+using Nop.Plugin.Shipping.DPD.Infrastructure;
 using Nop.Plugin.Shipping.DPD.Models;
 using Nop.Plugin.Shipping.DPD.Services;
 using Nop.Services;
@@ -109,7 +110,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                     serviceCodes == null ? false : serviceCodes.Any(x => x == item.Text?.TrimStart('_').Replace(" ", "")));
             }).ToList();
 
-            model.AvailableServiceVariantTypes = ServiceVariantType.TT.ToSelectList(false).Select(item =>
+            model.AvailableServiceVariantTypes = ServiceVariantType.DD.ToSelectList(false).Select(item =>
             {
                 var serviceVariant = _dpdService.GetUpsCode((ServiceVariantType)int.Parse(item.Value));
                 return new SelectListItem(
@@ -120,12 +121,14 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
 
             return View("~/Plugins/Shipping.DPD/Views/Configure.cshtml", model);
         }
-        
-        
+
+
 
         [HttpPost]
         public IActionResult Configure(DPDShippingModel model)
         {
+            List<string> errors = new List<string>();
+
             //whether user has the authority to manage configuration
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageShippingSettings))
                 return AccessDeniedView();
@@ -135,18 +138,62 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             _dpdSettings.ClientKey = model.ClientKey;
             _dpdSettings.UseSandbox = model.UseSandbox;
             _dpdSettings.CargoRegistered = model.CargoRegistered;
-            _dpdSettings.AddressCode = model.AddressCode;
+            _dpdSettings.AddressCode = model?.AddressCode;
 
             _dpdSettings.ServiceVariantsOffered =
                 string.Join(':', model.ServiceVariantTypes.Select(service => $"[{service}]"));
             _dpdSettings.ServiceCodesOffered =
                 string.Join(':', model.ServiceCodeTypes.Select(service => $"[{service}]"));
 
-            _settingService.SaveSetting(_dpdSettings);
+            if (model.IsCreateNewAddressSelected)
+            {
+                if (!string.IsNullOrEmpty(model.Code) &&
+                !string.IsNullOrEmpty(model.Name) &&
+                !string.IsNullOrEmpty(model.CountryName) &&
+                !string.IsNullOrEmpty(model.City) &&
+                !string.IsNullOrEmpty(model.Street) &&
+                !string.IsNullOrEmpty(model.ContactFullName) &&
+                !string.IsNullOrEmpty(model.ContactPhone))
+                {
+                    var response = (Order.createAddressResponse)_dpdService.CreateNewAddress(model);
 
-            _notificationService.SuccessNotification(_localizationService.GetResource("Admin.Plugins.Saved"));
+                    if (string.IsNullOrEmpty(response.@return.errorMessage))
+                    {
+                        _dpdSettings.AddressCode = response.@return.code;
+                    }
+                    else
+                    {
+                        errors.Add(response.@return.errorMessage);
+                    }
+                }
+                else
+                {
+                    errors.Add("Please fill in all required fields");
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(model.AddressCode))
+                {
+                    errors.Add("Please fill the address code input");
+                }
+            }
+            
+            if(errors.Count > 0)
+            {
+                _notificationService.ErrorNotification(string.Join("\r\n", errors));
+                return Configure();
+            }
+            else
+            {
+                _settingService.SaveSetting(_dpdSettings);
 
-            return Configure();
+                _notificationService.SuccessNotification(_localizationService.GetResource("Admin.Plugins.Saved"));
+
+                model.AddressCode = model.Code;
+
+                return Configure();
+            }
         }
     }
 }

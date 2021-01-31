@@ -58,11 +58,7 @@
             @{
                 var dataDictAddress = new ViewDataDictionary(ViewData);
                 dataDictAddress.TemplateInfo.HtmlFieldPrefix = "BillingNewAddress";
-<<<<<<< HEAD
                 @await Html.PartialAsync(PluginDefaults.CustomSharedViewPathFormat + "_CreateOrUpdateAddress.cshtml", Model.BillingNewAddress, dataDictAddress)
-=======
-                @await Html.PartialAsync(PluginDefaults.CustomSharedViewPathFormat + "_DPDCreateShippingDataCourier.cshtml", Model.BillingNewAddress, dataDictAddress)
->>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
             }
         </div>
     </div>

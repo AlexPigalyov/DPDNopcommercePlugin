@@ -55,15 +55,31 @@ namespace Geography
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class extraServiceParam
+    public partial class possibleExtraService
     {
+        
+        private string codeField;
         
         private string nameField;
         
-        private string valueField;
+        private bool isPaidField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string code
+        {
+            get
+            {
+                return this.codeField;
+            }
+            set
+            {
+                this.codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
         public string name
         {
             get
@@ -77,16 +93,16 @@ namespace Geography
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string value
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public bool isPaid
         {
             get
             {
-                return this.valueField;
+                return this.isPaidField;
             }
             set
             {
-                this.valueField = value;
+                this.isPaidField = value;
             }
         }
     }
@@ -95,78 +111,54 @@ namespace Geography
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class extraService
+    public partial class dpdPossibleESResult
     {
         
-        private string esCodeField;
+        private string resultCodeField;
         
-        private extraServiceParam[] paramsField;
+        private string resultMessageField;
+        
+        private possibleExtraService[] extraServiceField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string esCode
+        public string resultCode
         {
             get
             {
-                return this.esCodeField;
+                return this.resultCodeField;
             }
             set
             {
-                this.esCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("params", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public extraServiceParam[] @params
-        {
-            get
-            {
-                return this.paramsField;
-            }
-            set
-            {
-                this.paramsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class timetable
-    {
-        
-        private string weekDaysField;
-        
-        private string workTimeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string weekDays
-        {
-            get
-            {
-                return this.weekDaysField;
-            }
-            set
-            {
-                this.weekDaysField = value;
+                this.resultCodeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string workTime
+        public string resultMessage
         {
             get
             {
-                return this.workTimeField;
+                return this.resultMessageField;
             }
             set
             {
-                this.workTimeField = value;
+                this.resultMessageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("extraService", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public possibleExtraService[] extraService
+        {
+            get
+            {
+                return this.extraServiceField;
+            }
+            set
+            {
+                this.extraServiceField = value;
             }
         }
     }
@@ -175,110 +167,529 @@ namespace Geography
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class schedule
+    public partial class dpdPossibleESPickupDelivery
     {
         
-        private string operationField;
+        private decimal cityIdField;
         
-        private timetable[] timetableField;
+        private bool cityIdFieldSpecified;
+        
+        private string terminalCodeField;
+        
+        private decimal indexField;
+        
+        private bool indexFieldSpecified;
+        
+        private string cityNameField;
+        
+        private string regionCodeField;
+        
+        private string countryCodeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string operation
+        public decimal cityId
         {
             get
             {
-                return this.operationField;
+                return this.cityIdField;
             }
             set
             {
-                this.operationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("timetable", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public timetable[] timetable
-        {
-            get
-            {
-                return this.timetableField;
-            }
-            set
-            {
-                this.timetableField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class geoCoordinates
-    {
-        
-        private decimal latitudeField;
-        
-        private bool latitudeFieldSpecified;
-        
-        private decimal longitudeField;
-        
-        private bool longitudeFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public decimal latitude
-        {
-            get
-            {
-                return this.latitudeField;
-            }
-            set
-            {
-                this.latitudeField = value;
+                this.cityIdField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool latitudeSpecified
+        public bool cityIdSpecified
         {
             get
             {
-                return this.latitudeFieldSpecified;
+                return this.cityIdFieldSpecified;
             }
             set
             {
-                this.latitudeFieldSpecified = value;
+                this.cityIdFieldSpecified = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public decimal longitude
+        public string terminalCode
         {
             get
             {
-                return this.longitudeField;
+                return this.terminalCodeField;
             }
             set
             {
-                this.longitudeField = value;
+                this.terminalCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public decimal index
+        {
+            get
+            {
+                return this.indexField;
+            }
+            set
+            {
+                this.indexField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool longitudeSpecified
+        public bool indexSpecified
         {
             get
             {
-                return this.longitudeFieldSpecified;
+                return this.indexFieldSpecified;
             }
             set
             {
-                this.longitudeFieldSpecified = value;
+                this.indexFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string cityName
+        {
+            get
+            {
+                return this.cityNameField;
+            }
+            set
+            {
+                this.cityNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string regionCode
+        {
+            get
+            {
+                return this.regionCodeField;
+            }
+            set
+            {
+                this.regionCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string countryCode
+        {
+            get
+            {
+                return this.countryCodeField;
+            }
+            set
+            {
+                this.countryCodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
+    public partial class auth
+    {
+        
+        private long clientNumberField;
+        
+        private string clientKeyField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public long clientNumber
+        {
+            get
+            {
+                return this.clientNumberField;
+            }
+            set
+            {
+                this.clientNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string clientKey
+        {
+            get
+            {
+                return this.clientKeyField;
+            }
+            set
+            {
+                this.clientKeyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
+    public partial class dpdPossibleESRequest
+    {
+        
+        private auth authField;
+        
+        private dpdPossibleESPickupDelivery pickupField;
+        
+        private dpdPossibleESPickupDelivery deliveryField;
+        
+        private bool selfPickupField;
+        
+        private bool selfDeliveryField;
+        
+        private string serviceCodeField;
+        
+        private System.DateTime pickupDateField;
+        
+        private bool pickupDateFieldSpecified;
+        
+        private string[] optionsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public auth auth
+        {
+            get
+            {
+                return this.authField;
+            }
+            set
+            {
+                this.authField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public dpdPossibleESPickupDelivery pickup
+        {
+            get
+            {
+                return this.pickupField;
+            }
+            set
+            {
+                this.pickupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public dpdPossibleESPickupDelivery delivery
+        {
+            get
+            {
+                return this.deliveryField;
+            }
+            set
+            {
+                this.deliveryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public bool selfPickup
+        {
+            get
+            {
+                return this.selfPickupField;
+            }
+            set
+            {
+                this.selfPickupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public bool selfDelivery
+        {
+            get
+            {
+                return this.selfDeliveryField;
+            }
+            set
+            {
+                this.selfDeliveryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string serviceCode
+        {
+            get
+            {
+                return this.serviceCodeField;
+            }
+            set
+            {
+                this.serviceCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=6)]
+        public System.DateTime pickupDate
+        {
+            get
+            {
+                return this.pickupDateField;
+            }
+            set
+            {
+                this.pickupDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool pickupDateSpecified
+        {
+            get
+            {
+                return this.pickupDateFieldSpecified;
+            }
+            set
+            {
+                this.pickupDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("option", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string[] options
+        {
+            get
+            {
+                return this.optionsField;
+            }
+            set
+            {
+                this.optionsField = value;
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", ConfigurationName="Geography.DPDGeography2")]
+    public interface DPDGeography2
+    {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getPossibleExtraServiceReques" +
+            "t", ReplyAction="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getPossibleExtraServiceRespon" +
+            "se")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Geography.WSFault), Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getPossibleExtraService/Fault" +
+            "/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Geography.getPossibleExtraServiceResponse> getPossibleExtraServiceAsync(Geography.getPossibleExtraServiceRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getTerminalsSelfDelivery2Requ" +
+            "est", ReplyAction="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getTerminalsSelfDelivery2Resp" +
+            "onse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Geography.WSFault), Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getTerminalsSelfDelivery2/Fau" +
+            "lt/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Geography.getTerminalsSelfDelivery2Response> getTerminalsSelfDelivery2Async(Geography.getTerminalsSelfDelivery2Request request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getStoragePeriodRequest", ReplyAction="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getStoragePeriodResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Geography.WSFault), Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getStoragePeriod/Fault/WSFaul" +
+            "t", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Geography.getStoragePeriodResponse> getStoragePeriodAsync(Geography.getStoragePeriodRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getCitiesCashPayRequest", ReplyAction="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getCitiesCashPayResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Geography.WSFault), Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getCitiesCashPay/Fault/WSFaul" +
+            "t", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Geography.getCitiesCashPayResponse> getCitiesCashPayAsync(Geography.getCitiesCashPayRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getParcelShopsRequest", ReplyAction="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getParcelShopsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Geography.WSFault), Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getParcelShops/Fault/WSFault", Name="WSFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Geography.getParcelShopsResponse> getParcelShopsAsync(Geography.getParcelShopsRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getPossibleExtraService", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
+    public partial class getPossibleExtraServiceRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Geography.dpdPossibleESRequest request;
+        
+        public getPossibleExtraServiceRequest()
+        {
+        }
+        
+        public getPossibleExtraServiceRequest(Geography.dpdPossibleESRequest request)
+        {
+            this.request = request;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getPossibleExtraServiceResponse", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
+    public partial class getPossibleExtraServiceResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Geography.dpdPossibleESResult @return;
+        
+        public getPossibleExtraServiceResponse()
+        {
+        }
+        
+        public getPossibleExtraServiceResponse(Geography.dpdPossibleESResult @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
+    public partial class terminalSelf
+    {
+        
+        private string terminalCodeField;
+        
+        private string terminalNameField;
+        
+        private address addressField;
+        
+        private geoCoordinates geoCoordinatesField;
+        
+        private schedule[] scheduleField;
+        
+        private extraService[] extraServiceField;
+        
+        private string[] servicesField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string terminalCode
+        {
+            get
+            {
+                return this.terminalCodeField;
+            }
+            set
+            {
+                this.terminalCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string terminalName
+        {
+            get
+            {
+                return this.terminalNameField;
+            }
+            set
+            {
+                this.terminalNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public address address
+        {
+            get
+            {
+                return this.addressField;
+            }
+            set
+            {
+                this.addressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public geoCoordinates geoCoordinates
+        {
+            get
+            {
+                return this.geoCoordinatesField;
+            }
+            set
+            {
+                this.geoCoordinatesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("schedule", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public schedule[] schedule
+        {
+            get
+            {
+                return this.scheduleField;
+            }
+            set
+            {
+                this.scheduleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("extraService", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=5)]
+        public extraService[] extraService
+        {
+            get
+            {
+                return this.extraServiceField;
+            }
+            set
+            {
+                this.extraServiceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("serviceCode", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string[] services
+        {
+            get
+            {
+                return this.servicesField;
+            }
+            set
+            {
+                this.servicesField = value;
             }
         }
     }
@@ -535,119 +946,70 @@ namespace Geography
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class terminalSelf
+    public partial class geoCoordinates
     {
         
-        private string terminalCodeField;
+        private decimal latitudeField;
         
-        private string terminalNameField;
+        private bool latitudeFieldSpecified;
         
-        private address addressField;
+        private decimal longitudeField;
         
-        private geoCoordinates geoCoordinatesField;
-        
-        private schedule[] scheduleField;
-        
-        private extraService[] extraServiceField;
-        
-        private string[] servicesField;
+        private bool longitudeFieldSpecified;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string terminalCode
+        public decimal latitude
         {
             get
             {
-                return this.terminalCodeField;
+                return this.latitudeField;
             }
             set
             {
-                this.terminalCodeField = value;
+                this.latitudeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool latitudeSpecified
+        {
+            get
+            {
+                return this.latitudeFieldSpecified;
+            }
+            set
+            {
+                this.latitudeFieldSpecified = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string terminalName
+        public decimal longitude
         {
             get
             {
-                return this.terminalNameField;
+                return this.longitudeField;
             }
             set
             {
-                this.terminalNameField = value;
+                this.longitudeField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public address address
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool longitudeSpecified
         {
             get
             {
-                return this.addressField;
+                return this.longitudeFieldSpecified;
             }
             set
             {
-                this.addressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public geoCoordinates geoCoordinates
-        {
-            get
-            {
-                return this.geoCoordinatesField;
-            }
-            set
-            {
-                this.geoCoordinatesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("schedule", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public schedule[] schedule
-        {
-            get
-            {
-                return this.scheduleField;
-            }
-            set
-            {
-                this.scheduleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("extraService", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=5)]
-        public extraService[] extraService
-        {
-            get
-            {
-                return this.extraServiceField;
-            }
-            set
-            {
-                this.extraServiceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("serviceCode", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string[] services
-        {
-            get
-            {
-                return this.servicesField;
-            }
-            set
-            {
-                this.servicesField = value;
+                this.longitudeFieldSpecified = value;
             }
         }
     }
@@ -656,79 +1018,160 @@ namespace Geography
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class auth
+    public partial class schedule
     {
         
-        private long clientNumberField;
+        private string operationField;
         
-        private string clientKeyField;
+        private timetable[] timetableField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public long clientNumber
+        public string operation
         {
             get
             {
-                return this.clientNumberField;
+                return this.operationField;
             }
             set
             {
-                this.clientNumberField = value;
+                this.operationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("timetable", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public timetable[] timetable
+        {
+            get
+            {
+                return this.timetableField;
+            }
+            set
+            {
+                this.timetableField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
+    public partial class timetable
+    {
+        
+        private string weekDaysField;
+        
+        private string workTimeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string weekDays
+        {
+            get
+            {
+                return this.weekDaysField;
+            }
+            set
+            {
+                this.weekDaysField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string clientKey
+        public string workTime
         {
             get
             {
-                return this.clientKeyField;
+                return this.workTimeField;
             }
             set
             {
-                this.clientKeyField = value;
+                this.workTimeField = value;
             }
         }
     }
     
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", ConfigurationName="Geography.DPDGeography2")]
-    public interface DPDGeography2
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
+    public partial class extraService
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getTerminalsSelfDelivery2Requ" +
-            "est", ReplyAction="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getTerminalsSelfDelivery2Resp" +
-            "onse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Geography.WSFault), Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getTerminalsSelfDelivery2/Fau" +
-            "lt/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Geography.getTerminalsSelfDelivery2Response> getTerminalsSelfDelivery2Async(Geography.getTerminalsSelfDelivery2Request request);
+        private string esCodeField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getPossibleExtraServiceReques" +
-            "t", ReplyAction="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getPossibleExtraServiceRespon" +
-            "se")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Geography.WSFault), Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getPossibleExtraService/Fault" +
-            "/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Geography.getPossibleExtraServiceResponse> getPossibleExtraServiceAsync(Geography.getPossibleExtraServiceRequest request);
+        private extraServiceParam[] paramsField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getParcelShopsRequest", ReplyAction="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getParcelShopsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Geography.WSFault), Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getParcelShops/Fault/WSFault", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Geography.getParcelShopsResponse> getParcelShopsAsync(Geography.getParcelShopsRequest request);
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string esCode
+        {
+            get
+            {
+                return this.esCodeField;
+            }
+            set
+            {
+                this.esCodeField = value;
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getCitiesCashPayRequest", ReplyAction="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getCitiesCashPayResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Geography.WSFault), Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getCitiesCashPay/Fault/WSFaul" +
-            "t", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Geography.getCitiesCashPayResponse> getCitiesCashPayAsync(Geography.getCitiesCashPayRequest request);
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("params", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public extraServiceParam[] @params
+        {
+            get
+            {
+                return this.paramsField;
+            }
+            set
+            {
+                this.paramsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
+    public partial class extraServiceParam
+    {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getStoragePeriodRequest", ReplyAction="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getStoragePeriodResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Geography.WSFault), Action="http://dpd.ru/ws/geography/2015-05-20/DPDGeography2/getStoragePeriod/Fault/WSFaul" +
-            "t", Name="WSFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Geography.getStoragePeriodResponse> getStoragePeriodAsync(Geography.getStoragePeriodRequest request);
+        private string nameField;
+        
+        private string valueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string value
+        {
+            get
+            {
+                return this.valueField;
+            }
+            set
+            {
+                this.valueField = value;
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -778,26 +1221,14 @@ namespace Geography
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class dpdPossibleESRequest
+    public partial class storagePeriodRequest
     {
         
         private auth authField;
         
-        private dpdPossibleESPickupDelivery pickupField;
-        
-        private dpdPossibleESPickupDelivery deliveryField;
-        
-        private bool selfPickupField;
-        
-        private bool selfDeliveryField;
+        private string terminalCodeField;
         
         private string serviceCodeField;
-        
-        private System.DateTime pickupDateField;
-        
-        private bool pickupDateFieldSpecified;
-        
-        private string[] optionsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -815,62 +1246,86 @@ namespace Geography
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public dpdPossibleESPickupDelivery pickup
+        public string terminalCode
         {
             get
             {
-                return this.pickupField;
+                return this.terminalCodeField;
             }
             set
             {
-                this.pickupField = value;
+                this.terminalCodeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public dpdPossibleESPickupDelivery delivery
+        public string serviceCode
         {
             get
             {
-                return this.deliveryField;
+                return this.serviceCodeField;
             }
             set
             {
-                this.deliveryField = value;
+                this.serviceCodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
+    public partial class terminalStoragePeriods
+    {
+        
+        private string terminalCodeField;
+        
+        private storagePeriod[] servicesField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string terminalCode
+        {
+            get
+            {
+                return this.terminalCodeField;
+            }
+            set
+            {
+                this.terminalCodeField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public bool selfPickup
+        [System.Xml.Serialization.XmlElementAttribute("services", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public storagePeriod[] services
         {
             get
             {
-                return this.selfPickupField;
+                return this.servicesField;
             }
             set
             {
-                this.selfPickupField = value;
+                this.servicesField = value;
             }
         }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
+    public partial class storagePeriod
+    {
+        
+        private string serviceCodeField;
+        
+        private int daysField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public bool selfDelivery
-        {
-            get
-            {
-                return this.selfDeliveryField;
-            }
-            set
-            {
-                this.selfDeliveryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string serviceCode
         {
             get
@@ -884,45 +1339,99 @@ namespace Geography
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=6)]
-        public System.DateTime pickupDate
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public int days
         {
             get
             {
-                return this.pickupDateField;
+                return this.daysField;
             }
             set
             {
-                this.pickupDateField = value;
+                this.daysField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getStoragePeriod", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
+    public partial class getStoragePeriodRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Geography.storagePeriodRequest request;
+        
+        public getStoragePeriodRequest()
+        {
+        }
+        
+        public getStoragePeriodRequest(Geography.storagePeriodRequest request)
+        {
+            this.request = request;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getStoragePeriodResponse", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
+    public partial class getStoragePeriodResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("terminal", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Geography.terminalStoragePeriods[] @return;
+        
+        public getStoragePeriodResponse()
+        {
+        }
+        
+        public getStoragePeriodResponse(Geography.terminalStoragePeriods[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
+    public partial class dpdCitiesCashPayRequest
+    {
+        
+        private auth authField;
+        
+        private string countryCodeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public auth auth
+        {
+            get
+            {
+                return this.authField;
+            }
+            set
+            {
+                this.authField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool pickupDateSpecified
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string countryCode
         {
             get
             {
-                return this.pickupDateFieldSpecified;
+                return this.countryCodeField;
             }
             set
             {
-                this.pickupDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("option", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string[] options
-        {
-            get
-            {
-                return this.optionsField;
-            }
-            set
-            {
-                this.optionsField = value;
+                this.countryCodeField = value;
             }
         }
     }
@@ -931,28 +1440,36 @@ namespace Geography
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class dpdPossibleESPickupDelivery
+    public partial class city
     {
         
-        private decimal cityIdField;
+        private long cityIdField;
         
         private bool cityIdFieldSpecified;
         
-        private string terminalCodeField;
+        private string countryCodeField;
         
-        private decimal indexField;
+        private string countryNameField;
         
-        private bool indexFieldSpecified;
+        private int regionCodeField;
+        
+        private bool regionCodeFieldSpecified;
+        
+        private string regionNameField;
+        
+        private string cityCodeField;
         
         private string cityNameField;
         
-        private string regionCodeField;
+        private string abbreviationField;
         
-        private string countryCodeField;
+        private string indexMinField;
+        
+        private string indexMaxField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public decimal cityId
+        public long cityId
         {
             get
             {
@@ -980,48 +1497,90 @@ namespace Geography
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string terminalCode
+        public string countryCode
         {
             get
             {
-                return this.terminalCodeField;
+                return this.countryCodeField;
             }
             set
             {
-                this.terminalCodeField = value;
+                this.countryCodeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public decimal index
+        public string countryName
         {
             get
             {
-                return this.indexField;
+                return this.countryNameField;
             }
             set
             {
-                this.indexField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool indexSpecified
-        {
-            get
-            {
-                return this.indexFieldSpecified;
-            }
-            set
-            {
-                this.indexFieldSpecified = value;
+                this.countryNameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public int regionCode
+        {
+            get
+            {
+                return this.regionCodeField;
+            }
+            set
+            {
+                this.regionCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool regionCodeSpecified
+        {
+            get
+            {
+                return this.regionCodeFieldSpecified;
+            }
+            set
+            {
+                this.regionCodeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string regionName
+        {
+            get
+            {
+                return this.regionNameField;
+            }
+            set
+            {
+                this.regionNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public string cityCode
+        {
+            get
+            {
+                return this.cityCodeField;
+            }
+            set
+            {
+                this.cityCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
         public string cityName
         {
             get
@@ -1035,142 +1594,44 @@ namespace Geography
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public string regionCode
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public string abbreviation
         {
             get
             {
-                return this.regionCodeField;
+                return this.abbreviationField;
             }
             set
             {
-                this.regionCodeField = value;
+                this.abbreviationField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public string countryCode
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        public string indexMin
         {
             get
             {
-                return this.countryCodeField;
+                return this.indexMinField;
             }
             set
             {
-                this.countryCodeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class dpdPossibleESResult
-    {
-        
-        private string resultCodeField;
-        
-        private string resultMessageField;
-        
-        private possibleExtraService[] extraServiceField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string resultCode
-        {
-            get
-            {
-                return this.resultCodeField;
-            }
-            set
-            {
-                this.resultCodeField = value;
+                this.indexMinField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string resultMessage
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public string indexMax
         {
             get
             {
-                return this.resultMessageField;
+                return this.indexMaxField;
             }
             set
             {
-                this.resultMessageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("extraService", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public possibleExtraService[] extraService
-        {
-            get
-            {
-                return this.extraServiceField;
-            }
-            set
-            {
-                this.extraServiceField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class possibleExtraService
-    {
-        
-        private string codeField;
-        
-        private string nameField;
-        
-        private bool isPaidField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string code
-        {
-            get
-            {
-                return this.codeField;
-            }
-            set
-            {
-                this.codeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public bool isPaid
-        {
-            get
-            {
-                return this.isPaidField;
-            }
-            set
-            {
-                this.isPaidField = value;
+                this.indexMaxField = value;
             }
         }
     }
@@ -1178,19 +1639,19 @@ namespace Geography
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getPossibleExtraService", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
-    public partial class getPossibleExtraServiceRequest
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getCitiesCashPay", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
+    public partial class getCitiesCashPayRequest
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Geography.dpdPossibleESRequest request;
+        public Geography.dpdCitiesCashPayRequest request;
         
-        public getPossibleExtraServiceRequest()
+        public getCitiesCashPayRequest()
         {
         }
         
-        public getPossibleExtraServiceRequest(Geography.dpdPossibleESRequest request)
+        public getCitiesCashPayRequest(Geography.dpdCitiesCashPayRequest request)
         {
             this.request = request;
         }
@@ -1199,19 +1660,19 @@ namespace Geography
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getPossibleExtraServiceResponse", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
-    public partial class getPossibleExtraServiceResponse
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getCitiesCashPayResponse", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
+    public partial class getCitiesCashPayResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Geography.dpdPossibleESResult @return;
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Geography.city[] @return;
         
-        public getPossibleExtraServiceResponse()
+        public getCitiesCashPayResponse()
         {
         }
         
-        public getPossibleExtraServiceResponse(Geography.dpdPossibleESResult @return)
+        public getCitiesCashPayResponse(Geography.city[] @return)
         {
             this.@return = @return;
         }
@@ -1749,467 +2210,6 @@ namespace Geography
         }
     }
     
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class dpdCitiesCashPayRequest
-    {
-        
-        private auth authField;
-        
-        private string countryCodeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public auth auth
-        {
-            get
-            {
-                return this.authField;
-            }
-            set
-            {
-                this.authField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string countryCode
-        {
-            get
-            {
-                return this.countryCodeField;
-            }
-            set
-            {
-                this.countryCodeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class city
-    {
-        
-        private long cityIdField;
-        
-        private bool cityIdFieldSpecified;
-        
-        private string countryCodeField;
-        
-        private string countryNameField;
-        
-        private int regionCodeField;
-        
-        private bool regionCodeFieldSpecified;
-        
-        private string regionNameField;
-        
-        private string cityCodeField;
-        
-        private string cityNameField;
-        
-        private string abbreviationField;
-        
-        private string indexMinField;
-        
-        private string indexMaxField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public long cityId
-        {
-            get
-            {
-                return this.cityIdField;
-            }
-            set
-            {
-                this.cityIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool cityIdSpecified
-        {
-            get
-            {
-                return this.cityIdFieldSpecified;
-            }
-            set
-            {
-                this.cityIdFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string countryCode
-        {
-            get
-            {
-                return this.countryCodeField;
-            }
-            set
-            {
-                this.countryCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string countryName
-        {
-            get
-            {
-                return this.countryNameField;
-            }
-            set
-            {
-                this.countryNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public int regionCode
-        {
-            get
-            {
-                return this.regionCodeField;
-            }
-            set
-            {
-                this.regionCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool regionCodeSpecified
-        {
-            get
-            {
-                return this.regionCodeFieldSpecified;
-            }
-            set
-            {
-                this.regionCodeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public string regionName
-        {
-            get
-            {
-                return this.regionNameField;
-            }
-            set
-            {
-                this.regionNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public string cityCode
-        {
-            get
-            {
-                return this.cityCodeField;
-            }
-            set
-            {
-                this.cityCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        public string cityName
-        {
-            get
-            {
-                return this.cityNameField;
-            }
-            set
-            {
-                this.cityNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
-        public string abbreviation
-        {
-            get
-            {
-                return this.abbreviationField;
-            }
-            set
-            {
-                this.abbreviationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
-        public string indexMin
-        {
-            get
-            {
-                return this.indexMinField;
-            }
-            set
-            {
-                this.indexMinField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
-        public string indexMax
-        {
-            get
-            {
-                return this.indexMaxField;
-            }
-            set
-            {
-                this.indexMaxField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getCitiesCashPay", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
-    public partial class getCitiesCashPayRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Geography.dpdCitiesCashPayRequest request;
-        
-        public getCitiesCashPayRequest()
-        {
-        }
-        
-        public getCitiesCashPayRequest(Geography.dpdCitiesCashPayRequest request)
-        {
-            this.request = request;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getCitiesCashPayResponse", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
-    public partial class getCitiesCashPayResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Geography.city[] @return;
-        
-        public getCitiesCashPayResponse()
-        {
-        }
-        
-        public getCitiesCashPayResponse(Geography.city[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class storagePeriodRequest
-    {
-        
-        private auth authField;
-        
-        private string terminalCodeField;
-        
-        private string serviceCodeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public auth auth
-        {
-            get
-            {
-                return this.authField;
-            }
-            set
-            {
-                this.authField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string terminalCode
-        {
-            get
-            {
-                return this.terminalCodeField;
-            }
-            set
-            {
-                this.terminalCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string serviceCode
-        {
-            get
-            {
-                return this.serviceCodeField;
-            }
-            set
-            {
-                this.serviceCodeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class terminalStoragePeriods
-    {
-        
-        private string terminalCodeField;
-        
-        private storagePeriod[] servicesField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string terminalCode
-        {
-            get
-            {
-                return this.terminalCodeField;
-            }
-            set
-            {
-                this.terminalCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("services", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public storagePeriod[] services
-        {
-            get
-            {
-                return this.servicesField;
-            }
-            set
-            {
-                this.servicesField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20")]
-    public partial class storagePeriod
-    {
-        
-        private string serviceCodeField;
-        
-        private int daysField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string serviceCode
-        {
-            get
-            {
-                return this.serviceCodeField;
-            }
-            set
-            {
-                this.serviceCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public int days
-        {
-            get
-            {
-                return this.daysField;
-            }
-            set
-            {
-                this.daysField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getStoragePeriod", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
-    public partial class getStoragePeriodRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Geography.storagePeriodRequest request;
-        
-        public getStoragePeriodRequest()
-        {
-        }
-        
-        public getStoragePeriodRequest(Geography.storagePeriodRequest request)
-        {
-            this.request = request;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getStoragePeriodResponse", WrapperNamespace="http://dpd.ru/ws/geography/2015-05-20", IsWrapped=true)]
-    public partial class getStoragePeriodResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/geography/2015-05-20", Order=0)]
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("terminal", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Geography.terminalStoragePeriods[] @return;
-        
-        public getStoragePeriodResponse()
-        {
-        }
-        
-        public getStoragePeriodResponse(Geography.terminalStoragePeriods[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     public interface DPDGeography2Channel : Geography.DPDGeography2, System.ServiceModel.IClientChannel
     {
@@ -2261,19 +2261,6 @@ namespace Geography
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Geography.getTerminalsSelfDelivery2Response> Geography.DPDGeography2.getTerminalsSelfDelivery2Async(Geography.getTerminalsSelfDelivery2Request request)
-        {
-            return base.Channel.getTerminalsSelfDelivery2Async(request);
-        }
-        
-        public System.Threading.Tasks.Task<Geography.getTerminalsSelfDelivery2Response> getTerminalsSelfDelivery2Async(Geography.auth auth)
-        {
-            Geography.getTerminalsSelfDelivery2Request inValue = new Geography.getTerminalsSelfDelivery2Request();
-            inValue.auth = auth;
-            return ((Geography.DPDGeography2)(this)).getTerminalsSelfDelivery2Async(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<Geography.getPossibleExtraServiceResponse> Geography.DPDGeography2.getPossibleExtraServiceAsync(Geography.getPossibleExtraServiceRequest request)
         {
             return base.Channel.getPossibleExtraServiceAsync(request);
@@ -2287,16 +2274,29 @@ namespace Geography
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Geography.getParcelShopsResponse> Geography.DPDGeography2.getParcelShopsAsync(Geography.getParcelShopsRequest request)
+        System.Threading.Tasks.Task<Geography.getTerminalsSelfDelivery2Response> Geography.DPDGeography2.getTerminalsSelfDelivery2Async(Geography.getTerminalsSelfDelivery2Request request)
         {
-            return base.Channel.getParcelShopsAsync(request);
+            return base.Channel.getTerminalsSelfDelivery2Async(request);
         }
         
-        public System.Threading.Tasks.Task<Geography.getParcelShopsResponse> getParcelShopsAsync(Geography.dpdParcelShopRequest request)
+        public System.Threading.Tasks.Task<Geography.getTerminalsSelfDelivery2Response> getTerminalsSelfDelivery2Async(Geography.auth auth)
         {
-            Geography.getParcelShopsRequest inValue = new Geography.getParcelShopsRequest();
+            Geography.getTerminalsSelfDelivery2Request inValue = new Geography.getTerminalsSelfDelivery2Request();
+            inValue.auth = auth;
+            return ((Geography.DPDGeography2)(this)).getTerminalsSelfDelivery2Async(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Geography.getStoragePeriodResponse> Geography.DPDGeography2.getStoragePeriodAsync(Geography.getStoragePeriodRequest request)
+        {
+            return base.Channel.getStoragePeriodAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Geography.getStoragePeriodResponse> getStoragePeriodAsync(Geography.storagePeriodRequest request)
+        {
+            Geography.getStoragePeriodRequest inValue = new Geography.getStoragePeriodRequest();
             inValue.request = request;
-            return ((Geography.DPDGeography2)(this)).getParcelShopsAsync(inValue);
+            return ((Geography.DPDGeography2)(this)).getStoragePeriodAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2313,16 +2313,16 @@ namespace Geography
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Geography.getStoragePeriodResponse> Geography.DPDGeography2.getStoragePeriodAsync(Geography.getStoragePeriodRequest request)
+        System.Threading.Tasks.Task<Geography.getParcelShopsResponse> Geography.DPDGeography2.getParcelShopsAsync(Geography.getParcelShopsRequest request)
         {
-            return base.Channel.getStoragePeriodAsync(request);
+            return base.Channel.getParcelShopsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Geography.getStoragePeriodResponse> getStoragePeriodAsync(Geography.storagePeriodRequest request)
+        public System.Threading.Tasks.Task<Geography.getParcelShopsResponse> getParcelShopsAsync(Geography.dpdParcelShopRequest request)
         {
-            Geography.getStoragePeriodRequest inValue = new Geography.getStoragePeriodRequest();
+            Geography.getParcelShopsRequest inValue = new Geography.getParcelShopsRequest();
             inValue.request = request;
-            return ((Geography.DPDGeography2)(this)).getStoragePeriodAsync(inValue);
+            return ((Geography.DPDGeography2)(this)).getParcelShopsAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

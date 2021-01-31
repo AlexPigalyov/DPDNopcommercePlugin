@@ -123,16 +123,35 @@ namespace Nop.Plugin.Shipping.DPD
 
                 ["Plugins.Shipping.DPD.Fields.PickupTimePeriodType"] = "Time period of receipt of goods",
 
-                ["Plugins.Shipping.DPD.Fields.ServiceCodeType"] = "DPD service code",
+                ["Plugins.Shipping.DPD.Fields.AvailableServiceCodeTypes"] = "DPD service codes",
 
-                ["Plugins.Shipping.DPD.Fields.AvailableServiceVariantType"] = "Delivery variant",
+                ["Plugins.Shipping.DPD.Fields.AvailableServiceVariantTypes"] = "Delivery variants",
 
                 ["Plugins.Shipping.DPD.Fields.AddressCode"] = "Address code",
                 ["Plugins.Shipping.DPD.Fields.AddressCode.Hint"] = "Address code in DPD",
 
                 ["Plugins.Shipping.DPD.Fields.CargoRegistered"] = "Cargo registered",
                 ["Plugins.Shipping.DPD.Fields.CargoRegistered.Hint"] =
-                    "Enclosure included into the list of goods subject to extra safety measures reducing risk of its loss or damage during transportation."
+                    "Enclosure included into the list of goods subject to extra safety measures reducing risk of its loss or damage during transportation.",
+
+                ["Plugins.Shipping.DPD.Fields.Code"] = "DPD Code (Required)",
+                ["Plugins.Shipping.DPD.Fields.Name"] = "Full Name (Required)",
+                ["Plugins.Shipping.DPD.Fields.CountryName"] = "Country name (Required)",
+                ["Plugins.Shipping.DPD.Fields.Index"] = "Index",
+                ["Plugins.Shipping.DPD.Fields.Region"] = "Region",
+                ["Plugins.Shipping.DPD.Fields.City"] = "City name (Required)",
+                ["Plugins.Shipping.DPD.Fields.Street"] = "Street name (Required)",
+                ["Plugins.Shipping.DPD.Fields.House"] = "House (Required)",
+                ["Plugins.Shipping.DPD.Fields.HouseCorps"] = "Corps",
+                ["Plugins.Shipping.DPD.Fields.Building"] = "Building",
+                ["Plugins.Shipping.DPD.Fields.OwnerShip"] = "Owner ship",
+                ["Plugins.Shipping.DPD.Fields.Office"] = "Office",
+                ["Plugins.Shipping.DPD.Fields.Apartament"] = "Apartament",
+                ["Plugins.Shipping.DPD.Fields.ContactFullName"] = "Contact full name (Required)",
+                ["Plugins.Shipping.DPD.Fields.ContactPhone"] = "Contact phone (Required)",
+                ["Plugins.Shipping.DPD.Fields.ContactEmail"] = "Contact email",
+                ["Plugins.Shipping.DPD.Fields.Instructions"] = "Insturctions for courier",
+                ["Plugins.Shipping.DPD.Fields.NeedPass"] = "Need pass",
             });
 
 

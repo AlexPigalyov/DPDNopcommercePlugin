@@ -2,7 +2,7 @@
 {
     public enum ServiceVariantType
     {
-        [DPDCode("ToTerminal")] TD,
-        [DPDCode("ToPerson")] TT
+        [DPDCode("ToPerson")] DD,
+        [DPDCode("ToTerminal")] DT
     }
 }

@@ -30,13 +30,6 @@
         paymentInfoStepNumber = paymentInfoStepNumber - 2;
         confirmOrderStepNumber = confirmOrderStepNumber - 2;
     }
-
-    shippingAddressStepNumber--;
-    shippingMethodStepNumber--;
-    paymentMethodStepNumber--;
-    paymentInfoStepNumber--;
-    confirmOrderStepNumber--;
-
     if (Model.DisableBillingAddressCheckoutStep)
     {
         shippingAddressStepNumber--;
@@ -47,17 +40,6 @@
     }
 }
 
-<<<<<<< HEAD
-=======
-<style>
-    .btn-primary {
-        color: #ffffff;
-        background-color: #C39B6A !important; 
-        border-color: #C39B6A !important;
-    }
-</style>    
-
->>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
 <div class="page checkout-page">
     <div class="page-title">
         <h1>@T("Checkout")</h1>
@@ -226,9 +208,6 @@
         Accordion.init('checkout-steps', '.step-title', true);
         Accordion.openSection('#opc-billing');
         Checkout.init('@(storeLocation)cart/');
-
-        Accordion.hideSection('#opc-shipping');
-
         if (Billing.disableBillingAddressCheckoutStep)
         {
             Accordion.hideSection('#opc-billing');

@@ -1,6 +1,9 @@
 ﻿{
   "ProviderId": "Microsoft.VisualStudio.ConnectedService.Wcf",
   "Version": "15.0.40203.910",
+  "GettingStartedDocument": {
+    "Uri": "https://go.microsoft.com/fwlink/?linkid=858517"
+  },
   "ExtendedData": {
     "inputs": [
       "http://ws.dpd.ru/services/calculator2?wsdl"
@@ -176,11 +179,8 @@
       "System.Security.Principal.Windows, {System.Security.Principal.Windows, 4.7.0}",
       "System.Security.SecureString, {System.Security.SecureString, 4.3.0}",
       "System.ServiceModel, {System.ServiceModel.Primitives, 4.7.0}",
-      "System.ServiceModel.Duplex, {System.ServiceModel.Duplex, 4.4.4}",
       "System.ServiceModel.Http, {System.ServiceModel.Http, 4.7.0}",
-      "System.ServiceModel.NetTcp, {System.ServiceModel.NetTcp, 4.4.4}",
       "System.ServiceModel.Primitives, {System.ServiceModel.Primitives, 4.7.0}",
-      "System.ServiceModel.Security, {System.ServiceModel.Security, 4.4.4}",
       "System.Spatial, {System.Spatial, 5.8.4}",
       "System.Text.Encoding, {System.Text.Encoding, 4.3.0}",
       "System.Text.Encoding.CodePages, {System.Text.Encoding.CodePages, 4.7.0}",

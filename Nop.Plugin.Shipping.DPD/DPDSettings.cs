@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using iTextSharp.text;
-using Nop.Core.Configuration;
-using Nop.Plugin.Shipping.DPD.Domain;
+﻿using Nop.Core.Configuration;
 
 namespace Nop.Plugin.Shipping.DPD
 {

@@ -1,10 +1,10 @@
 ﻿{
   "Group": "Shipping rate computation",
-  "FriendlyName": "DPD---GQG-- (United Parcel Service)",
+  "FriendlyName": "DPD (Dynamic Parcel Distribution)",
   "SystemName": "Shipping.DPD",
-  "Version": "1.60",
+  "Version": "1.00",
   "SupportedVersions": [ "4.30" ],
-  "Author": "nopCommerce team",
+  "Author": "Stella team",
   "DisplayOrder": 1,
   "FileName": "Nop.Plugin.Shipping.DPD.dll",
   "Description": "This plugin offers shipping rates by DPD"

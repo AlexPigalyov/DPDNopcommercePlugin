@@ -14,10 +14,7 @@ using Nop.Core.Http.Extensions;
 using Nop.Plugin.Shipping.DPD.Domain;
 using Nop.Plugin.Shipping.DPD.Infrastructure;
 using Nop.Plugin.Shipping.DPD.Models;
-<<<<<<< HEAD
 using Nop.Plugin.Shipping.DPD.Services;
-=======
->>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
 using Nop.Services.Catalog;
 using Nop.Services.Common;
 using Nop.Services.Customers;
@@ -36,6 +33,7 @@ using Nop.Web.Framework.Controllers;
 using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Models.Checkout;
 using Nop.Web.Models.Common;
+using Nop.Core.Domain.Catalog;
 
 namespace Nop.Plugin.Shipping.DPD.Controllers
 {
@@ -43,7 +41,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
     [AutoValidateAntiforgeryToken]
     public class DPDCheckoutController : BasePluginController, IConsumer<OrderPlacedEvent>
     {
-        
+
         private readonly AddressSettings _addressSettings;
         private readonly CustomerSettings _customerSettings;
         private readonly IAddressAttributeParser _addressAttributeParser;
@@ -71,6 +69,8 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
         private readonly Order.DPDOrderClient _dpdOrder;
         private readonly OrderSettings _orderSettings;
         private readonly PaymentSettings _paymentSettings;
+        private readonly IRepository<ProductCategory> _productCategoryRepository;
+        private readonly IRepository<Category> _categoryRepository;
         private readonly RewardPointsSettings _rewardPointsSettings;
         private readonly ShippingSettings _shippingSettings;
 
@@ -83,7 +83,9 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             IRepository<PickupPointAddress> dpdPickupPointAddressRepository,
             ICustomerService customerService,
             IGenericAttributeService genericAttributeService,
-            ILocalizationService localizationService,   
+            ILocalizationService localizationService,
+            IRepository<ProductCategory> productCategoryRepository,
+            IRepository<Category> categoryRepository,
             ILogger logger,
             IOrderProcessingService orderProcessingService,
             IOrderService orderService,
@@ -103,6 +105,8 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             RewardPointsSettings rewardPointsSettings,
             ShippingSettings shippingSettings)
         {
+            _productCategoryRepository = productCategoryRepository;
+            _categoryRepository = categoryRepository;
             _categoryService = categoryService;
             _dpdSettings = dpdSettings;
             _dpdService = dpdService;
@@ -134,10 +138,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             _customerSettings = customerSettings;
             _addressSettings = addressSettings;
         }
-<<<<<<< HEAD
-        
-=======
->>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
+
         protected virtual bool ParsePickupInStore(IFormCollection form)
         {
             var pickupInStore = false;
@@ -347,11 +348,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             var selectedPoint = pickupPoints.FirstOrDefault(x => x.Id.Equals(pickupPoint[0]));
             if (selectedPoint == null)
                 throw new Exception("Pickup point is not allowed");
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
             return selectedPoint;
         }
 
@@ -478,7 +475,15 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                     //do not ship to the same address
                     var shippingAddressModel = _checkoutModelFactory.PrepareShippingAddressModel(cart, prePopulateNewAddressWithCustomerFields: true);
 
-                    return OpcLoadStepAfterShippingAddress(cart);
+                    return Json(new
+                    {
+                        update_section = new UpdateSectionJsonModel
+                        {
+                            name = "shipping",
+                            html = RenderPartialViewToString(PluginDefaults.CustomCheckoutViewPathFormat + "OpcShippingAddress.cshtml", shippingAddressModel)
+                        },
+                        goto_section = "shipping"
+                    });
                 }
 
                 //shipping is not required
@@ -493,14 +498,13 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 return Json(new { error = 1, message = exc.Message });
             }
         }
-<<<<<<< HEAD
         [IgnoreAntiforgeryToken]
         public virtual IActionResult OpcSaveShipping(CheckoutShippingAddressModel model, IFormCollection form)
         {
             try
             {
                 //validation
-                  if (_orderSettings.CheckoutDisabled)
+                if (_orderSettings.CheckoutDisabled)
                     throw new Exception(_localizationService.GetResource("Checkout.Disabled"));
 
                 var cart = _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
@@ -537,7 +541,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 if (shippingAddressId > 0)
                 {
                     //existing address
-                    
+
                     var address = _customerService.GetCustomerAddress(_workContext.CurrentCustomer.Id, shippingAddressId)
                         ?? throw new Exception(_localizationService.GetResource("Checkout.Address.NotFound"));
 
@@ -612,30 +616,35 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
         {
             try
             {
-                if (shippingoption.ToLower().Contains("dpd-td"))
+                if (shippingoption.ToLower().Contains("dpd-dt"))
                 {
                     if (!string.IsNullOrEmpty(form["pickupaddress"][0]) &&
                        !string.IsNullOrEmpty(form["pickupaddress"][1]) &&
                        !string.IsNullOrEmpty(form["pickupaddress"][2]) &&
-                       !string.IsNullOrEmpty(form["pickupaddress"][3]))
+                       !string.IsNullOrEmpty(form["pickupaddress"][3]) &&
+                       !string.IsNullOrEmpty(form["pickupaddress"][4]))
                     {
-                        var pickupPointAddress = _dpdPickupPointAddressRepository.Table.FirstOrDefault(x => x.UserId == _workContext.CurrentCustomer.Id);
-                        if(pickupPointAddress != null)
-                        {
-                            pickupPointAddress.TerminalCode = form["pickupaddress"][0];
-                            pickupPointAddress.CountryName = form["pickupaddress"][1];
-                            pickupPointAddress.City = form["pickupaddress"][2];
-                            pickupPointAddress.Street = form["pickupaddress"][3];
+                        var dpdPickupPointAddresses = from pickupAddresses in _dpdPickupPointAddressRepository.Table
+                                                      select pickupAddresses;
 
-                            _dpdPickupPointAddressRepository.Update(pickupPointAddress);
+                        var dpdPickupPointAddress = dpdPickupPointAddresses.ToList().LastOrDefault(x => x.UserId == _workContext.CurrentCustomer.Id);
+                        if (dpdPickupPointAddress != null)
+                        {
+                            dpdPickupPointAddress.TerminalCode = form["pickupaddress"][0];
+                            dpdPickupPointAddress.CountryName = form["pickupaddress"][1];
+                            dpdPickupPointAddress.City = form["pickupaddress"][2];
+                            dpdPickupPointAddress.Street = form["pickupaddress"][3];
+                            dpdPickupPointAddress.House = form["pickupaddress"][4];
+
+                            _dpdPickupPointAddressRepository.Update(dpdPickupPointAddress);
                         }
                         else
                         {
                             _logger.Warning("Pick-up address was not saved", new ArgumentNullException(), _workContext.CurrentCustomer);
                             return Json(new { error = 1, message = "Pick-up address is null" });
                         }
-                       
-                        
+
+
                     }
                     else
                     {
@@ -646,20 +655,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 //validation
                 if (_orderSettings.CheckoutDisabled)
                     throw new Exception(_localizationService.GetResource("Checkout.Disabled"));
-                
-=======
 
-        [IgnoreAntiforgeryToken]
-        public virtual IActionResult OpcSaveShippingMethod(string shippingoption, IFormCollection form)
-        {
-            
-            try
-            {
-                //validation
-                if (_orderSettings.CheckoutDisabled)
-                    throw new Exception(_localizationService.GetResource("Checkout.Disabled"));
-
->>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
                 var cart =
                     _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
 
@@ -721,11 +717,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                     .Find(so => !string.IsNullOrEmpty(so.Name) && so.Name.Equals(selectedName, StringComparison.InvariantCultureIgnoreCase));
                 if (shippingOption == null)
                     throw new Exception("Selected shipping method can't be loaded");
-<<<<<<< HEAD
-               
-=======
 
->>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
                 //save
                 _genericAttributeService.SaveAttribute(_workContext.CurrentCustomer, NopCustomerDefaults.SelectedShippingOptionAttribute, shippingOption, _storeContext.CurrentStore.Id);
 
@@ -739,7 +731,6 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             }
         }
 
-<<<<<<< HEAD
         [IgnoreAntiforgeryToken]
         public virtual IActionResult OpcConfirmOrder()
         {
@@ -754,6 +745,41 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
 
                 if (!cart.Any())
                     throw new Exception("Your cart is empty");
+
+                var dpdPickupPointAddresses = from pickupAddresses in _dpdPickupPointAddressRepository.Table
+                                              select pickupAddresses;
+
+                var dpdPickupPointAddress = dpdPickupPointAddresses.ToList().LastOrDefault(x => x.UserId == _workContext.CurrentCustomer.Id);
+
+                List<string> productsCategories = new List<string>();
+
+                dpdPickupPointAddress.CartItemsCost = 50000;
+
+                foreach (var productId in cart.Select(x => x.ProductId))
+                {
+                    var product = _productService.GetProductById(productId);
+
+                    dpdPickupPointAddress.CartItemsWeight += (double)product.Weight;
+                    dpdPickupPointAddress.CartItemsCost += (double)product.Price;
+
+                    var categoryId = _productCategoryRepository.Table.FirstOrDefault(x => x.ProductId == productId).CategoryId;
+
+                    var categoryName = _categoryRepository.Table.FirstOrDefault(x => x.Id == categoryId).Name;
+
+                    productsCategories.Add(categoryName);
+                }
+
+                string uniqueCategoryNamesString = productsCategories.FirstOrDefault();
+
+                if (productsCategories.Count > 1)
+                {
+                    uniqueCategoryNamesString = string.Join(", ", productsCategories.Distinct());
+                }
+                 
+
+                dpdPickupPointAddress.Category = uniqueCategoryNamesString;
+
+                _dpdPickupPointAddressRepository.Update(dpdPickupPointAddress);
 
                 if (!_orderSettings.OnePageCheckoutEnabled)
                     throw new Exception("One page checkout is disabled");
@@ -842,12 +868,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
         [HttpPost, ActionName("BillingAddress")]
         public virtual IActionResult NewBillingAddress(CheckoutBillingAddressModel model, IFormCollection form)
         {
-            
-=======
-        [HttpPost, ActionName("BillingAddress")]
-        public virtual IActionResult NewBillingAddress(CheckoutBillingAddressModel model, IFormCollection form)
-        {
->>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
+
             //validation
             if (_orderSettings.CheckoutDisabled)
                 return RedirectToRoute("ShoppingCart");
@@ -912,10 +933,10 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
             model = _checkoutModelFactory.PrepareBillingAddressModel(cart,
                 selectedCountryId: newAddress.CountryId,
                 overrideAttributesXml: customAttributes);
-<<<<<<< HEAD
 
             return View(model);
         }
+
         private void ClearPickUpPointsByUserId(int UserId)
         {
             var pickUpPoints = _dpdPickupPointAddressRepository.Table.Where(x => x.UserId == UserId).ToList();
@@ -925,6 +946,7 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 pickUpPoints.ForEach(x => _dpdPickupPointAddressRepository.Delete(x));
             }
         }
+
         public void HandleEvent(OrderPlacedEvent eventMessage)
         {
             if (eventMessage.Order.ShippingRateComputationMethodSystemName.Contains("DPD"))
@@ -933,9 +955,12 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                 {
                     Order.createOrderResponse response = new Order.createOrderResponse();
 
-                    var dpdPickupPointAddress = _dpdPickupPointAddressRepository.Table.LastOrDefault(x => x.UserId == _workContext.CurrentCustomer.Id);
+                    var dpdPickupPointAddresses = from pickupAddresses in _dpdPickupPointAddressRepository.Table            
+                                select pickupAddresses;
 
-                    if(dpdPickupPointAddress != null)
+                    var dpdPickupPointAddress = dpdPickupPointAddresses.ToList().LastOrDefault(x => x.UserId == _workContext.CurrentCustomer.Id);
+
+                    if (dpdPickupPointAddress != null)
                     {
                         response = (Order.createOrderResponse)_dpdService.CreateShippingRequest(eventMessage.Order.Id, dpdPickupPointAddress);
                     }
@@ -958,20 +983,16 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
                             throw new Exception(x.errorMessage);
                         }
                     });
-                } 
-                catch(Exception exc)
+                }
+                catch (Exception exc)
                 {
                     ClearPickUpPointsByUserId(_workContext.CurrentCustomer.Id);
                     _logger.Warning(exc.Message, exc, _workContext.CurrentCustomer);
                     throw new Exception(exc.Message);
                 }
-                
+
             }
         }
-=======
-            return View(model);
-        }
->>>>>>> 7452aaa7fbf5a2fa1b74ee74f4fd8cd89d11525d
     }
 }
 

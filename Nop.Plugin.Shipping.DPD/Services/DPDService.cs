@@ -4,12 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
 using Calculator;
 using Geography;
-
 using Newtonsoft.Json;
-
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
@@ -23,7 +20,6 @@ using Nop.Services.Common;
 using Nop.Services.Localization;
 using Nop.Services.Orders;
 using Nop.Services.Shipping;
-using auth = Order.auth;
 
 namespace Nop.Plugin.Shipping.DPD.Services
 {
@@ -43,7 +39,7 @@ namespace Nop.Plugin.Shipping.DPD.Services
         private readonly ICategoryService _catergoryService;
         private readonly IStoreContext _storeContext;
         private readonly IWorkContext _workContext;
-        
+
         private readonly IShippingService _shippingService;
         public DPDService(
             ILocalizationService localizationService,
@@ -54,7 +50,7 @@ namespace Nop.Plugin.Shipping.DPD.Services
             IAddressService addressService,
             IProductService productService,
             ICategoryService categoryService,
-            DPDSettings dpdSettings, 
+            DPDSettings dpdSettings,
             IShippingService shippingService)
         {
             _dpdCalculator = new DPDCalculatorClient();
@@ -82,11 +78,16 @@ namespace Nop.Plugin.Shipping.DPD.Services
         /// <returns>The attribute value</returns>
         private TAttribute GetAttributeValue<TAttribute>(Enum enumValue) where TAttribute : Attribute
         {
-            
+
             var enumType = enumValue.GetType();
             var enumValueInfo = enumType.GetMember(enumValue.ToString()).FirstOrDefault();
             var attribute = enumValueInfo?.GetCustomAttributes(typeof(TAttribute), false).FirstOrDefault();
             return attribute as TAttribute;
+        }
+
+        public static string ToUpper(string str, int chars)
+        {
+            return str.Substring(0, chars).ToUpper() + (str.Length > 1 ? str.Substring(chars) : "");
         }
 
         /// <summary>
@@ -98,11 +99,53 @@ namespace Nop.Plugin.Shipping.DPD.Services
         {
             return GetAttributeValue<DPDCodeAttribute>(enumValue)?.Code;
         }
+        public object CreateNewAddress(DPDShippingModel newAddressModel)
+        {
+            try
+            {
+                var response = _dpdOrderClient.createAddressAsync(new Order.dpdClientAddress()
+                {
+                    auth = new Order.auth()
+                    {
+                        clientKey = _dpdSettings.ClientKey,
+                        clientNumber = _dpdSettings.ClientNumber
+                    },
+                    clientAddress = new Order.clientAddress()
+                    {
+                        city = newAddressModel.City,
+                        contactEmail = newAddressModel?.ContactEmail,
+                        code = newAddressModel.Code,
+                        contactFio = newAddressModel.ContactFullName,
+                        contactPhone = newAddressModel.ContactPhone,
+                        countryName = newAddressModel.CountryName,
+                        flat = newAddressModel?.Apartament,
+                        house = newAddressModel?.House,
+                        street = newAddressModel.Street,
+                        houseKorpus = newAddressModel?.HouseCorps,
+                        instructions = newAddressModel?.Instructions,
+                        name = newAddressModel.Name,
+                        index = newAddressModel?.Index,
+                        needPass = Convert.ToBoolean(newAddressModel?.NeedPass),
+                        needPassSpecified = newAddressModel?.NeedPass != null,
+                        office = newAddressModel?.Office,
+                        region = newAddressModel?.Region,
+                        vlad = newAddressModel?.OwnerShip,
+                    }
+                }).Result;
+
+                return response;
+            } 
+            catch
+            {
+                throw new ArgumentException("Create new address expetion");
+            }
+        }
         public object CreateShippingRequest(int orderId, PickupPointAddress dpdPickupPointAddress)
         {
             var orderAuth = PrepareOrderAuth();
             var orderHeader = PrepareOrderHeader();
             var orderSettings = PrepareOrderSettings(orderId, dpdPickupPointAddress);
+
             if (_dpdSettings.UseSandbox)
             {
                 var orderResponse = _dpdSandboxOrderClient.createOrderAsync(new SandboxOrder.dpdOrdersData()
@@ -137,8 +180,10 @@ namespace Nop.Plugin.Shipping.DPD.Services
                                 name = orderSettings.receiverAddress.name,
                                 countryName = orderSettings.receiverAddress.countryName,
                                 city = orderSettings.receiverAddress.city,
+                                house = orderSettings.receiverAddress.house,
                                 street = orderSettings.receiverAddress.street,
                                 contactFio = orderSettings.receiverAddress.contactFio,
+                                terminalCode = orderSettings.receiverAddress.terminalCode,
                                 contactPhone = orderSettings.receiverAddress.contactPhone,
                                 contactEmail = orderSettings.receiverAddress.contactEmail
                             }
@@ -175,7 +220,7 @@ namespace Nop.Plugin.Shipping.DPD.Services
 
         private Order.auth PrepareOrderAuth()
         {
-            return new auth()
+            return new Order.auth()
             {
                 clientKey = _dpdSettings.ClientKey,
                 clientNumber = _dpdSettings.ClientNumber
@@ -188,26 +233,27 @@ namespace Nop.Plugin.Shipping.DPD.Services
                 datePickup = DateTime.Now,
                 senderAddress = new Order.address()
                 {
-                    code = _dpdSettings.AddressCode
+                    code = _dpdSettings.AddressCode,
                 }
             };
         }
-        private Order.address PrepareReceiverAdress(Core.Domain.Orders.Order currentOrder, bool isTTServiceVariantType, PickupPointAddress dpdPickupPointAddress)
+        private Order.address PrepareReceiverAdress(Core.Domain.Orders.Order currentOrder, bool isDDServiceVariantType, PickupPointAddress dpdPickupPointAddress)
         {
             var receiverAddress = new Order.address();
+
             
-            if (isTTServiceVariantType)
+            var shippingAddress = _addressService.GetAddressById(currentOrder.ShippingAddressId.GetValueOrDefault());
+            
+            string receiverFullName = shippingAddress.FirstName + " " + shippingAddress.LastName;
+            if (isDDServiceVariantType)
             {
-                var shippingAddress = _addressService.GetAddressById(currentOrder.ShippingAddressId.GetValueOrDefault());
-
-                string receiverFullName = shippingAddress.FirstName + " " + shippingAddress.LastName;
-
                 receiverAddress = new Order.address()
                 {
                     name = receiverFullName,
                     countryName = shippingAddress.County,
-                    city = shippingAddress.City,
-                    street = shippingAddress.Address1 ?? shippingAddress.Address2 ?? throw new ArgumentNullException("Shipping street can be null"),
+                    city = dpdPickupPointAddress.City,
+                    street = dpdPickupPointAddress.Street ?? throw new ArgumentNullException("Shipping street can be null"),
+                    house = dpdPickupPointAddress.House,
                     contactFio = receiverFullName,
                     contactPhone = shippingAddress.PhoneNumber,
                     contactEmail = shippingAddress.Email
@@ -217,11 +263,15 @@ namespace Nop.Plugin.Shipping.DPD.Services
             {
                 receiverAddress = new Order.address()
                 {
+                    contactFio = receiverFullName,
+                    contactPhone = shippingAddress.PhoneNumber,
+                    contactEmail = shippingAddress.Email,
                     terminalCode = dpdPickupPointAddress.TerminalCode,
                     countryName = dpdPickupPointAddress.CountryName,
                     city = dpdPickupPointAddress.City,
                     street = dpdPickupPointAddress.Street,
-                    name = dpdPickupPointAddress.CustomerFullName
+                    house = dpdPickupPointAddress.House,
+                    name = receiverFullName
                 };
             }
 
@@ -229,52 +279,23 @@ namespace Nop.Plugin.Shipping.DPD.Services
         }
         private Order.order PrepareOrderSettings(int orderId, PickupPointAddress dpdPickupPointAddress)
         {
-            double productsWeight = 0;
-            double productsCost = 0;
-
             var currentOrder = _orderService.GetOrderById(orderId);
 
-            bool isTTServiceVariantType = new string(currentOrder.ShippingRateComputationMethodSystemName.Reverse().Take(2).Reverse().ToArray()) == "TT" ? true : false;
+            bool isDDServiceVariantType = new string(currentOrder.ShippingRateComputationMethodSystemName.Reverse().Take(2).Reverse().ToArray()) == "DD" ? true : false;
 
-            var cart = _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
-
-            List<string> productsCategories = new List<string>();
-
-            foreach (var productId in cart.Select(x => x.ProductId))
-            {
-                var product = _productService.GetProductById(productId);
-
-                productsWeight += (double)product.Weight;
-                productsCost += (double)product.Price;
-
-                int[] categoriyIds = _catergoryService
-                    .GetProductCategoriesByCategoryId(product.TaxCategoryId)
-                        .Select(x => x.CategoryId)
-                    .ToArray();
-
-                List<Category> categories = _catergoryService
-                    .GetCategoriesByIds(categoriyIds);
-
-                List<string> uniqueCategoryNames = categories.Select(x => x.Name).ToList();
-
-                productsCategories.AddRange(uniqueCategoryNames);
-            }
-
-            var receiverAddress = PrepareReceiverAdress(currentOrder, isTTServiceVariantType, dpdPickupPointAddress);
-
-            string uniqueCategoryNamesString = string.Join(", ", productsCategories.Distinct());
+            var receiverAddress = PrepareReceiverAdress(currentOrder, isDDServiceVariantType, dpdPickupPointAddress);
 
             return new Order.order()
             {
                 orderNumberInternal = currentOrder.Id.ToString(),
-                serviceCode = currentOrder.ShippingMethod.Split('(', ')')[1],
-                serviceVariant = isTTServiceVariantType ? "ТТ" : "ТД",
+                serviceCode = GetUpsCode((ServiceCodeType)Enum.Parse(typeof(ServiceCodeType), ToUpper(currentOrder.ShippingMethod.Split('(', ')')[1].Trim().ToLower().Replace(" ", ""), 4))),
+                serviceVariant = isDDServiceVariantType ? "ДД" : "ДТ",
                 cargoNumPack = 1,
-                cargoWeight = productsWeight,
+                cargoWeight = 0.050,
                 cargoRegistered = _dpdSettings.CargoRegistered,
-                cargoValue = productsCost,
+                cargoValue = 50000,
                 cargoValueSpecified = true,
-                cargoCategory = uniqueCategoryNamesString,
+                cargoCategory = dpdPickupPointAddress.Category,
                 receiverAddress = receiverAddress
             };
         }
@@ -294,10 +315,9 @@ namespace Nop.Plugin.Shipping.DPD.Services
             /*
             var cityDeliveryJson = GetCityByCityNameAsync(shippingOptionRequest.CityFrom).Result;
             var cityDelivery = JsonConvert.DeserializeObject<Geography.city>(cityDeliveryJson);
-
             var cityFromJson = GetCityByCityNameAsync(shippingOptionRequest.ShippingAddress.City).Result;
             var cityFrom = JsonConvert.DeserializeObject<Geography.city>(cityFromJson);
-            */          
+            */
 
             var serviceVariantTypes = _dpdSettings
                 .ServiceVariantsOffered.Split(':')
@@ -311,7 +331,7 @@ namespace Nop.Plugin.Shipping.DPD.Services
 
             double priceOfProducts = 0;
 
-            foreach(var product in shippingOptionRequest.Items.Select(x => x.Product))
+            foreach (var product in shippingOptionRequest.Items.Select(x => x.Product))
             {
                 priceOfProducts += (double)product.Price;
             }
@@ -330,8 +350,8 @@ namespace Nop.Plugin.Shipping.DPD.Services
 
             for (int i = 0; i < serviceVariantTypes.Count; i++)
             {
-                 var serviceCosts = _dpdCalculator.getServiceCost2Async(new serviceCostRequest()
-                 {
+                var serviceCosts = _dpdCalculator.getServiceCost2Async(new serviceCostRequest()
+                {
                     auth = new Calculator.auth()
                     {
                         clientKey = _dpdSettings.ClientKey,
@@ -359,18 +379,18 @@ namespace Nop.Plugin.Shipping.DPD.Services
                         regionCode = cityDelivery.regionCode,
                     },
                     selfPickup = false,
-                    selfDelivery = serviceVariantTypes[i] == "TD",
+                    selfDelivery = serviceVariantTypes[i] == "DT",
                     declaredValue = priceOfProducts,
                     weight = 0.050
                 }).Result;
 
-                foreach(var service in serviceCosts.@return.ToList())
+                foreach (var service in serviceCosts.@return.ToList())
                 {
-                    if(serviceCodeTypes.Any(x => x.ToLower() == service.serviceName.Replace(" ", "").ToLower()))
+                    if (serviceCodeTypes.Any(x => x.ToLower() == service.serviceName.Replace(" ", "").ToLower()))
                     {
                         response.ShippingOptions.Add(new ShippingOption()
                         {
-                            Name = (serviceVariantTypes[i] == "TD" ? "DPD Pick-up delivery" : "DPD Courier delivery") + $" ({service.serviceName})",
+                            Name = (serviceVariantTypes[i] == "DT" ? "DPD Pick-up delivery" : "DPD Courier delivery") + $" ({service.serviceName})",
                             Rate = (decimal)service.cost,
                             TransitDays = service.days,
                             ShippingRateComputationMethodSystemName = "DPD-" + serviceVariantTypes[i]

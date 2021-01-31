@@ -1118,14 +1118,6 @@ namespace Calculator
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<Calculator.getServiceCostByParcels2Response> getServiceCostByParcels2Async(Calculator.getServiceCostByParcels2Request request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/calculator/2012-03-20/DPDCalculator/getServiceCostInternationalR" +
-            "equest", ReplyAction="http://dpd.ru/ws/calculator/2012-03-20/DPDCalculator/getServiceCostInternationalR" +
-            "esponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Calculator.ServiceCostFault), Action="http://dpd.ru/ws/calculator/2012-03-20/DPDCalculator/getServiceCostInternational/" +
-            "Fault/ServiceCostFault", Name="ServiceCostFault")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<Calculator.getServiceCostInternationalResponse> getServiceCostInternationalAsync(Calculator.getServiceCostInternationalRequest request);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/calculator/2012-03-20/DPDCalculator/getServiceCost2Request", ReplyAction="http://dpd.ru/ws/calculator/2012-03-20/DPDCalculator/getServiceCost2Response")]
         [System.ServiceModel.FaultContractAttribute(typeof(Calculator.ServiceCostFault2), Action="http://dpd.ru/ws/calculator/2012-03-20/DPDCalculator/getServiceCost2/Fault/Servic" +
             "eCostFault2", Name="ServiceCostFault2")]
@@ -1137,6 +1129,14 @@ namespace Calculator
             "CostFault", Name="ServiceCostFault")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<Calculator.getServiceCostResponse> getServiceCostAsync(Calculator.getServiceCostRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://dpd.ru/ws/calculator/2012-03-20/DPDCalculator/getServiceCostInternationalR" +
+            "equest", ReplyAction="http://dpd.ru/ws/calculator/2012-03-20/DPDCalculator/getServiceCostInternationalR" +
+            "esponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Calculator.ServiceCostFault), Action="http://dpd.ru/ws/calculator/2012-03-20/DPDCalculator/getServiceCostInternational/" +
+            "Fault/ServiceCostFault", Name="ServiceCostFault")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<Calculator.getServiceCostInternationalResponse> getServiceCostInternationalAsync(Calculator.getServiceCostInternationalRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1218,6 +1218,370 @@ namespace Calculator
         }
         
         public getServiceCostByParcels2Response(Calculator.serviceCost[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/calculator/2012-03-20")]
+    public partial class serviceCostRequest
+    {
+        
+        private auth authField;
+        
+        private cityRequest pickupField;
+        
+        private cityRequest deliveryField;
+        
+        private bool selfPickupField;
+        
+        private bool selfDeliveryField;
+        
+        private double weightField;
+        
+        private double volumeField;
+        
+        private bool volumeFieldSpecified;
+        
+        private string serviceCodeField;
+        
+        private System.DateTime pickupDateField;
+        
+        private bool pickupDateFieldSpecified;
+        
+        private int maxDaysField;
+        
+        private bool maxDaysFieldSpecified;
+        
+        private double maxCostField;
+        
+        private bool maxCostFieldSpecified;
+        
+        private double declaredValueField;
+        
+        private bool declaredValueFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public auth auth
+        {
+            get
+            {
+                return this.authField;
+            }
+            set
+            {
+                this.authField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public cityRequest pickup
+        {
+            get
+            {
+                return this.pickupField;
+            }
+            set
+            {
+                this.pickupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public cityRequest delivery
+        {
+            get
+            {
+                return this.deliveryField;
+            }
+            set
+            {
+                this.deliveryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public bool selfPickup
+        {
+            get
+            {
+                return this.selfPickupField;
+            }
+            set
+            {
+                this.selfPickupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public bool selfDelivery
+        {
+            get
+            {
+                return this.selfDeliveryField;
+            }
+            set
+            {
+                this.selfDeliveryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public double weight
+        {
+            get
+            {
+                return this.weightField;
+            }
+            set
+            {
+                this.weightField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public double volume
+        {
+            get
+            {
+                return this.volumeField;
+            }
+            set
+            {
+                this.volumeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool volumeSpecified
+        {
+            get
+            {
+                return this.volumeFieldSpecified;
+            }
+            set
+            {
+                this.volumeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        public string serviceCode
+        {
+            get
+            {
+                return this.serviceCodeField;
+            }
+            set
+            {
+                this.serviceCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=8)]
+        public System.DateTime pickupDate
+        {
+            get
+            {
+                return this.pickupDateField;
+            }
+            set
+            {
+                this.pickupDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool pickupDateSpecified
+        {
+            get
+            {
+                return this.pickupDateFieldSpecified;
+            }
+            set
+            {
+                this.pickupDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        public int maxDays
+        {
+            get
+            {
+                return this.maxDaysField;
+            }
+            set
+            {
+                this.maxDaysField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool maxDaysSpecified
+        {
+            get
+            {
+                return this.maxDaysFieldSpecified;
+            }
+            set
+            {
+                this.maxDaysFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        public double maxCost
+        {
+            get
+            {
+                return this.maxCostField;
+            }
+            set
+            {
+                this.maxCostField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool maxCostSpecified
+        {
+            get
+            {
+                return this.maxCostFieldSpecified;
+            }
+            set
+            {
+                this.maxCostFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public double declaredValue
+        {
+            get
+            {
+                return this.declaredValueField;
+            }
+            set
+            {
+                this.declaredValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool declaredValueSpecified
+        {
+            get
+            {
+                return this.declaredValueFieldSpecified;
+            }
+            set
+            {
+                this.declaredValueFieldSpecified = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getServiceCost2", WrapperNamespace="http://dpd.ru/ws/calculator/2012-03-20", IsWrapped=true)]
+    public partial class getServiceCost2Request
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/calculator/2012-03-20", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Calculator.serviceCostRequest request;
+        
+        public getServiceCost2Request()
+        {
+        }
+        
+        public getServiceCost2Request(Calculator.serviceCostRequest request)
+        {
+            this.request = request;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getServiceCost2Response", WrapperNamespace="http://dpd.ru/ws/calculator/2012-03-20", IsWrapped=true)]
+    public partial class getServiceCost2Response
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/calculator/2012-03-20", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Calculator.serviceCost[] @return;
+        
+        public getServiceCost2Response()
+        {
+        }
+        
+        public getServiceCost2Response(Calculator.serviceCost[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getServiceCost", WrapperNamespace="http://dpd.ru/ws/calculator/2012-03-20", IsWrapped=true)]
+    public partial class getServiceCostRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/calculator/2012-03-20", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Calculator.serviceCostRequest request;
+        
+        public getServiceCostRequest()
+        {
+        }
+        
+        public getServiceCostRequest(Calculator.serviceCostRequest request)
+        {
+            this.request = request;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getServiceCostResponse", WrapperNamespace="http://dpd.ru/ws/calculator/2012-03-20", IsWrapped=true)]
+    public partial class getServiceCostResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/calculator/2012-03-20", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Calculator.serviceCost[] @return;
+        
+        public getServiceCostResponse()
+        {
+        }
+        
+        public getServiceCostResponse(Calculator.serviceCost[] @return)
         {
             this.@return = @return;
         }
@@ -1737,370 +2101,6 @@ namespace Calculator
         }
     }
     
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://dpd.ru/ws/calculator/2012-03-20")]
-    public partial class serviceCostRequest
-    {
-        
-        private auth authField;
-        
-        private cityRequest pickupField;
-        
-        private cityRequest deliveryField;
-        
-        private bool selfPickupField;
-        
-        private bool selfDeliveryField;
-        
-        private double weightField;
-        
-        private double volumeField;
-        
-        private bool volumeFieldSpecified;
-        
-        private string serviceCodeField;
-        
-        private System.DateTime pickupDateField;
-        
-        private bool pickupDateFieldSpecified;
-        
-        private int maxDaysField;
-        
-        private bool maxDaysFieldSpecified;
-        
-        private double maxCostField;
-        
-        private bool maxCostFieldSpecified;
-        
-        private double declaredValueField;
-        
-        private bool declaredValueFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public auth auth
-        {
-            get
-            {
-                return this.authField;
-            }
-            set
-            {
-                this.authField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public cityRequest pickup
-        {
-            get
-            {
-                return this.pickupField;
-            }
-            set
-            {
-                this.pickupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public cityRequest delivery
-        {
-            get
-            {
-                return this.deliveryField;
-            }
-            set
-            {
-                this.deliveryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public bool selfPickup
-        {
-            get
-            {
-                return this.selfPickupField;
-            }
-            set
-            {
-                this.selfPickupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
-        public bool selfDelivery
-        {
-            get
-            {
-                return this.selfDeliveryField;
-            }
-            set
-            {
-                this.selfDeliveryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public double weight
-        {
-            get
-            {
-                return this.weightField;
-            }
-            set
-            {
-                this.weightField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        public double volume
-        {
-            get
-            {
-                return this.volumeField;
-            }
-            set
-            {
-                this.volumeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool volumeSpecified
-        {
-            get
-            {
-                return this.volumeFieldSpecified;
-            }
-            set
-            {
-                this.volumeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
-        public string serviceCode
-        {
-            get
-            {
-                return this.serviceCodeField;
-            }
-            set
-            {
-                this.serviceCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=8)]
-        public System.DateTime pickupDate
-        {
-            get
-            {
-                return this.pickupDateField;
-            }
-            set
-            {
-                this.pickupDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool pickupDateSpecified
-        {
-            get
-            {
-                return this.pickupDateFieldSpecified;
-            }
-            set
-            {
-                this.pickupDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
-        public int maxDays
-        {
-            get
-            {
-                return this.maxDaysField;
-            }
-            set
-            {
-                this.maxDaysField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool maxDaysSpecified
-        {
-            get
-            {
-                return this.maxDaysFieldSpecified;
-            }
-            set
-            {
-                this.maxDaysFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
-        public double maxCost
-        {
-            get
-            {
-                return this.maxCostField;
-            }
-            set
-            {
-                this.maxCostField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool maxCostSpecified
-        {
-            get
-            {
-                return this.maxCostFieldSpecified;
-            }
-            set
-            {
-                this.maxCostFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
-        public double declaredValue
-        {
-            get
-            {
-                return this.declaredValueField;
-            }
-            set
-            {
-                this.declaredValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool declaredValueSpecified
-        {
-            get
-            {
-                return this.declaredValueFieldSpecified;
-            }
-            set
-            {
-                this.declaredValueFieldSpecified = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getServiceCost2", WrapperNamespace="http://dpd.ru/ws/calculator/2012-03-20", IsWrapped=true)]
-    public partial class getServiceCost2Request
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/calculator/2012-03-20", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Calculator.serviceCostRequest request;
-        
-        public getServiceCost2Request()
-        {
-        }
-        
-        public getServiceCost2Request(Calculator.serviceCostRequest request)
-        {
-            this.request = request;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getServiceCost2Response", WrapperNamespace="http://dpd.ru/ws/calculator/2012-03-20", IsWrapped=true)]
-    public partial class getServiceCost2Response
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/calculator/2012-03-20", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Calculator.serviceCost[] @return;
-        
-        public getServiceCost2Response()
-        {
-        }
-        
-        public getServiceCost2Response(Calculator.serviceCost[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getServiceCost", WrapperNamespace="http://dpd.ru/ws/calculator/2012-03-20", IsWrapped=true)]
-    public partial class getServiceCostRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/calculator/2012-03-20", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Calculator.serviceCostRequest request;
-        
-        public getServiceCostRequest()
-        {
-        }
-        
-        public getServiceCostRequest(Calculator.serviceCostRequest request)
-        {
-            this.request = request;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getServiceCostResponse", WrapperNamespace="http://dpd.ru/ws/calculator/2012-03-20", IsWrapped=true)]
-    public partial class getServiceCostResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dpd.ru/ws/calculator/2012-03-20", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Calculator.serviceCost[] @return;
-        
-        public getServiceCostResponse()
-        {
-        }
-        
-        public getServiceCostResponse(Calculator.serviceCost[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     public interface DPDCalculatorChannel : Calculator.DPDCalculator, System.ServiceModel.IClientChannel
     {
@@ -2178,19 +2178,6 @@ namespace Calculator
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Calculator.getServiceCostInternationalResponse> Calculator.DPDCalculator.getServiceCostInternationalAsync(Calculator.getServiceCostInternationalRequest request)
-        {
-            return base.Channel.getServiceCostInternationalAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Calculator.getServiceCostInternationalResponse> getServiceCostInternationalAsync(Calculator.serviceCostInternationalRequest request)
-        {
-            Calculator.getServiceCostInternationalRequest inValue = new Calculator.getServiceCostInternationalRequest();
-            inValue.request = request;
-            return ((Calculator.DPDCalculator)(this)).getServiceCostInternationalAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<Calculator.getServiceCost2Response> Calculator.DPDCalculator.getServiceCost2Async(Calculator.getServiceCost2Request request)
         {
             return base.Channel.getServiceCost2Async(request);
@@ -2214,6 +2201,19 @@ namespace Calculator
             Calculator.getServiceCostRequest inValue = new Calculator.getServiceCostRequest();
             inValue.request = request;
             return ((Calculator.DPDCalculator)(this)).getServiceCostAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Calculator.getServiceCostInternationalResponse> Calculator.DPDCalculator.getServiceCostInternationalAsync(Calculator.getServiceCostInternationalRequest request)
+        {
+            return base.Channel.getServiceCostInternationalAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Calculator.getServiceCostInternationalResponse> getServiceCostInternationalAsync(Calculator.serviceCostInternationalRequest request)
+        {
+            Calculator.getServiceCostInternationalRequest inValue = new Calculator.getServiceCostInternationalRequest();
+            inValue.request = request;
+            return ((Calculator.DPDCalculator)(this)).getServiceCostInternationalAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
