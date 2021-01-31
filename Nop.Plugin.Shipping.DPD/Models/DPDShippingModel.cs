@@ -65,7 +65,7 @@ namespace Nop.Plugin.Shipping.DPD.Models
         public string AddressCode { get; set; }
         [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.CargoRegistered")]
         public bool CargoRegistered { get; set; }
-        [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.ServiceCodeTypes")]
+        [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.AvailableServiceCodeTypes")]
         public IList<SelectListItem> AvailableServiceCodeTypes { get; set; }
         public IList<string> ServiceCodeTypes { get; set; }
         [NopResourceDisplayName("Plugins.Shipping.DPD.Fields.AvailableServiceVariantTypes")]

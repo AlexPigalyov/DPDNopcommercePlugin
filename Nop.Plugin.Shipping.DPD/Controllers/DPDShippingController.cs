@@ -190,8 +190,6 @@ namespace Nop.Plugin.Shipping.DPD.Controllers
 
                 _notificationService.SuccessNotification(_localizationService.GetResource("Admin.Plugins.Saved"));
 
-                model.AddressCode = model.Code;
-
                 return Configure();
             }
         }

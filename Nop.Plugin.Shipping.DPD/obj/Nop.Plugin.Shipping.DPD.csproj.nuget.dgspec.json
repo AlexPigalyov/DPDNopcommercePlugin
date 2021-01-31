@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Plugins\\Nop.Plugin.Shipping.UPS\\Nop.Plugin.Shipping.DPD.csproj": {}
+    "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Plugins\\Nop.Plugin.Shipping.DPD\\Nop.Plugin.Shipping.DPD.csproj": {}
   },
   "projects": {
     "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Libraries\\Nop.Core\\Nop.Core.csproj": {
@@ -292,14 +292,14 @@
         }
       }
     },
-    "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Plugins\\Nop.Plugin.Shipping.UPS\\Nop.Plugin.Shipping.DPD.csproj": {
+    "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Plugins\\Nop.Plugin.Shipping.DPD\\Nop.Plugin.Shipping.DPD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Plugins\\Nop.Plugin.Shipping.UPS\\Nop.Plugin.Shipping.DPD.csproj",
+        "projectUniqueName": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Plugins\\Nop.Plugin.Shipping.DPD\\Nop.Plugin.Shipping.DPD.csproj",
         "projectName": "Nop.Plugin.Shipping.DPD",
-        "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Plugins\\Nop.Plugin.Shipping.UPS\\Nop.Plugin.Shipping.DPD.csproj",
+        "projectPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Plugins\\Nop.Plugin.Shipping.DPD\\Nop.Plugin.Shipping.DPD.csproj",
         "packagesPath": "C:\\Users\\alexpigalyov\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Plugins\\Nop.Plugin.Shipping.UPS\\obj\\",
+        "outputPath": "D:\\Project\\goldtech-market.ru\\nopCommerce_4.30_Source\\Plugins\\Nop.Plugin.Shipping.DPD\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alexpigalyov\\AppData\\Roaming\\NuGet\\NuGet.Config",
